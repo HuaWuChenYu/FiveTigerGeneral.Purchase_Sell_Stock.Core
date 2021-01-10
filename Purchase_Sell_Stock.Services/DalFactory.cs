@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO.Pipes;
 using System.Text;
-using DAL;
+using Purchase_Sell_Stock.DAL;
 
 namespace Purchase_Sell_Stock.Services
 {
