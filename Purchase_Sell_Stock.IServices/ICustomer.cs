@@ -6,5 +6,6 @@ namespace Purchase_Sell_Stock.IServices
 {
     interface ICustomer
     {
+        //发大水
     }
 }
