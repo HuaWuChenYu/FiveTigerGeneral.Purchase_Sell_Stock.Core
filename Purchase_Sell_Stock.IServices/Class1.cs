@@ -6,6 +6,5 @@ namespace Purchase_Sell_Stock.IServices
     {
         public int MyProperty { get; set; }
         public int AAA { get; set; }
-        public int Name { get; set; }
     }
 }
