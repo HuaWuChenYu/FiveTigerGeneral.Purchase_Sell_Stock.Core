@@ -20,10 +20,9 @@ namespace Purchase_Sell_Stock.API.Controllers
         //{
         //    _iset = set;
         //}
-        [HttpGet]
         public List<Classify> ClassifiesShow()
         {
-            List<Classify> clist= _bll.ClassifiesShow();
+            List<Classify> clist = _bll.ClassifiesShow();
             return clist;
         }
     }
