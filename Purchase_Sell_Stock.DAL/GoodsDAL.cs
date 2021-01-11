@@ -18,7 +18,7 @@ namespace Purchase_Sell_Stock.DAL
         public List<Goods> GetList()
         {
             string sql = "select * from Goods";
-            List<Goods> list = SimplyFactoryDB.GetInstance("Ado").GetList<Goods>(sql);
+            List<Goods> list = SimplyFactoryDB.GetInstance("Dapper").GetList<Goods>(sql);
             return list;
         }
         
