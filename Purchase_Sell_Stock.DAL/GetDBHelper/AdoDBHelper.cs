@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.Configuration;
 namespace Purchase_Sell_Stock.DAL.GetDBHelper
 {
     public class AdoDBHelper : DBHelper
     {
 
+      
         public override int ExecuteNonQuery(string sql)
         {
             using (SqlConnection conn = new SqlConnection())

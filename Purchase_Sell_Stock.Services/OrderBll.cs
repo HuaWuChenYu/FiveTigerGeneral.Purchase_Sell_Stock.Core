@@ -9,5 +9,6 @@ namespace Purchase_Sell_Stock.Services
     /// </summary>
     public class OrderBll
     {
+
     }
 }
