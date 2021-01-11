@@ -8,4 +8,10 @@
     <ProjectReference Include="..\Purchase_Sell_Stock.Model\Purchase_Sell_Stock.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>bin\Debug\netcoreapp3.1\Dapper.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
