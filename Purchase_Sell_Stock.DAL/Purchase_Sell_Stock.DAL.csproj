@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SqlSugarCore" Version="5.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Purchase_Sell_Stock.Model\Purchase_Sell_Stock.Model.csproj" />
   </ItemGroup>
 
