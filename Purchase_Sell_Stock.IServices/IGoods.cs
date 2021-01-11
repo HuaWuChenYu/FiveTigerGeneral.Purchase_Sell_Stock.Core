@@ -17,6 +17,30 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
         List<T> GetGoodsList<T>(string goodsNum,string goodsName,string goodsType,string goodsClassify);
-        List<T> GetGoodsTypeList<T>(string typeId, string typeName);
+        /// <summary>
+        /// 商品分类查询
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="typeId"></param>
+        /// <param name="typeName"></param>
+        /// <returns></returns>
+        List<T> GetGoodsTypeList<T>(int typeId, string typeName);
+        /// <summary>
+        /// 商品品牌查询
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="brandId"></param>
+        /// <param name="brandName"></param>
+        /// <returns></returns>
+        List<T> GetGoodsBrandList<T>(int brandId, string brandName);
+        /// <summary>
+        /// 商品单位查询
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="unitId"></param>
+        /// <param name="unitName"></param>
+        /// <returns></returns>
+        List<T> GetGoodsUnitList<T>(int unitId, string unitName);
+
     }
 }
