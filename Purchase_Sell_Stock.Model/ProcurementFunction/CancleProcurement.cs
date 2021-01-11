@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Purchase_Sell_Stock.Model.ProcurementFunction
 {
-    class CancleProcurement
+    public class CancleProcurement
     {
     }
 }
