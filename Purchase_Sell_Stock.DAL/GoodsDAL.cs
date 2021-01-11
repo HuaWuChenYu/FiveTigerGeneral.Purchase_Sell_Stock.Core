@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Purchase_Sell_Stock.DAL.GetDBHelper;
 
 namespace Purchase_Sell_Stock.DAL
 {
@@ -9,5 +10,7 @@ namespace Purchase_Sell_Stock.DAL
     /// </summary>
     public class GoodsDal
     {
+        DBHelper db = SimplyFactoryDB.GetInstance("");
+
     }
 }
