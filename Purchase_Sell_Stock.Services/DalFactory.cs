@@ -30,9 +30,11 @@ namespace Purchase_Sell_Stock.Services
                     return new LoginDal() as T;
                 case "Order":
                     return new OrderDal() as T;
+                case "Goods":
+                    return new GoodsDal() as T;
                 case "Property":
                     return new PropertyDal() as T;
-                case "Purchase":
+                case "Procurement":
                     return new ProcurementDal() as T;
                 case "Set":
                     return new SetDal() as T;

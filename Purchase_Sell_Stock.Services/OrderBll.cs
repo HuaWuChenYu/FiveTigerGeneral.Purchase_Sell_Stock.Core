@@ -5,9 +5,10 @@ using System.Text;
 namespace Purchase_Sell_Stock.Services
 {
     /// <summary>
-    /// 用于订单和商品
+    /// 用于订单
     /// </summary>
     public class OrderBll
     {
+
     }
 }
