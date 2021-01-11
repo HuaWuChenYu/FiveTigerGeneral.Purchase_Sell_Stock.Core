@@ -11,15 +11,17 @@ namespace Purchase_Sell_Stock.API.Controllers
 {
     public class PropertyController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public List<Amount_settled> PropertyShow(IServiceProvider service) 
+        List<Amount_settled> ss;
+        public PropertyController(IServiceProvider service) 
         {
             var property = service.GetService<PropertyBll>();
-            return property.amount_SettledsShow();
+            ss= property.amount_SettledsShow();
+        }
+
+        [Route("/api/Show")]
+        public List<Amount_settled> PropertyShow() 
+        {
+            return ss;
         }
     }
 }

@@ -11,12 +11,17 @@ namespace Purchase_Sell_Stock.DAL
         DBHelper dBHelper = SimplyFactoryDB.GetInstance("Ado");
         public List<Users> Login(string name, string pwd)
         {
-            string sql = "";
-            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(pwd))
+            List<Users> users = dBHelper.GetList < Users>("");
+            users.Add(new Users()
             {
-                sql = $"select * from yh_Users where UserAccount='{name}' and UserPassword='{pwd}'";
-            }
-            return dBHelper.GetList<Users>("");
+                UserId = 1,
+                UserAccount = "海鲜"
+            });
+            return users;
+        }
+        public List<Users> Forter(string name)
+        { 
+            
         }
     }
 }

@@ -8,26 +8,31 @@ namespace Purchase_Sell_Stock.DAL
 {
     public class PropertyDal
     {
-       
-        //待结算数据插入
-        public int Add()
+
+        /// <summary>
+        /// 插入待结数据
+        /// </summary>
+        /// <returns></returns>
+
+        DBHelper dB = GetDBHelper.SimplyFactoryDB.GetInstance("AdoDBHelper");
+        public int AddAmount_settledInfos()
         {
             string sql = "insert  into Amount_settled values('1','20.33','2020-5-5','JD_10002','矿泉水')";
-            DBHelper dB= GetDBHelper.SimplyFactoryDB.GetInstance("AdoDBHelper");
+          
+            return dB.ExecuteNonQuery("");
+        }
+
+        /// <summary>
+        /// 插入余额数据
+        /// </summary>
+        /// <returns></returns>
+        public int Addbalance_MoneyInfos()
+        {
+            string sql = "insert  into balance_Money values('1','20.33','2020-5-5','JD_10002','矿泉水')";
             return dB.ExecuteNonQuery("");
         }
 
        
-       
-        public List<Amount_settled> amount_SettledsShow() 
-        {
-            List<Amount_settled> am = new List<Amount_settled>();
-            for (int i = 0; i < 6; i++)
-            {
-                am.Add(new Amount_settled { Amount_settleId = i, OrderId = '1', Amount_settledMoney = 20.33m, OrderSubmitTime = DateTime.Now, OrderUnm = "JD_1002", ProductName = "菲菲" });
-            }
-            return am;
-        }
 
 
     }
