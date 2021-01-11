@@ -5,16 +5,21 @@ using System.Text;
 namespace Purchase_Sell_Stock.Model.GoodsFunction
 {
     /// <summary>
-    /// 商品分类递归表
+    /// 商品品牌表
     /// </summary>
     public class GoodsBrand
     {
         /// <summary>
-        /// 
+        /// 商品品牌表主键
         /// </summary>
-        public int GoodsTypeId { get; set; }
-        public string GoodsTypeName { get; set; }
-        public int GoodsTypePId { get; set; }
+        public int GoodsBrandId { get; set; }
+        /// <summary>
+        /// 商品品牌表名称
+        /// </summary>
+        public string GoodsBrandName { get; set; }
+        /// <summary>
+        /// 店铺外键
+        /// </summary>
         public int StoreId { get; set; }
     }
 }
