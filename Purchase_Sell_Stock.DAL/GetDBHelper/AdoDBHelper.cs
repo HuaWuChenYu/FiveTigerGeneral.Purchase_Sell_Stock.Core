@@ -6,7 +6,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
 {
     public class AdoDBHelper : DBHelper
     {
-        public override int ExecuteNonQuery()
+        public override int ExecuteNonQuery(string sql)
         {
             throw new NotImplementedException();
         }
