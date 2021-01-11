@@ -7,7 +7,7 @@ namespace Purchase_Sell_Stock.DAL
     /// <summary>
     /// 用于采购
     /// </summary>
-    public class PurchaseDal
+    public class ProcurementDal
     {
     }
 }

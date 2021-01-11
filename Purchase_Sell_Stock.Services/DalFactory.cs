@@ -33,7 +33,7 @@ namespace Purchase_Sell_Stock.Services
                 case "Property":
                     return new PropertyDal() as T;
                 case "Purchase":
-                    return new PurchaseDal() as T;
+                    return new ProcurementDal() as T;
                 case "Set":
                     return new SetDal() as T;
                 case "Storage":

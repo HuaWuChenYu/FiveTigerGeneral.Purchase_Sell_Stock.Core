@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Data;
 namespace Purchase_Sell_Stock.DAL.GetDBHelper
 {
     public class AdoDBHelper : DBHelper

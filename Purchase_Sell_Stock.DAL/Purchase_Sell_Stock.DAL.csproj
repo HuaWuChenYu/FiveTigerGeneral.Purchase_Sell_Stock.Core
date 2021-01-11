@@ -6,11 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="SqlSugarCore" Version="5.0.2" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Purchase_Sell_Stock.Model\Purchase_Sell_Stock.Model.csproj" />
+    <Reference Include="Dapper">
+      <HintPath>bin\Debug\netcoreapp3.1\Dapper.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

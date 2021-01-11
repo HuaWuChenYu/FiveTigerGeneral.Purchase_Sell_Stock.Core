@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-
 namespace Purchase_Sell_Stock.API.Controllers
 {
     [ApiController]
@@ -35,5 +34,7 @@ namespace Purchase_Sell_Stock.API.Controllers
             })
             .ToArray();
         }
+
+    
     }
 }
