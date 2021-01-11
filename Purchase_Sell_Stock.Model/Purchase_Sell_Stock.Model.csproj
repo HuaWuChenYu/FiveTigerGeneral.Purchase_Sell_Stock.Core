@@ -10,4 +10,8 @@
     <None Remove="Indent\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="SqlSugarCore" Version="5.0.2" />
+  </ItemGroup>
+
 </Project>
