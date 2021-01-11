@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Purchase_Sell_Stock.IServices;
 using Purchase_Sell_Stock.Model.SettingModels;
+using Purchase_Sell_Stock.Model.GoodsFunction;
+using Purchase_Sell_Stock.DAL.GetDBHelper;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
@@ -13,6 +15,7 @@ namespace Purchase_Sell_Stock.API.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
+        
         ISet _iset;
         public TestController(ISet set)
         {
@@ -24,5 +27,6 @@ namespace Purchase_Sell_Stock.API.Controllers
             List<Classify> clist = _iset.ClassifiesShow();
             return clist;
         }
+        
     }
 }

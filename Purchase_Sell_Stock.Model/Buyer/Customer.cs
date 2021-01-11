@@ -53,5 +53,9 @@ namespace Purchase_Sell_Stock.Model.Buyer
         /// 店铺外键
         /// </summary>
         public int StoreId { get; set; }
+        /// <summary>
+        /// 地址
+        /// </summary>
+        public string Adress { get; set; }
     }
 }
