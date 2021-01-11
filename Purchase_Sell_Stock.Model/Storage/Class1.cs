@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Purchase_Sell_Stock.Model.Storage
 {
-    class unit
+    class UUUUU
     {
     }
 }
