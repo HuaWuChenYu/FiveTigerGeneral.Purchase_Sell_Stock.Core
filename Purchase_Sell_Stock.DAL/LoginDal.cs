@@ -16,7 +16,7 @@ namespace Purchase_Sell_Stock.DAL
             {
                 sql = $"select * from yh_Users where UserAccount='{name}' and UserPassword='{pwd}'";
             }
-            return dBHelper.GetList<Users>();
+            return dBHelper.GetList<Users>("");
         }
     }
 }
