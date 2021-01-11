@@ -5,9 +5,9 @@ using System.Text;
 namespace Purchase_Sell_Stock.DAL
 {
     /// <summary>
-    /// 订单
+    /// 商品
     /// </summary>
-    public class OrderDal
+    public class GoodsDal
     {
     }
 }
