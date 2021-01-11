@@ -18,7 +18,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
 
         public override List<T> GetList<T>()
         {
-            throw new NotImplementedException();
+            return new List<T>();
         }
     }
 }

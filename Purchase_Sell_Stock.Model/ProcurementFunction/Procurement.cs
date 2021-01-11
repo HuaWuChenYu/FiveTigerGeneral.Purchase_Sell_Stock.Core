@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Purchase_Sell_Stock.Model.Storage
+namespace Purchase_Sell_Stock.Model.ProcurementFunction
 {
-    class Class5
+    public class Procurement
     {
     }
 }

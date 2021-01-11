@@ -19,41 +19,29 @@ namespace Purchase_Sell_Stock.Services
             switch (name)
             {
                 case "Commodity":
-                    return new CommodityBll() as T;
-                    break;
+                    return new CommodityDal() as T;
                 case "Customer":
-                    return new CustomerBll() as T;
-                    break;
+                    return new CustomerDal() as T;
                 case "Discount":
-                    return new DiscountBll() as T;
-                    break;
+                    return new DiscountDal() as T;
                 case "Infomation":
-                    return new InformationBll() as T;
-                    break;
+                    return new InformationDal() as T;
                 case "Login":
-                    return new LoginBll() as T;
-                    break;
+                    return new LoginDal() as T;
                 case "Order":
-                    return new OrderBll() as T;
-                    break;
+                    return new OrderDal() as T;
                 case "Property":
-                    return new PropertyBll() as T;
-                    break;
+                    return new PropertyDal() as T;
                 case "Purchase":
-                    return new PurchaseBll() as T;
-                    break;
+                    return new PurchaseDal() as T;
                 case "Set":
-                    return new SetBll() as T;
-                    break;
+                    return new SetDal() as T;
                 case "Storage":
-                    return new StorageBll() as T;
-                    break;
+                    return new StorageDal() as T;
                 case "Stores":
-                    return new StorageBll() as T;
-                    break;
+                    return new StorageDal() as T;
                 default:
                     return null;
-                    break;
             }
         }
     }

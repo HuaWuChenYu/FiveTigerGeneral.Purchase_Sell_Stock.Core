@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Indent\**" />
+    <EmbeddedResource Remove="Indent\**" />
+    <None Remove="Indent\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SqlSugarCore" Version="5.0.2" />
+  </ItemGroup>
+
 </Project>
