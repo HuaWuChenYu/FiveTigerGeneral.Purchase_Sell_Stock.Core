@@ -1,17 +1,22 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 
 namespace Purchase_Sell_Stock.DAL.GetDBHelper
 {
     public class DapperDBHelper : DBHelper
     {
-        string connStr = "Data Source=192.168.137.64;Initial Catalog=OurProject;User ID=sa";
-
         public override int ExecuteNonQuery(string sql)
         {
-            throw new NotImplementedException();
+            using (IDbConnection conn=new SqlConnection(_locastr))
+            {
+                int n= conn.Execute(sql);
+                return n;
+            }
         }
 
         public override int ExecuteNonQuery(string procName, SqlParameter[] parameter = null)
@@ -21,12 +26,19 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
 
         public override object ExecuteScalar(string sql)
         {
-            throw new NotImplementedException();
+            using(IDbConnection conn = new SqlConnection(_locastr))
+            {
+                return conn.ExecuteScalar(sql);
+            }
+            
         }
 
         public override List<T> GetList<T>(string sql)
         {
-            return new List<T>();
+            using (IDbConnection conn = new SqlConnection(_locastr))
+            {
+                return conn.Query<T>(sql).ToList();
+            }
         }
 
         public override List<T> GetList<T>(string procName, SqlParameter[] parameter = null)

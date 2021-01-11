@@ -8,6 +8,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
 {
     public abstract class DBHelper
     {
+        public static string _locastr = null;
         /// <summary>
         /// 获取数据
         /// </summary>

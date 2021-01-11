@@ -18,6 +18,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         {
             _iset = set;
         }
+        [HttpGet]
         public List<Classify> ClassifiesShow()
         {
             List<Classify> clist = _iset.ClassifiesShow();
