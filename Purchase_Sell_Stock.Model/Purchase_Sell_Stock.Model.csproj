@@ -10,8 +10,4 @@
     <None Remove="Indent\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Goods\" />
-  </ItemGroup>
-
 </Project>
