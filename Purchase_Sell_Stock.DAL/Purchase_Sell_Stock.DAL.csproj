@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <Reference Include="Dapper">
-      <HintPath>bin\Debug\netcoreapp3.1\Dapper.dll</HintPath>
+      <HintPath>..\..\辅助文件\Dapper.dll</HintPath>
     </Reference>
   </ItemGroup>
 

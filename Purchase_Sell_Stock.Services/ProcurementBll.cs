@@ -7,7 +7,7 @@ namespace Purchase_Sell_Stock.Services
     /// <summary>
     /// 用于采购
     /// </summary>
-    public class PurchaseBll
+    public class ProcurementBll
     {
     }
 }
