@@ -14,7 +14,7 @@ namespace Purchase_Sell_Stock.DAL
         {
             string sql = "insert  into Amount_settled values('1','20.33','2020-5-5','JD_10002','矿泉水')";
             DBHelper dB= GetDBHelper.SimplyFactoryDB.GetInstance("AdoDBHelper");
-            return dB.ExecuteNonQuery();
+            return dB.ExecuteNonQuery("");
         }
 
        

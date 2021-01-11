@@ -15,7 +15,7 @@ namespace Purchase_Sell_Stock.DAL
         DBHelper dBHelper= SimplyFactoryDB.GetInstance("Dapper");
         public List<Classify> ClassifiesShow()
         {
-            List<Classify> clist= dBHelper.GetList<Classify>();
+            List<Classify> clist= dBHelper.GetList<Classify>("");
             clist.Add(new Classify() { ClassifyId = 1, ClassifyName = "海鲜" });
             return clist;
         }
