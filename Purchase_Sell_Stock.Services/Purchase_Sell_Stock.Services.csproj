@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Purchase_Sell_Stock.DAL\Purchase_Sell_Stock.DAL.csproj" />
+    <ProjectReference Include="..\Purchase_Sell_Stock.Model\Purchase_Sell_Stock.Model.csproj" />
   </ItemGroup>
 
 </Project>
