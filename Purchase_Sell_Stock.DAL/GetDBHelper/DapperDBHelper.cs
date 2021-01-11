@@ -8,7 +8,6 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
     public class DapperDBHelper:DBHelper
     {
         string connStr = "Data Source=192.168.137.64;Initial Catalog=OurProject;User ID=sa";
-
         public override int ExecuteNonQuery(string sql)
         {
             throw new NotImplementedException();

@@ -8,9 +8,13 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
 {
     public class AdoDBHelper : DBHelper
     {
+
         public override int ExecuteNonQuery(string sql)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection())
+            {
+                return 1;
+            }
         }
 
         public override int ExecuteNonQuery(string procName, SqlParameter[] parameter = null)

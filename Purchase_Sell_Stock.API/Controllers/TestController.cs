@@ -13,6 +13,7 @@ namespace Purchase_Sell_Stock.API.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
+        
         ISet _iset;
         public TestController(ISet set)
         {
