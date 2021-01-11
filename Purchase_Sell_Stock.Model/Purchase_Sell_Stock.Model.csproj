@@ -5,8 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Indent\**" />
+    <EmbeddedResource Remove="Indent\**" />
+    <None Remove="Indent\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Goods\" />
-    <Folder Include="Indent\" />
   </ItemGroup>
 
 </Project>
