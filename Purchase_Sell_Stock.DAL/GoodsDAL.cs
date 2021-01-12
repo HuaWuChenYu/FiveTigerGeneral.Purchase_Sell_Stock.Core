@@ -16,26 +16,41 @@ namespace Purchase_Sell_Stock.DAL
         /// <summary>
         /// 查询商品
         /// </summary>
+        /// <typeparam name="Goods"></typeparam>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="goodsName"></param>
+        /// <param name="goodsType"></param>
+        /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        public GoodsPaging GetGoodsList<Goods>(int pageIndex, int pageSize, string goodsNum, string goodsName, string goodsType, string goodsClassify)
+        public GoodsPaging GetGoodsList<Goods>(int pageIndex, int pageSize, string goodsName, string goodsType, string goodsClassify)
         {
             string sql = $" where 1 = 1";
-            if (!string.IsNullOrEmpty(goodsNum))
+            if (!string.IsNullOrEmpty(goodsName))
             {
-                sql +=$" and goodsNum = '{goodsNum}'";
+                sql += $" and GoodsName like '%{goodsName}%'";
+            }
+            if (!string.IsNullOrEmpty(goodsType))
+            {
+                sql += $" and GoodsTypeName = '{goodsType}'";
+            }
+            if (!string.IsNullOrEmpty(goodsClassify))
+            {
+                sql += $" and Goodsclassify = '{goodsClassify}'";
             }
             SqlParameter[] para = new SqlParameter[] {
                 new SqlParameter(){ParameterName="@TableFields",DbType=DbType.String,Value= "*"},
                 new SqlParameter(){ParameterName="@TableName",DbType=DbType.String,Value= "Goods"},
-                new SqlParameter(){ParameterName="@SqlWhere",DbType=DbType.String,Value=sql },
-                new SqlParameter(){ParameterName="@OrderBy",DbType=DbType.String,Value= ""},
+                new SqlParameter(){ParameterName="@SqlWhere",DbType=DbType.String,Value= sql },
+                new SqlParameter(){ParameterName="@OrderBy",DbType=DbType.String,Value= "GoodsId"},
                 new SqlParameter(){ParameterName="@PageIndex",DbType=DbType.Int32,Value=pageIndex },
                 new SqlParameter(){ParameterName="@PageSize",DbType=DbType.Int32,Value= pageSize},
+                new SqlParameter(){ParameterName="@@TotalCount",DbType=DbType.Int32,Direction=ParameterDirection.Output},
             };
-            List<Goods> listGoods = SimplyFactoryDB.GetInstance("Ado").GetList<Goods>("", para);
+            List<Goods> listGoods = SimplyFactoryDB.GetInstance("Ado").GetList<Goods>("Proc_Paging", para);
             GoodsPaging paging = new GoodsPaging()
             {
-                Count = 0,
+                Count = Convert.ToInt32(para[6].Value),
                 list = listGoods as List<Model.GoodsFunction.Goods>
             };
             return paging;
