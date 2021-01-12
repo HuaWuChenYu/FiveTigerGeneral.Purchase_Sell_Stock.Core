@@ -9,7 +9,7 @@ namespace Purchase_Sell_Stock.Services
 {
     public class GoodsBll : IGoods
     {
-        //DalFactory dalFactory = new DalFactory();
+        DalFactory dalFactory = new DalFactory();
 
         ///<summary>
         /// 商品品牌查询
@@ -20,18 +20,20 @@ namespace Purchase_Sell_Stock.Services
         /// <returns></returns>
         public List<GoodsUnit> GetGoodsBrandList<GoodsUnit>(int brandId, string brandName)
         {
-            return DalFactory.GetDal<GoodsDal>();
+            return DalFactory.GetDal<GoodsDal>("Goods").GetGoodsList<GoodsUnit>().list();
         }
         /// <summary>
         /// 商品档案查询
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
         /// <param name="goodsNum"></param>
         /// <param name="goodsName"></param>
         /// <param name="goodsType"></param>
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        public List<Goods> GetGoodsList<Goods>(string goodsNum, string goodsName, string goodsType, string goodsClassify)
+        public List<T> GetGoodsList<T>(int pageIndex, int pageSize, string goodsNum, string goodsName, string goodsType, string goodsClassify)
         {
             throw new NotImplementedException();
         }
