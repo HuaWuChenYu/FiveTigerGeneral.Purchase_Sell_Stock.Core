@@ -14,5 +14,10 @@ namespace Purchase_Sell_Stock.DAL
             List<Users> users = dBHelper.GetList < Users>($"select * from Users UserAccount={name} where UserPassword={pwd}");
             return users;
         }
+        public int ZhuCe(Users a)
+        {
+            int i = dBHelper.ExecuteNonQuery($"insert into Users values('{a.UserPhone}')");
+            return i;
+        }
     }
 }
