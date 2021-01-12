@@ -11,7 +11,7 @@ namespace Purchase_Sell_Stock.API.Controllers
 {
     public class PropertyController : Controller
     {
-        List<Amount_settled> ss;
+        List<Amount_settledMoney> ss;
         public PropertyController(IServiceProvider service) 
         {
             var property = service.GetService<PropertyBll>();
@@ -19,7 +19,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         }
 
         [Route("/api/Show")]
-        public List<Amount_settled> PropertyShow() 
+        public List<Amount_settledMoney> PropertyShow() 
         {
             return ss;
         }
