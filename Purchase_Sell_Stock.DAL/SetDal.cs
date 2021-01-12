@@ -5,6 +5,8 @@ using System.Text;
 using NetTaste;
 using Purchase_Sell_Stock.DAL.GetDBHelper;
 using Purchase_Sell_Stock.Model.SettingModels;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Purchase_Sell_Stock.DAL
 {
@@ -17,7 +19,12 @@ namespace Purchase_Sell_Stock.DAL
 
         public List<Classify> ClassifiesShow()
         {
-            List<Classify> clist = dBHelper.GetList<Classify>("select * from Classify");
+            SqlParameter[] paras = new SqlParameter[]
+            {
+                new SqlParameter(){ ParameterName="@MemberId",DbType=DbType.Int32,Value=111},
+                new SqlParameter(){ ParameterName="@Name",DbType=DbType.AnsiString,Value="hhhhh"}
+            };
+            List<Classify> clist = dBHelper.GetList<Classify>("page_Test",paras);
             //List<Classify> clist= DapperHelper.Query<Classify>("select * from Classify");
             return clist;
         }

@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Purchase_Sell_Stock.Model.Buyer;
 
 namespace Purchase_Sell_Stock.IServices
 {
-    interface ICustomer
+    public interface ICustomer
     {
-        //发大水
+        /// <summary>
+        /// 全部用户查询
+        /// </summary>
+        List<T> GetCustomers<T>(int customerId, string customerName, string customerPhone, string customerIdentity, int lableId, string whetherEnable);
+
+
+
     }
 }

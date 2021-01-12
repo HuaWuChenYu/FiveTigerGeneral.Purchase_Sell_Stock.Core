@@ -27,14 +27,17 @@ namespace Purchase_Sell_Stock.Services
         /// 商品档案查询
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
         /// <param name="goodsNum"></param>
         /// <param name="goodsName"></param>
         /// <param name="goodsType"></param>
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        public List<Goods> GetGoodsList<Goods>(string goodsNum, string goodsName, string goodsType, string goodsClassify)
+        public GoodsPaging GetGoodsList<T>(int pageIndex, int pageSize,string goodsName, string goodsType, string goodsClassify)
         {
-            throw new NotImplementedException();
+            GoodsPaging goodsPaging= DalFactory.GetDal<GoodsDal>("Goods").GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify);
+            return goodsPaging;
         }
         /// <summary>
         /// 商品分类查询

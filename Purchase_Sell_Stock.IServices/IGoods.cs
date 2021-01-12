@@ -16,7 +16,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="goodsType"></param>
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        List<T> GetGoodsList<T>(string goodsNum,string goodsName,string goodsType,string goodsClassify);
+        GoodsPaging GetGoodsList<T>(int pageIndex ,int pageSize,string goodsName,string goodsType,string goodsClassify);
         /// <summary>
         /// 商品分类查询
         /// </summary>
