@@ -31,6 +31,7 @@ namespace Purchase_Sell_Stock.API
             services.AddControllers();
             services.AddTransient<ISet,SetBll>();
             services.AddTransient<PropertyBll>();
+            services.AddTransient<IStorage, StorageBll>();
             //services.Add(new ServiceDescriptor(typeof(DBHelper),  DBHelper(Configuration["ConnectionString:locastr"])));
         }
 

@@ -15,13 +15,13 @@ namespace Purchase_Sell_Stock.DAL
             users.Add(new Users()
             {
                 UserId = 1,
-                UserAccount = "海鲜"
+                //UserAccount = "海鲜"
             });
             return users;
         }
-        public List<Users> Forter(string name)
-        { 
+        //public List<Users> Forter(string name)
+        //{ 
             
-        }
+        //}
     }
 }

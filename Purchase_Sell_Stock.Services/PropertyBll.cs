@@ -11,8 +11,8 @@ namespace Purchase_Sell_Stock.Services
     {
         PropertyDal pd = new PropertyDal();
         public List<Amount_settled> amount_SettledsShow()
-        { 
-            return pd.amount_SettledsShow();
+        {
+            return new List<Amount_settled>();/* pd.amount_SettledsShow();*/
         }
     }
 }
