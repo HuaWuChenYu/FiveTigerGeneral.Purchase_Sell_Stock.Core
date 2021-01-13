@@ -32,7 +32,18 @@ namespace Purchase_Sell_Stock.API
             services.AddSwaggerSetup();
             services.AddSingleton<IGoods, GoodsBll>();
             services.AddTransient<ISet,SetBll>();
-            services.AddControllers(); 
+            services.AddControllers();
+            //配置跨域处理，允许所有来源：
+            services.AddCors(options =>
+            {
+                options.AddPolicy("any", builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()   //必须写AllowAnyHeader否则前端掉不了 
+                    //.AllowCredentials()//指定处理cookie
+                .AllowAnyOrigin(); //允许任何来源的主机访问
+                });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +53,7 @@ namespace Purchase_Sell_Stock.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors("any");
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
