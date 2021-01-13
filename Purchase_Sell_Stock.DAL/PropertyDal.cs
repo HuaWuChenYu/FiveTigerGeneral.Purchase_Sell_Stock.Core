@@ -32,7 +32,7 @@ namespace Purchase_Sell_Stock.DAL
         public int Addbalance_MoneyInfos()
         {
             string sql = "insert  into balance_Money values('1','20.33','2020-5-5','JD_10002','矿泉水')";
-            return dB.ExecuteNonQuery("");
+            return dB.ExecuteNonQuery(sql);
         }
 
         /// <summary>
@@ -42,6 +42,7 @@ namespace Purchase_Sell_Stock.DAL
         public int AddRechanged_recordInfos()
         {
             string sql = "insert  into Rechanged_record values('1','20.33','2020-5-5','JD_10002','矿泉水')";
+
             return dB.ExecuteNonQuery(sql);
         }
 
