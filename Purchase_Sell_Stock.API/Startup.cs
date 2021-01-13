@@ -33,10 +33,10 @@ namespace Purchase_Sell_Stock.API
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            //DBHelper._locastr = Configuration["ConnectionStrings:connString"];
-            //services.AddSingleton<ISet,SetBll>();
-            //services.AddSingleton<PropertyBll>();
-            
+            DBHelper._locastr = Configuration["ConnectionStrings:connString"];
+            services.AddSingleton<ISet, SetBll>();
+            services.AddSingleton<PropertyBll>();
+
             //services.Add(new ServiceDescriptor(typeof(DBHelper),  DBHelper(Configuration["ConnectionString:locastr"])));
             services.AddControllers();
         }
