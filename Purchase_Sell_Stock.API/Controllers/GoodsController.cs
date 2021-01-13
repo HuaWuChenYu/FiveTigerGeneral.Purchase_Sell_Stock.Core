@@ -33,10 +33,52 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="goodsType"></param>
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        public GoodsPaging GetGoodsList(int pageIndex, int pageSize, string goodsName, string goodsType, string goodsClassify)
+        public GoodsPaging<Goods> GetGoodsList(int pageIndex, int pageSize, string goodsName, string goodsType, string goodsClassify)
         {
-            GoodsPaging goodsPaging = _goods1.GetGoodsList(1, 2, "", "", "");
+            GoodsPaging<Goods> goodsPaging = _goods1.GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify);
             return goodsPaging;
+        }
+        [HttpGet]
+        [Route("/api/GetGoodsBrandList")]
+        ///<summary>
+        /// 商品品牌查询
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="brandId"></param>
+        /// <param name="brandName"></param>
+        /// <returns></returns>
+        public List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName)
+        {
+            List<GoodsBrand> list = _goods1.GetGoodsBrandList(brandId, brandName);
+            return list;
+        }
+        [HttpGet]
+        [Route("/api/GetGoodsTypeList")]
+        /// <summary>
+        /// 商品分类查询
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="typeId"></param>
+        /// <param name="typeName"></param>
+        /// <returns></returns>
+        public List<GoodsType> GetGoodsTypeList(int typeId, string typeName)
+        {
+            List<GoodsType> list = _goods1.GetGoodsTypeList(typeId, typeName);
+            return list;
+        }
+        [HttpGet]
+        [Route("/api/GetGoodsUnitList")]
+        /// <summary>
+        /// 商品单位查询
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="unitId"></param>
+        /// <param name="unitName"></param>
+        /// <returns></returns>
+        public List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName)
+        {
+            List<GoodsUnit> list = _goods1.GetGoodsUnitList(unitId, unitName);
+            return list;
         }
     }
 }

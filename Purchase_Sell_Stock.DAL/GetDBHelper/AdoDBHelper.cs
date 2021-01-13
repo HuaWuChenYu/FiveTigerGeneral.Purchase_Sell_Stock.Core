@@ -111,7 +111,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
         /// <typeparam name="T"></typeparam>
         /// <param name="dt">DataTable</param>
         /// <returns></returns>
-        public List<T> ConvertTableToList<T>(DataTable dt)
+        private List<T> ConvertTableToList<T>(DataTable dt)
         {
             var props = typeof(T).GetProperties();
             //实例化泛型集合

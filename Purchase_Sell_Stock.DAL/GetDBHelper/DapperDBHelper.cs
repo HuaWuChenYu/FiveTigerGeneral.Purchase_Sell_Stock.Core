@@ -76,11 +76,11 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
                 };
                 foreach (SqlParameter p in parameter)
                 {
-                    
+
                 }
                 List<T> info = conn.Query<T>(procName, new
                 {
-                    
+
                 },
      commandType: CommandType.StoredProcedure).ToList();
                 return info;

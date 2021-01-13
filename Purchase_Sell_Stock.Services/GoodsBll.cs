@@ -33,9 +33,9 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="goodsType"></param>
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        public GoodsPaging GetGoodsList(int pageIndex, int pageSize,string goodsName, string goodsType, string goodsClassify)
+        public GoodsPaging<Goods> GetGoodsList<Goods>(int pageIndex, int pageSize,string goodsName, string goodsType, string goodsClassify)
         {
-            GoodsPaging goodsPaging= DalFactory.GetDal<GoodsDal>("Goods").GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify);
+            GoodsPaging<Goods> goodsPaging = DalFactory.GetDal<GoodsDal>("Goods").GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify);
             return goodsPaging;
         }
         /// <summary>

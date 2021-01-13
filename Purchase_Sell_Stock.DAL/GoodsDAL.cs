@@ -13,6 +13,8 @@ namespace Purchase_Sell_Stock.DAL
     /// </summary>
     public class GoodsDal
     {
+        DBHelper dBDapper = SimplyFactoryDB.GetInstance("Dapper");
+        DBHelper dBAdo = SimplyFactoryDB.GetInstance("Ado");
         /// <summary>
         /// 查询商品
         /// </summary>
@@ -23,7 +25,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <param name="goodsType"></param>
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        public GoodsPaging GetGoodsList<Goods>(int pageIndex, int pageSize, string goodsName, string goodsType, string goodsClassify)
+        public GoodsPaging<Goods> GetGoodsList<Goods>(int pageIndex, int pageSize, string goodsName, string goodsType, string goodsClassify)
         {
             string sql = $"1 = 1";
             if (!string.IsNullOrEmpty(goodsName))
@@ -47,11 +49,11 @@ namespace Purchase_Sell_Stock.DAL
                 new SqlParameter(){ParameterName="@PageSize",DbType=DbType.Int32,Value= pageSize},
                 new SqlParameter(){ParameterName="@TotalCount",DbType=DbType.Int32,Direction=ParameterDirection.Output},
             };
-            List<Goods> listGoods = SimplyFactoryDB.GetInstance("Ado").GetList<Goods>("Proc_Paging", para);
-            GoodsPaging paging = new GoodsPaging()
+            List<Goods> listGoods = dBAdo.GetList<Goods>("Proc_Paging", para);
+            GoodsPaging<Goods> paging = new GoodsPaging<Goods>()
             {
                 Count = Convert.ToInt32(para[6].Value),
-                list = listGoods as List<Model.GoodsFunction.Goods>
+                list = listGoods
             };
             return paging;
         }
@@ -73,7 +75,7 @@ namespace Purchase_Sell_Stock.DAL
             {
                 sql += " and GoodsTypeName = @name" + ",new {name=" + $"{typeName}" + "}";
             }
-            List<GoodsType> list = SimplyFactoryDB.GetInstance("Dapper").GetList<GoodsType>(sql);
+            List<GoodsType> list = dBDapper.GetList<GoodsType>(sql);
             return list;
         }
         /// <summary>
@@ -85,7 +87,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public List<GoodsBrand> GetGoodsBrandList<GoodsBrand>(int brandId, string brandName)
         {
-            string sql = "select * from GoodsType where 1 = 1";
+            string sql = "select * from GoodsBrand where 1 = 1";
             if (brandId != 0)
             {
                 sql += " and GoodsBrandId = @id" + ",new {id=" + $"{brandId}" + "}";
@@ -94,7 +96,7 @@ namespace Purchase_Sell_Stock.DAL
             {
                 sql += " and GoodsBrandName = @name" + ",new {name=" + $"{brandName}" + "}";
             }
-            List<GoodsBrand> list = SimplyFactoryDB.GetInstance("Dapper").GetList<GoodsBrand>(sql);
+            List<GoodsBrand> list = dBDapper.GetList<GoodsBrand>(sql);
             return list;
         }
         /// <summary>
@@ -106,7 +108,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public List<GoodsUnit> GetGoodsUnitList<GoodsType>(int unitId, string unitName)
         {
-            string sql = "select * from GoodsType where 1 = 1";
+            string sql = "select * from GoodsUnit where 1 = 1";
             if (unitId != 0)
             {
                 sql += " and GoodsUnitId = @id" + ",new {id=" + $"{unitId}" + "}";
@@ -115,9 +117,18 @@ namespace Purchase_Sell_Stock.DAL
             {
                 sql += " and GoodsUnitName = @name" + ",new {name=" + $"{unitName}" + "}";
             }
-            List<GoodsUnit> list = SimplyFactoryDB.GetInstance("Dapper").GetList<GoodsUnit>(sql);
+            List<GoodsUnit> list = dBDapper.GetList<GoodsUnit>(sql);
             return list;
         }
-
+        /// <summary>
+        /// 添加商品
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns>
+        public int AddGoods(Goods goods)
+        {
+            int i = dBDapper.ExecuteNonQuery(goods);
+            return i;
+        }
     }
 }
