@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Purchase_Sell_Stock.API</name>
+    </assembly>
+    <members>
+        <member name="M:Purchase_Sell_Stock.API.SetUp.SwaggerSetUp.AddSwaggerSetup(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            AddSwaggerSetup
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="P:Purchase_Sell_Stock.API.Startup.Configuration">
+            <summary>
+            Configuration
+            </summary>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            ConfigureServices
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configure
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>

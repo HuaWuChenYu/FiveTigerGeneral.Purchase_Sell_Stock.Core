@@ -9,7 +9,7 @@ using Purchase_Sell_Stock.Model.GoodsFunction;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {

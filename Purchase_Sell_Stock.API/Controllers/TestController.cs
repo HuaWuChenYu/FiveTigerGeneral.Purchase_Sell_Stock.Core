@@ -11,7 +11,7 @@ using Purchase_Sell_Stock.DAL.GetDBHelper;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
-    [Route("/api/[controller]/[action]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class TestController : ControllerBase
     {

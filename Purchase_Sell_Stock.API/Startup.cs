@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 using Purchase_Sell_Stock.Services;
 using Purchase_Sell_Stock.IServices;
 using Purchase_Sell_Stock.DAL.GetDBHelper;
-using Purchase_Sell_Stock.API.SetUp;
 
 namespace Purchase_Sell_Stock.API
 {
@@ -22,22 +21,33 @@ namespace Purchase_Sell_Stock.API
         {
             Configuration = configuration;
         }
-
+        /// <summary>
+        /// Configuration
+        /// </summary>
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// ConfigureServices
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             DBHelper._locastr = Configuration["ConnectionStrings:connString"];
+            services.AddSingleton<ISet, SetBll>();
+            services.AddSingleton<PropertyBll>();
+
+            //services.Add(new ServiceDescriptor(typeof(DBHelper),  DBHelper(Configuration["ConnectionString:locastr"])));
             services.AddControllers();
-            services.AddTransient<ISet,SetBll>();
-            services.AddTransient<PropertyBll>();
-            services.AddSwaggerSetup();
-            services.AddTransient<IStorage, StorageBll>();
             //services.Add(new ServiceDescriptor(typeof(DBHelper),  DBHelper(Configuration["ConnectionString:locastr"])));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configure
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //AutoFac   IOC    JWT    this 
@@ -45,14 +55,6 @@ namespace Purchase_Sell_Stock.API
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint($"/swagger/V1/swagger.json", "Purchase_Sell_Stock.API V1");
-
-                //·�����ã�����Ϊ�գ���ʾֱ���ڸ�������localhost:8001�����ʸ��ļ�,ע��localhost:8001/swagger�Ƿ��ʲ����ģ�ȥlaunchSettings.json��launchUrlȥ���������뻻һ��·����ֱ��д���ּ��ɣ�����ֱ��дc.RoutePrefix = "doc";
-                c.RoutePrefix = "";
-            });
             app.UseRouting();
 
             app.UseAuthorization();

@@ -54,5 +54,6 @@ namespace Purchase_Sell_Stock.DAL
             List<Customer> list = SimplyFactoryDB.GetInstance("Dapper").GetList<Customer>(sql);
             return list;
         }
+        //public List<>
     }
 }
