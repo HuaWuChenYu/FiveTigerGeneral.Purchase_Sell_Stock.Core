@@ -19,17 +19,17 @@ namespace Purchase_Sell_Stock.DAL
         DBHelper dBHelper = SimplyFactoryDB.GetInstance("Dapper");
         public List<Classify> ClassifiesShow()
         {
-            string name = "主店";
-            //' or 1=1 --
-            string name2 = "直销";
-            object obj = dBHelper.ExecuteScalar("select count(*) from Classify where ClassifyName=@name", new { name});
+            //string name = "主店";
+            ////' or 1=1 --
+            //string name2 = "直销";
+            //object obj = dBHelper.ExecuteScalar("select count(*) from Classify where ClassifyName=@name", new { name});
             //DynamicParameters dp = new DynamicParameters();
             //dp.Add("@MemberId", "2019595");
             //dp.Add("@Name", "张三");
             //dp.Add("@Name2", "", DbType.String, ParameterDirection.Output);
             //int n = dBHelper.ExecuteNonQuery("page_Test", dp);
-            //List<Classify> clist= DapperHelper.Query<Classify>("select * from Classify");
-            return new List<Classify>();
+            List<Classify> clist = dBHelper.GetList<Classify>("select * from Classify");
+            return clist;
         }
     }
 }
