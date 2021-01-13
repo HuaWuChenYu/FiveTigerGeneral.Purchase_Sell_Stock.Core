@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchase_Sell_Stock.API", "Purchase_Sell_Stock.API\Purchase_Sell_Stock.API.csproj", "{098C6C4E-98D3-45FB-978C-FAF3EEDAD481}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Purchase_Sell_Stock.Services", "Purchase_Sell_Stock.Services\Purchase_Sell_Stock.Services.csproj", "{F7581DE3-15F5-4733-BE8B-AE48B3FACEC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchase_Sell_Stock.Services", "Purchase_Sell_Stock.Services\Purchase_Sell_Stock.Services.csproj", "{F7581DE3-15F5-4733-BE8B-AE48B3FACEC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Purchase_Sell_Stock.DAL", "Purchase_Sell_Stock.DAL\Purchase_Sell_Stock.DAL.csproj", "{E079D3CF-A49B-4BA7-B2BE-955724D6F215}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchase_Sell_Stock.DAL", "Purchase_Sell_Stock.DAL\Purchase_Sell_Stock.DAL.csproj", "{E079D3CF-A49B-4BA7-B2BE-955724D6F215}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Purchase_Sell_Stock.Model", "Purchase_Sell_Stock.Model\Purchase_Sell_Stock.Model.csproj", "{250AA371-425E-4E6C-93D7-675BF26A1EBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchase_Sell_Stock.Model", "Purchase_Sell_Stock.Model\Purchase_Sell_Stock.Model.csproj", "{250AA371-425E-4E6C-93D7-675BF26A1EBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Purchase_Sell_Stock.IServices", "Purchase_Sell_Stock.IServices\Purchase_Sell_Stock.IServices.csproj", "{61F46549-3353-41A5-82CB-A8D452D469C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchase_Sell_Stock.IServices", "Purchase_Sell_Stock.IServices\Purchase_Sell_Stock.IServices.csproj", "{61F46549-3353-41A5-82CB-A8D452D469C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchase_Sell_Stock.API", "Purchase_Sell_Stock.API\Purchase_Sell_Stock.API.csproj", "{C0B2B293-E1B0-4CD7-BA28-457A8BE742BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{098C6C4E-98D3-45FB-978C-FAF3EEDAD481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{098C6C4E-98D3-45FB-978C-FAF3EEDAD481}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{098C6C4E-98D3-45FB-978C-FAF3EEDAD481}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{098C6C4E-98D3-45FB-978C-FAF3EEDAD481}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F7581DE3-15F5-4733-BE8B-AE48B3FACEC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F7581DE3-15F5-4733-BE8B-AE48B3FACEC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7581DE3-15F5-4733-BE8B-AE48B3FACEC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{61F46549-3353-41A5-82CB-A8D452D469C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61F46549-3353-41A5-82CB-A8D452D469C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61F46549-3353-41A5-82CB-A8D452D469C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0B2B293-E1B0-4CD7-BA28-457A8BE742BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0B2B293-E1B0-4CD7-BA28-457A8BE742BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0B2B293-E1B0-4CD7-BA28-457A8BE742BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0B2B293-E1B0-4CD7-BA28-457A8BE742BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

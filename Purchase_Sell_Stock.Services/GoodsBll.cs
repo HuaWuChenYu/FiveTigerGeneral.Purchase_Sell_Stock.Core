@@ -18,9 +18,9 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="brandId"></param>
         /// <param name="brandName"></param>
         /// <returns></returns>
-        public List<GoodsUnit> GetGoodsBrandList<GoodsUnit>(int brandId, string brandName)
+        public List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName)
         {
-            throw new NotImplementedException();
+            return DalFactory.GetDal<GoodsDal>("Goods").GetGoodsBrandList<GoodsBrand>(brandId,brandName);
         }
         /// <summary>
         /// 商品档案查询
@@ -33,7 +33,7 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="goodsType"></param>
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        public GoodsPaging GetGoodsList<T>(int pageIndex, int pageSize,string goodsName, string goodsType, string goodsClassify)
+        public GoodsPaging GetGoodsList(int pageIndex, int pageSize,string goodsName, string goodsType, string goodsClassify)
         {
             GoodsPaging goodsPaging= DalFactory.GetDal<GoodsDal>("Goods").GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify);
             return goodsPaging;
@@ -45,7 +45,7 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="typeId"></param>
         /// <param name="typeName"></param>
         /// <returns></returns>
-        public List<GoodsType> GetGoodsTypeList<GoodsType>(int typeId, string typeName)
+        public List<GoodsType> GetGoodsTypeList(int typeId, string typeName)
         {
             throw new NotImplementedException();
         }
@@ -56,7 +56,7 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="unitId"></param>
         /// <param name="unitName"></param>
         /// <returns></returns>
-        public List<GoodsUnit> GetGoodsUnitList<GoodsUnit>(int unitId, string unitName)
+        public List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName)
         {
             throw new NotImplementedException();
         }

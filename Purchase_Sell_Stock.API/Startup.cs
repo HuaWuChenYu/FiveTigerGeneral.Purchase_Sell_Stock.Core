@@ -1,18 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+ï»¿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Purchase_Sell_Stock.Services;
-using Purchase_Sell_Stock.IServices;
-using Purchase_Sell_Stock.DAL.GetDBHelper;
 using Purchase_Sell_Stock.API.SetUp;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Purchase_Sell_Stock.IServices;
+using Purchase_Sell_Stock.Services;
 
 namespace Purchase_Sell_Stock.API
 {
@@ -28,18 +27,15 @@ namespace Purchase_Sell_Stock.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            DBHelper._locastr = Configuration["ConnectionStrings:connString"];
-            services.AddControllers();
-            services.AddTransient<ISet,SetBll>();
-            services.AddTransient<PropertyBll>();
+            
             services.AddSwaggerSetup();
-            //services.Add(new ServiceDescriptor(typeof(DBHelper),  DBHelper(Configuration["ConnectionString:locastr"])));
+            services.AddSingleton<IGoods, GoodsBll>();
+            services.AddControllers(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //AutoFac   IOC    JWT    this 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -49,7 +45,7 @@ namespace Purchase_Sell_Stock.API
             {
                 c.SwaggerEndpoint($"/swagger/V1/swagger.json", "Purchase_Sell_Stock.API V1");
 
-                //Â·¾¶ÅäÖÃ£¬ÉèÖÃÎª¿Õ£¬±íÊ¾Ö±½ÓÔÚ¸ùÓòÃû£¨localhost:8001£©·ÃÎÊ¸ÃÎÄ¼þ,×¢Òâlocalhost:8001/swaggerÊÇ·ÃÎÊ²»µ½µÄ£¬È¥launchSettings.json°ÑlaunchUrlÈ¥µô£¬Èç¹ûÄãÏë»»Ò»¸öÂ·¾¶£¬Ö±½ÓÐ´Ãû×Ö¼´¿É£¬±ÈÈçÖ±½ÓÐ´c.RoutePrefix = "doc";
+                //Â·ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½Ê¾Ö±ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½localhost:8001ï¿½ï¿½ï¿½ï¿½ï¿½Ê¸ï¿½ï¿½Ä¼ï¿½,×¢ï¿½ï¿½localhost:8001/swaggerï¿½Ç·ï¿½ï¿½Ê²ï¿½ï¿½ï¿½ï¿½Ä£ï¿½È¥launchSettings.jsonï¿½ï¿½launchUrlÈ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë»»Ò»ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½É£ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½Ð´c.RoutePrefix = "doc";
                 c.RoutePrefix = "";
             });
             app.UseRouting();

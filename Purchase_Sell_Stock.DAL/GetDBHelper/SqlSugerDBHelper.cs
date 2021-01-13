@@ -41,7 +41,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
         {
             SqlSugarClient db = new SqlSugarClient(new ConnectionConfig()
             {
-                ConnectionString = "Data Source=192.168.137.64;Initial Catalog=OurProject;User ID=sa",
+                ConnectionString = "Data Source=192.168.137.64;Initial Catalog=OurProject;Persist Security Info=True;User ID=sa;Password=123456",
                 DbType = DbType.SqlServer,
                 IsAutoCloseConnection = true,
                 InitKeyType = InitKeyType.Attribute

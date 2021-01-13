@@ -76,7 +76,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
-                List<T> list = ConvertTableToList<List<T>>(dt);
+                List<T> list = ConvertTableToList<T>(dt);
                 return list;
             }
         }
@@ -101,7 +101,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
                 //实例化适配器
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 sda.Fill(dt);
-                List<T> list = ConvertTableToList<List<T>>(dt);
+                List<T> list = ConvertTableToList<T>(dt);
                 return list;
             }
         }
@@ -111,10 +111,29 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
         /// <typeparam name="T"></typeparam>
         /// <param name="dt">DataTable</param>
         /// <returns></returns>
-        public static T ConvertTableToList<T>(DataTable dt)
+        public List<T> ConvertTableToList<T>(DataTable dt)
         {
-            var str = JsonConvert.SerializeObject(dt);
-            var list = JsonConvert.DeserializeObject<T>(str);
+            var props = typeof(T).GetProperties();
+            //实例化泛型集合
+            List<T> list = new List<T>();
+            //循环数据表中的数据
+            foreach (DataRow item in dt.Rows)
+            {
+                //泛型对象实例化必须要加引用类型的约束
+                T t = (T)Activator.CreateInstance(typeof(T));
+                //循环属性 
+                foreach (var prop in props)
+                {
+                    //判断属性与数据表中的列名是否一致
+                    if (dt.Columns.Contains(prop.Name))
+                    {
+                        //取值 赋给t对象          通过属性名去查询列名
+                        prop.SetValue(t, item[prop.Name]);
+                    }
+                }
+                //添加
+                list.Add(t);
+            }
             return list;
         }
     }
