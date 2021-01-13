@@ -69,7 +69,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
         /// <typeparam name="T"></typeparam>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public override List<T> GetList<T>(string sql) 
+        public override List<T> GetList<T>(string sql)
         {
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -111,7 +111,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
         /// <typeparam name="T"></typeparam>
         /// <param name="dt">DataTable</param>
         /// <returns></returns>
-        public List<T> ConvertTableToList<T>(DataTable dt) where T : class, new()
+        public List<T> ConvertTableToList<T>(DataTable dt)
         {
             var props = typeof(T).GetProperties();
             //实例化泛型集合
@@ -120,7 +120,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
             foreach (DataRow item in dt.Rows)
             {
                 //泛型对象实例化必须要加引用类型的约束
-                T t = new T();
+                T t = (T)Activator.CreateInstance(typeof(T));
                 //循环属性 
                 foreach (var prop in props)
                 {

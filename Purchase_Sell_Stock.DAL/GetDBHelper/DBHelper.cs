@@ -17,7 +17,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public abstract List<T> GetList<T>(string sql) where T : class, new();
+        public abstract List<T> GetList<T>(string sql);
         /// <summary>
         /// 应用存储过程获取数据
         /// </summary>
@@ -25,7 +25,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
         /// <param name="procName"></param>
         /// <param name="parameter"></param>
         /// <returns></returns>
-        public abstract List<T> GetList<T>(string procName, SqlParameter[] parameter = null) where T : class, new();
+        public abstract List<T> GetList<T>(string procName, SqlParameter[] parameter = null);
         /// <summary>
         /// 进行增删改
         /// </summary>
