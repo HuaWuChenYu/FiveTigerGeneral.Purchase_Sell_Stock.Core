@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Purchase_Sell_Stock.API</name>
+    </assembly>
+    <members>
+        <member name="T:Purchase_Sell_Stock.API.Controllers.GoodsController1">
+            <summary>
+            商品模块
+            </summary>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.GoodsController1.GetGoodsList``1(System.Int32,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            获取商品档案
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <param name="goodsName"></param>
+            <param name="goodsType"></param>
+            <param name="goodsClassify"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
