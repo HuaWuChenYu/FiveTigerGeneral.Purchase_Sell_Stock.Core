@@ -24,11 +24,14 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="pwd"></param>
         /// <returns></returns>
         [HttpPost]
+        [Route("/api/Login")]
         public List<Users> Login(string name, string pwd)
         {
             var list = bll.Login(name, pwd);
             return list;
         }
+        [HttpPost]
+        [Route("/api/Logins")]
         /// <summary>
         /// 短信登陆
         /// </summary>
@@ -39,6 +42,8 @@ namespace Purchase_Sell_Stock.API.Controllers
             var list = bll.Logins(phone);
             return list;
         }
+        [HttpPost]
+        [Route("/api/Forgers")]
         /// <summary>
         /// 忘记密码
         /// </summary>
@@ -49,6 +54,8 @@ namespace Purchase_Sell_Stock.API.Controllers
             var list = bll.Forget(name);
             return list;
         }
+        [HttpPost]
+        [Route("/api/Register")]
         /// <summary>
         /// 注册
         /// </summary>

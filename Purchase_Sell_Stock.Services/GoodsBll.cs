@@ -69,5 +69,32 @@ namespace Purchase_Sell_Stock.Services
         {
             return goods1.AddGoods(goods);
         }
+        /// <summary>
+        /// 添加商品分类
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns> v  
+        public int AddGoodsType(GoodsType goods)
+        {
+            return goods1.AddGoodsType(goods);
+        }
+        /// <summary>
+        /// 添加商品品牌
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns> v  
+        public int AddGoodsBrand(GoodsBrand goods)
+        {
+            return goods1.AddGoodsBrand(goods);
+        }
+        /// <summary>
+        /// 添加商品单位
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns> v  
+        public int AddGoodsUnit(GoodsUnit goods)
+        {
+            return goods1.AddGoodsUnit(goods);
+        }
     }
 }

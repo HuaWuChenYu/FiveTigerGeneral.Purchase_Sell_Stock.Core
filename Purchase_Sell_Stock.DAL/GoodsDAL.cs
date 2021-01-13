@@ -15,6 +15,7 @@ namespace Purchase_Sell_Stock.DAL
     {
         DBHelper dBDapper = SimplyFactoryDB.GetInstance("Dapper");
         DBHelper dBAdo = SimplyFactoryDB.GetInstance("Ado");
+        SqlSugerDBHelper sqlSugerDB = new SqlSugerDBHelper();
         /// <summary>
         /// 查询商品
         /// </summary>
@@ -111,11 +112,11 @@ namespace Purchase_Sell_Stock.DAL
             string sql = "select * from GoodsUnit where 1 = 1";
             if (unitId != 0)
             {
-                sql += " and GoodsUnitId = @id" + ",new {id=" + $"{unitId}" + "}";
+                sql += " and GoodsUnitId = @id";
             }
             if (!string.IsNullOrEmpty(unitName))
             {
-                sql += " and GoodsUnitName = @name" + ",new {name=" + $"{unitName}" + "}";
+                sql += " and GoodsUnitName = @name";
             }
             List<GoodsUnit> list = dBDapper.GetList<GoodsUnit>(sql);
             return list;
@@ -124,7 +125,7 @@ namespace Purchase_Sell_Stock.DAL
         /// 添加商品
         /// </summary>
         /// <param name="goods"></param>
-        /// <returns></returns>
+        /// <returns></returns> v  
         public int AddGoods(Goods goods)
         {
             string sql = $"insert into Goods values(@GoodsName,@GoodsPhoto,@GoodsSize,@Price,@ProcurementPrice,@GoodsState,@Goodsclassify,@GoodsTypeName,@GoodsUnitName,@GoodsBrandName,@StoreId)";
@@ -132,5 +133,42 @@ namespace Purchase_Sell_Stock.DAL
             //int i = dBDapper.ExecuteNonQuery(sql, new { goods });
             return i;
         }
+        /// <summary>
+        /// 添加商品分类
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns> v  
+        public int AddGoodsType(GoodsType goods)
+        {
+            string sql = $"insert into GoodsType values(@GoodsTypeName,@GoodsTypePId,@StoreId)";
+            int i = dBDapper.ExecuteNonQuery(sql);
+            //int i = dBDapper.ExecuteNonQuery(sql, new { goods });
+            return i;
+        }
+        /// <summary>
+        /// 添加商品品牌
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns> v  
+        public int AddGoodsBrand(GoodsBrand goods)
+        {
+            string sql = $"insert into GoodsBrand values(@GoodsBrandName,@StoreId)";
+            int i = dBDapper.ExecuteNonQuery(sql);
+            //int i = dBDapper.ExecuteNonQuery(sql, new { goods });
+            return i;
+        }
+        /// <summary>
+        /// 添加商品单位
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns> v  
+        public int AddGoodsUnit(GoodsUnit goods)
+        {
+            string sql = $"insert into GoodsUnit values(@GoodsUnitName,@GoodsUnitGroup,@StoreId)";
+            int i = dBDapper.ExecuteNonQuery(sql);
+            //int i = dBDapper.ExecuteNonQuery(sql, new { goods });
+            return i;
+        }
+
     }
 }

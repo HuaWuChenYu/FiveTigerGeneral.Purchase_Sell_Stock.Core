@@ -157,10 +157,10 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
                 {
                     Id = 1
                 };
-                foreach (SqlParameter p in parameter)
-                {
+                //foreach (SqlParameter p in parameter)
+                //{
 
-                }
+                //}
                 List<T> info = conn.Query<T>(procName, new
                 {
 

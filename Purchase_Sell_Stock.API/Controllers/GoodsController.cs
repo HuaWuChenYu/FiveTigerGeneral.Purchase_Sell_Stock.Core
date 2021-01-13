@@ -80,5 +80,38 @@ namespace Purchase_Sell_Stock.API.Controllers
             List<GoodsUnit> list = _goods1.GetGoodsUnitList(unitId, unitName);
             return list;
         }
+        [HttpPost]
+        [Route("/api/AddGoodsType")]
+        /// <summary>
+        /// 添加商品分类
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns> v  
+        public int AddGoodsType(GoodsType goods)
+        {
+            return _goods1.AddGoodsType(goods);
+        }
+        [HttpPost]
+        [Route("/api/AddGoodsBrand")]
+        /// <summary>
+        /// 添加商品品牌
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns> v  
+        public int AddGoodsBrand(GoodsBrand goods)
+        {
+            return _goods1.AddGoodsBrand(goods);
+        }
+        [HttpPost]
+        [Route("/api/AddGoodsUnit")]
+        /// <summary>
+        /// 添加商品单位
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns> v  
+        public int AddGoodsUnit(GoodsUnit goods)
+        {
+            return _goods1.AddGoodsUnit(goods);
+        }
     }
 }
