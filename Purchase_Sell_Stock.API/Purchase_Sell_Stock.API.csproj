@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Purchase_Sell_Stock.IServices\Purchase_Sell_Stock.IServices.csproj" />
     <ProjectReference Include="..\Purchase_Sell_Stock.Model\Purchase_Sell_Stock.Model.csproj" />
     <ProjectReference Include="..\Purchase_Sell_Stock.Services\Purchase_Sell_Stock.Services.csproj" />
   </ItemGroup>

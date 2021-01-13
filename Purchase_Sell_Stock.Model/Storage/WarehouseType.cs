@@ -21,11 +21,6 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// </summary>
         [SugarColumn(ColumnName = "WarehouseTypeName")]
         public string WarehouseTypeName { get; set; }
-        /// <summary>
-        /// 商品库存id
-        /// </summary>
-        [SugarColumn(ColumnName = "CommodityStocksId")]
-        public int CommodityStocksId { get; set; }
 
     }
 }

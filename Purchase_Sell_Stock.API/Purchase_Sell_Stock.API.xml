@@ -4,5 +4,55 @@
         <name>Purchase_Sell_Stock.API</name>
     </assembly>
     <members>
+        <member name="F:Purchase_Sell_Stock.API.Controllers.StorageController._storage">
+            <summary>
+            定义一个接口
+            </summary>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.#ctor(Purchase_Sell_Stock.IServices.IStorage)">
+            <summary>
+            依赖注入
+            </summary>
+            <param name="storage"></param>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.IncomingorderShow">
+            <summary>
+            入库订单的显示
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.IncomingordermodityDetail(System.Int32)">
+            <summary>
+            反填入库信息
+            </summary>
+            <param name="incomingorderid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.IncomingordermodityGoods(System.Int32)">
+            <summary>
+            反填入库商品
+            </summary>
+            <param name="incomingorderid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.OutboundorderCombinebackfill(System.Int32)">
+            <summary>
+            反填详细信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.Outboundordercommoditybackfill(System.Int32)">
+            <summary>
+            出库商品的反填
+            </summary>
+            <param name="outboundorderid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.OutboundorderShow">
+            <summary>
+            出库订单显示
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>
