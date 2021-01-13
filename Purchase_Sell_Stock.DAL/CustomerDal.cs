@@ -65,6 +65,5 @@ namespace Purchase_Sell_Stock.DAL
             };
             return paging;
         }
-        
     }
 }

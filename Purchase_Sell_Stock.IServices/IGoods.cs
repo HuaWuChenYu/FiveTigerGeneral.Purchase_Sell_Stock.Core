@@ -16,7 +16,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="goodsType"></param>
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        GoodsPaging GetGoodsList<T>(int pageIndex ,int pageSize,string goodsName,string goodsType,string goodsClassify);
+        GoodsPaging GetGoodsList(int pageIndex ,int pageSize,string goodsName,string goodsType,string goodsClassify);
         /// <summary>
         /// 商品分类查询
         /// </summary>
@@ -24,7 +24,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="typeId"></param>
         /// <param name="typeName"></param>
         /// <returns></returns>
-        List<T> GetGoodsTypeList<T>(int typeId, string typeName);
+        List<GoodsType> GetGoodsTypeList(int typeId, string typeName);
         /// <summary>
         /// 商品品牌查询
         /// </summary>
@@ -32,7 +32,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="brandId"></param>
         /// <param name="brandName"></param>
         /// <returns></returns>
-        List<T> GetGoodsBrandList<T>(int brandId, string brandName);
+        List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName);
         /// <summary>
         /// 商品单位查询
         /// </summary>
@@ -40,7 +40,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="unitId"></param>
         /// <param name="unitName"></param>
         /// <returns></returns>
-        List<T> GetGoodsUnitList<T>(int unitId, string unitName);
+        List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName);
 
     }
 }
