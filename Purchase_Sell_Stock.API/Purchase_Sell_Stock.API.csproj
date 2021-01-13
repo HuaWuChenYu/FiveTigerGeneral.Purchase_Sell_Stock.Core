@@ -1,18 +1,20 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\新建文件夹\新建文件夹\新建文件夹\新建文件夹\新建文件夹\新建文件夹\新建文件夹\Purchase_Sell_Stock.API\Purchase_Sell_Stock.API.xml</DocumentationFile>
+    <DocumentationFile>D:\大实训1\FiveTigerGeneral.Purchase_Sell_Stock.Core\Purchase_Sell_Stock.API\Purchase_Sell_Stock.API.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Purchase_Sell_Stock.IServices\Purchase_Sell_Stock.IServices.csproj" />
     <ProjectReference Include="..\Purchase_Sell_Stock.Model\Purchase_Sell_Stock.Model.csproj" />
     <ProjectReference Include="..\Purchase_Sell_Stock.Services\Purchase_Sell_Stock.Services.csproj" />
   </ItemGroup>
