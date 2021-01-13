@@ -12,5 +12,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Purchase_Sell_Stock.Model\Purchase_Sell_Stock.Model.csproj" />
+    <ProjectReference Include="..\Purchase_Sell_Stock.Services\Purchase_Sell_Stock.Services.csproj" />
+  </ItemGroup>
+
 
 </Project>
