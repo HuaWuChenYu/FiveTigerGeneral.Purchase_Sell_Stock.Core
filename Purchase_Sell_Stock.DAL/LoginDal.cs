@@ -9,15 +9,20 @@ namespace Purchase_Sell_Stock.DAL
     public class LoginDal
     {
         DBHelper dBHelper = SimplyFactoryDB.GetInstance("Ado");
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
         public List<Users> Login(string name, string pwd)
         {
-            List<Users> users = dBHelper.GetList < Users>("");
-            users.Add(new Users()
+            string sql = "";
+            if (!string.IsNullOrEmpty(name)&&!string.IsNullOrEmpty(pwd))
             {
-                UserId = 1,
-                //UserAccount = "海鲜"
-            });
-            return users;
+                sql = $"select * Users where UserAccount={name} and UserPassword={pwd}";
+            }
+            return dBHelper.GetList<Users>(sql);
         }
         //public List<Users> Forter(string name)
         //{ 
