@@ -23,6 +23,6 @@ namespace Purchase_Sell_Stock.DAL
             List<Customer> list = dBHelper.GetList<Customer>($"select * from Customer");
             return list;
         }
-        public List<>
+        //public List<>
     }
 }
