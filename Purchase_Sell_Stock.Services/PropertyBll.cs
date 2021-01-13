@@ -37,7 +37,7 @@ namespace Purchase_Sell_Stock.Services
             return pd.Amount_settledMoneyShowInfos();
         }
 
-        public Coods_Page<balance_Money> balance_MoneyShowInfos(int pageIndex, int pageSize, string Order_num, string starttime_quantum, string endttime_quantum, string remark) 
+        public Coods_Page<balance_Money> balance_MoneyShowInfos(int pageIndex, int pageSize, string Order_num=null, string starttime_quantum=null, string endttime_quantum=null, string remark=null) 
         {
             return pd.balance_MoneyShowInfos( pageIndex,  pageSize,  Order_num, starttime_quantum,  endttime_quantum,  remark);
         }
