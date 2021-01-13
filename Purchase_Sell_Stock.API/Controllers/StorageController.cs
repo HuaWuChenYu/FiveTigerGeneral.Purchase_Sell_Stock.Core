@@ -16,11 +16,18 @@ namespace Purchase_Sell_Stock.API.Controllers
     public class StorageController : ControllerBase
     {
         IStorage _istorage;
+        /// <summary>
+        /// 依赖注入
+        /// </summary>
+        /// <param name="storage"></param>
         public StorageController(IStorage storage)
         {
             _istorage = storage;
         }
-        //出库订单的显示
+        /// <summary>
+        /// 出库订单的显示
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("/api/OutboundorderShow")]
         public List<OutboundorderCombine> OutboundorderShow()

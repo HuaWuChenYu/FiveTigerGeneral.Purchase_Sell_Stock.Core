@@ -19,9 +19,9 @@ namespace Purchase_Sell_Stock.DAL
             });
             return users;
         }
-        public List<Users> Forter(string name)
-        { 
+        //public List<Users> Forter(string name)
+        //{ 
             
-        }
+        //}
     }
 }

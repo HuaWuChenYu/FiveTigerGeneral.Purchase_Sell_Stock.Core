@@ -40,7 +40,7 @@ namespace Purchase_Sell_Stock.DAL
                 CustomerName = e.CustomerName,                            //收货方名称（客户名称）
                                                                          //收货方地址(客户地址)
                 StorageTypeName = d.StorageTypeName,                      //出库类型
-                //OutboundGoodsNum = OutNumber,               //商品数量
+                /*OutboundGoodsNum = OutNumber, */              //商品数量
                 OutboundorderState = a.OutboundorderState,                //状态
                 OutboundordercreationTime = a.OutboundordercreationTime,  //创建时间
                 OutboundorderTime = a.OutboundorderTime,                  //出库时间
@@ -50,7 +50,6 @@ namespace Purchase_Sell_Stock.DAL
             return outboundorderlist;
 
         }
-
         /// <summary>
         /// 订单商品
         /// </summary>
@@ -69,11 +68,6 @@ namespace Purchase_Sell_Stock.DAL
                 OrdersGoodsNum = b.OrdersGoodsNum, //数量
                 OutboundorderNumber = 0            //出库数量
             }).ToList();
-            //计算商品总数量
-            //foreach (var item in _list)
-            //{
-            //    OutNumber += item.OrdersGoodsNum;
-            //}
             return _list;
         }
         /// <summary>
