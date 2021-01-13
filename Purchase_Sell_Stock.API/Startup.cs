@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Purchase_Sell_Stock.IServices;
 using Purchase_Sell_Stock.Services;
+using Purchase_Sell_Stock.DAL.GetDBHelper;
 
 namespace Purchase_Sell_Stock.API
 {
@@ -27,9 +28,10 @@ namespace Purchase_Sell_Stock.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            DBHelper._locastr = Configuration["ConnectionString:locastr"];
             services.AddSwaggerSetup();
             services.AddSingleton<IGoods, GoodsBll>();
+            services.AddTransient<ISet,SetBll>();
             services.AddControllers(); 
         }
 
