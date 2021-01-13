@@ -24,9 +24,9 @@ namespace Purchase_Sell_Stock.DAL
             }
             return dBHelper.GetList<Users>(sql);
         }
-        public List<Users> Forter(string name)
-        { 
+        //public List<Users> Forter(string name)
+        //{ 
             
-        }
+        //}
     }
 }

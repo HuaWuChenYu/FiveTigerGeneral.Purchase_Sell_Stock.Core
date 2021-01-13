@@ -65,5 +65,23 @@ namespace Purchase_Sell_Stock.DAL
             };
             return paging;
         }
+        public List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId)
+        {
+            string sql = $"select * from RechargeRecord where 1=1";
+            if (!string.IsNullOrEmpty(customerName))
+            {
+                sql += " and CustomerName=@name" + ",new {name=" + $"{customerName}" + "}";
+            }
+            if (!string.IsNullOrEmpty(customerPhone))
+            {
+                sql += " and CustomerPhone=@phone" + ",new {phone=" + $"{customerPhone}" + "}";
+            }
+            if (denominationId!=0)
+            {
+                sql += " and DenominationId=@id" + ",new {id=" + $"{denominationId}" + "}";
+            }
+            List<RechargeRecord> list = SimplyFactoryDB.GetInstance("Dapper").GetList<RechargeRecord>(sql);
+            return list;
+        }
     }
 }

@@ -12,7 +12,6 @@ namespace Purchase_Sell_Stock.IServices
         /// </summary>
         List<T> GetCustomers<T>(int customerId, string customerName, string customerPhone, string customerIdentity, int lableId, string whetherEnable);
 
-
-
+        List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId);
     }
 }
