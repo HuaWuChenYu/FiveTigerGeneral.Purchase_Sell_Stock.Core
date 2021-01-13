@@ -9,6 +9,8 @@ using Purchase_Sell_Stock.Model.Buyer;
 using Purchase_Sell_Stock.Model.OrderFunction;
 using Purchase_Sell_Stock.Model.GoodsFunction;
 using Purchase_Sell_Stock.Model.ProcurementFunction;
+using System.Linq.Expressions;
+using System.Linq;
 
 namespace Purchase_Sell_Stock.DAL
 {
@@ -40,7 +42,7 @@ namespace Purchase_Sell_Stock.DAL
                 CustomerName = e.CustomerName,                            //收货方名称（客户名称）
                                                                          //收货方地址(客户地址)
                 StorageTypeName = d.StorageTypeName,                      //出库类型
-                //OutboundGoodsNum = OutNumber,               //商品数量
+                /*OutboundGoodsNum = OutNumber, */              //商品数量
                 OutboundorderState = a.OutboundorderState,                //状态
                 OutboundordercreationTime = a.OutboundordercreationTime,  //创建时间
                 OutboundorderTime = a.OutboundorderTime,                  //出库时间
@@ -50,7 +52,6 @@ namespace Purchase_Sell_Stock.DAL
             return outboundorderlist;
 
         }
-
         /// <summary>
         /// 订单商品
         /// </summary>
@@ -69,22 +70,20 @@ namespace Purchase_Sell_Stock.DAL
                 OrdersGoodsNum = b.OrdersGoodsNum, //数量
                 OutboundorderNumber = 0            //出库数量
             }).ToList();
-            //计算商品总数量
-            //foreach (var item in _list)
-            //{
-            //    OutNumber += item.OrdersGoodsNum;
-            //}
             return _list;
         }
         /// <summary>
-        /// 确定出库
+        /// 反填详细信息
         /// </summary>
         /// <returns></returns>
-        public int OutboundorderModify()
+        public OutboundorderCombine OutboundorderCombinebackfill(int outboundorderid) //出库订单id
         {
-
-            return 1;
+            //通过出库订单中的id来获取订单信息
+            var _list= OutboundorderShow().FirstOrDefault(x=>x.OutboundorderId==outboundorderid);
+            
+            return _list;
         }
+
 
 
         /// <summary>

@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+锘縰sing Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -41,7 +41,7 @@ namespace Purchase_Sell_Stock.API
             {
                 c.SwaggerEndpoint($"/swagger/V1/swagger.json", "Purchase_Sell_Stock.API V1");
 
-                //路径配置，设置为空，表示直接在根域名（localhost:8001）访问该文件,注意localhost:8001/swagger是访问不到的，去launchSettings.json把launchUrl去掉，如果你想换一个路径，直接写名字即可，比如直接写c.RoutePrefix = "doc";
+                //路锟斤拷锟斤拷锟矫ｏ拷锟斤拷锟斤拷为锟秸ｏ拷锟斤拷示直锟斤拷锟节革拷锟斤拷锟斤拷锟斤拷localhost:8001锟斤拷锟斤拷锟绞革拷锟侥硷拷,注锟斤拷localhost:8001/swagger锟角凤拷锟绞诧拷锟斤拷锟侥ｏ拷去launchSettings.json锟斤拷launchUrl去锟斤拷锟斤拷锟斤拷锟斤拷锟诫换一锟斤拷路锟斤拷锟斤拷直锟斤拷写锟斤拷锟街硷拷锟缴ｏ拷锟斤拷锟斤拷直锟斤拷写c.RoutePrefix = "doc";
                 c.RoutePrefix = "";
             });
             app.UseRouting();
