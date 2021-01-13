@@ -80,8 +80,17 @@ namespace Purchase_Sell_Stock.DAL
         {
             //通过出库订单中的id来获取订单信息
             var _list= OutboundorderShow().FirstOrDefault(x=>x.OutboundorderId==outboundorderid);
-            
-            return _list;
+             return _list;
+        }
+        /// <summary>
+        /// 反填商品信息
+        /// </summary>
+        /// <returns></returns>
+        public List<OutboundorderCombine> Outboundordercommoditybackfill(int outboundorderid)//出单编号
+        {
+            //获取订单表中的订单编号（来源编号）
+
+            return null;
         }
 
 
