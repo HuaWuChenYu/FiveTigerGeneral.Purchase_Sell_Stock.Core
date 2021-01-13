@@ -25,7 +25,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public GoodsPaging GetGoodsList<Goods>(int pageIndex, int pageSize, string goodsName, string goodsType, string goodsClassify)
         {
-            string sql = $" where 1 = 1";
+            string sql = $"1 = 1";
             if (!string.IsNullOrEmpty(goodsName))
             {
                 sql += $" and GoodsName like '%{goodsName}%'";
@@ -45,7 +45,7 @@ namespace Purchase_Sell_Stock.DAL
                 new SqlParameter(){ParameterName="@OrderBy",DbType=DbType.String,Value= "GoodsId"},
                 new SqlParameter(){ParameterName="@PageIndex",DbType=DbType.Int32,Value=pageIndex },
                 new SqlParameter(){ParameterName="@PageSize",DbType=DbType.Int32,Value= pageSize},
-                new SqlParameter(){ParameterName="@@TotalCount",DbType=DbType.Int32,Direction=ParameterDirection.Output},
+                new SqlParameter(){ParameterName="@TotalCount",DbType=DbType.Int32,Direction=ParameterDirection.Output},
             };
             List<Goods> listGoods = SimplyFactoryDB.GetInstance("Ado").GetList<Goods>("Proc_Paging", para);
             GoodsPaging paging = new GoodsPaging()
