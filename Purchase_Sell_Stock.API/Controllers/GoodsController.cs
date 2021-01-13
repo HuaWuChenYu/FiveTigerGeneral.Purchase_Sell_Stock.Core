@@ -21,7 +21,7 @@ namespace Purchase_Sell_Stock.API.Controllers
             _goods1 = goods;
         }
         [HttpGet]
-        [Route("/api/GetGoodsList")]
+        [Route("/api/GetGoodsList/{pageIndex}/{pageSize}/{goodsName}/{goodsType}/{goodsClassify}/{storeId}")]
         /// <summary>
         /// 商品档案查询
         /// </summary>
@@ -33,9 +33,9 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="goodsType"></param>
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        public GoodsPaging<Goods> GetGoodsList(int pageIndex, int pageSize, string goodsName, string goodsType, string goodsClassify)
+        public GoodsPaging<Goods> GetGoodsList(int storeId,int pageIndex, int pageSize, string goodsName = "", string goodsType = "", string goodsClassify="")
         {
-            GoodsPaging<Goods> goodsPaging = _goods1.GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify);
+            GoodsPaging<Goods> goodsPaging = _goods1.GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify, storeId);
             return goodsPaging;
         }
         [HttpGet]

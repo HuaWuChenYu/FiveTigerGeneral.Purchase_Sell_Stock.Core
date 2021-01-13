@@ -26,9 +26,9 @@ namespace Purchase_Sell_Stock.DAL
         /// <param name="goodsType"></param>
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        public GoodsPaging<Goods> GetGoodsList<Goods>(int pageIndex, int pageSize, string goodsName, string goodsType, string goodsClassify)
+        public GoodsPaging<Goods> GetGoodsList<Goods>(int pageIndex, int pageSize, string goodsName, string goodsType, string goodsClassify,int storeId)
         {
-            string sql = $"1 = 1";
+            string sql = $"1 = 1 and StoreId = {storeId}";
             if (!string.IsNullOrEmpty(goodsName))
             {
                 sql += $" and GoodsName like '%{goodsName}%'";
