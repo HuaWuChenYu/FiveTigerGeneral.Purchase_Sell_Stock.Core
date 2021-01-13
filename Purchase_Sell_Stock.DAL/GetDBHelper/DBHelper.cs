@@ -9,6 +9,10 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
     public abstract class DBHelper
     {
         /// <summary>
+        /// 连接字符串
+        /// </summary>
+        public static string _locastr = null;
+        /// <summary>
         /// 获取数据
         /// </summary>
         /// <typeparam name="T"></typeparam>

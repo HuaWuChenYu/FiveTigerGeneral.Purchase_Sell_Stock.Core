@@ -44,8 +44,8 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// <summary>
         /// 发货方（仓库）（仓库外键）
         /// </summary>
-        [SugarColumn(ColumnName = "WarehouseTypeId")]
-        public int WarehouseTypeId { get; set; }
+        [SugarColumn(ColumnName = "WarehouseId")]
+        public int WarehouseId { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
@@ -61,5 +61,8 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// </summary>
         [SugarColumn(ColumnName = "OutboundorderRemark")]
         public string OutboundorderRemark { get; set; }
+
+
+       
     }
 }
