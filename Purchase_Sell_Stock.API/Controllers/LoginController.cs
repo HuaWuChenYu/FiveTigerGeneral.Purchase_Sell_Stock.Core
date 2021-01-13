@@ -30,8 +30,8 @@ namespace Purchase_Sell_Stock.API.Controllers
             var list = bll.Login(name, pwd);
             return list;
         }
-        [HttpPost]
-        [Route("/api/Logins")]
+        [HttpGet]
+        [Route("/api/Logins/{phone}")]
         /// <summary>
         /// 短信登陆
         /// </summary>
