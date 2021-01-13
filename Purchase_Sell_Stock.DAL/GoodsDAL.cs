@@ -13,6 +13,9 @@ namespace Purchase_Sell_Stock.DAL
     /// </summary>
     public class GoodsDal
     {
+        DBHelper dBDapper = SimplyFactoryDB.GetInstance("Dapper");
+        DBHelper dBAdo = SimplyFactoryDB.GetInstance("Ado");
+        SqlSugerDBHelper sqlSugerDB = new SqlSugerDBHelper();
         /// <summary>
         /// 查询商品
         /// </summary>
@@ -23,9 +26,9 @@ namespace Purchase_Sell_Stock.DAL
         /// <param name="goodsType"></param>
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        public GoodsPaging GetGoodsList<Goods>(int pageIndex, int pageSize, string goodsName, string goodsType, string goodsClassify)
+        public GoodsPaging<Goods> GetGoodsList<Goods>(int pageIndex, int pageSize, string goodsName, string goodsType, string goodsClassify,int storeId)
         {
-            string sql = $" where 1 = 1";
+            string sql = $"1 = 1 and StoreId = {storeId}";
             if (!string.IsNullOrEmpty(goodsName))
             {
                 sql += $" and GoodsName like '%{goodsName}%'";
@@ -45,13 +48,13 @@ namespace Purchase_Sell_Stock.DAL
                 new SqlParameter(){ParameterName="@OrderBy",DbType=DbType.String,Value= "GoodsId"},
                 new SqlParameter(){ParameterName="@PageIndex",DbType=DbType.Int32,Value=pageIndex },
                 new SqlParameter(){ParameterName="@PageSize",DbType=DbType.Int32,Value= pageSize},
-                new SqlParameter(){ParameterName="@@TotalCount",DbType=DbType.Int32,Direction=ParameterDirection.Output},
+                new SqlParameter(){ParameterName="@TotalCount",DbType=DbType.Int32,Direction=ParameterDirection.Output},
             };
-            List<Goods> listGoods = SimplyFactoryDB.GetInstance("Ado").GetList<Goods>("Proc_Paging", para);
-            GoodsPaging paging = new GoodsPaging()
+            List<Goods> listGoods = dBAdo.GetList<Goods>("Proc_Paging", para);
+            GoodsPaging<Goods> paging = new GoodsPaging<Goods>()
             {
                 Count = Convert.ToInt32(para[6].Value),
-                list = listGoods as List<Model.GoodsFunction.Goods>
+                list = listGoods
             };
             return paging;
         }
@@ -73,7 +76,7 @@ namespace Purchase_Sell_Stock.DAL
             {
                 sql += " and GoodsTypeName = @name" + ",new {name=" + $"{typeName}" + "}";
             }
-            List<GoodsType> list = SimplyFactoryDB.GetInstance("Dapper").GetList<GoodsType>(sql);
+            List<GoodsType> list = dBDapper.GetList<GoodsType>(sql);
             return list;
         }
         /// <summary>
@@ -85,16 +88,16 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public List<GoodsBrand> GetGoodsBrandList<GoodsBrand>(int brandId, string brandName)
         {
-            string sql = "select * from GoodsType where 1 = 1";
+            string sql = "select * from GoodsBrand where 1 = 1";
             if (brandId != 0)
             {
-                sql += " and GoodsBrandId = @id" + ",new {id=" + $"{brandId}" + "}";
+                sql += " and GoodsBrandId = @id";
             }
             if (!string.IsNullOrEmpty(brandName))
             {
-                sql += " and GoodsBrandName = @name" + ",new {name=" + $"{brandName}" + "}";
+                sql += " and GoodsBrandName = @name";
             }
-            List<GoodsBrand> list = SimplyFactoryDB.GetInstance("Dapper").GetList<GoodsBrand>(sql);
+            List<GoodsBrand> list = dBDapper.GetList<GoodsBrand>(sql);
             return list;
         }
         /// <summary>
@@ -106,17 +109,65 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public List<GoodsUnit> GetGoodsUnitList<GoodsType>(int unitId, string unitName)
         {
-            string sql = "select * from GoodsType where 1 = 1";
+            string sql = "select * from GoodsUnit where 1 = 1";
             if (unitId != 0)
             {
-                sql += " and GoodsUnitId = @id" + ",new {id=" + $"{unitId}" + "}";
+                sql += " and GoodsUnitId = @id";
             }
             if (!string.IsNullOrEmpty(unitName))
             {
-                sql += " and GoodsUnitName = @name" + ",new {name=" + $"{unitName}" + "}";
+                sql += " and GoodsUnitName = @name";
             }
-            List<GoodsUnit> list = SimplyFactoryDB.GetInstance("Dapper").GetList<GoodsUnit>(sql);
+            List<GoodsUnit> list = dBDapper.GetList<GoodsUnit>(sql);
             return list;
+        }
+        /// <summary>
+        /// 添加商品
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns> v  
+        public int AddGoods(Goods goods)
+        {
+            string sql = $"insert into Goods values(@GoodsName,@GoodsPhoto,@GoodsSize,@Price,@ProcurementPrice,@GoodsState,@Goodsclassify,@GoodsTypeName,@GoodsUnitName,@GoodsBrandName,@StoreId)";
+            int i = dBDapper.ExecuteNonQuery(sql);
+            //int i = dBDapper.ExecuteNonQuery(sql, new { goods });
+            return i;
+        }
+        /// <summary>
+        /// 添加商品分类
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns> v  
+        public int AddGoodsType(GoodsType goods)
+        {
+            string sql = $"insert into GoodsType values(@GoodsTypeName,@GoodsTypePId,@StoreId)";
+            int i = dBDapper.ExecuteNonQuery(sql);
+            //int i = dBDapper.ExecuteNonQuery(sql, new { goods });
+            return i;
+        }
+        /// <summary>
+        /// 添加商品品牌
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns> v  
+        public int AddGoodsBrand(GoodsBrand goods)
+        {
+            string sql = $"insert into GoodsBrand values(@GoodsBrandName,@StoreId)";
+            int i = dBDapper.ExecuteNonQuery(sql);
+            //int i = dBDapper.ExecuteNonQuery(sql, new { goods });
+            return i;
+        }
+        /// <summary>
+        /// 添加商品单位
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns> v  
+        public int AddGoodsUnit(GoodsUnit goods)
+        {
+            string sql = $"insert into GoodsUnit values(@GoodsUnitName,@GoodsUnitGroup,@StoreId)";
+            int i = dBDapper.ExecuteNonQuery(sql);
+            //int i = dBDapper.ExecuteNonQuery(sql, new { goods });
+            return i;
         }
 
     }

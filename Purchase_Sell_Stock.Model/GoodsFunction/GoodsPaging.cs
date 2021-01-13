@@ -5,9 +5,9 @@ using Purchase_Sell_Stock.Model.GoodsFunction;
 
 namespace Purchase_Sell_Stock.Model.GoodsFunction
 {
-    public class GoodsPaging
+    public class GoodsPaging<T>
     {
-        public List<Goods> list { get; set; }
+        public List<T> list { get; set; }
         public int Count { get; set; }
     }
 }

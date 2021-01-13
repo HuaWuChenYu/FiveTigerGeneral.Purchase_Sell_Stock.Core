@@ -16,7 +16,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="goodsType"></param>
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        GoodsPaging GetGoodsList(int pageIndex ,int pageSize,string goodsName,string goodsType,string goodsClassify);
+        GoodsPaging<T> GetGoodsList<T>(int pageIndex ,int pageSize,string goodsName,string goodsType,string goodsClassify,int storeId);
         /// <summary>
         /// 商品分类查询
         /// </summary>
@@ -41,6 +41,30 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="unitName"></param>
         /// <returns></returns>
         List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName);
+        /// <summary>
+        /// 添加商品
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns>
+        int AddGoods(Goods goods);
+        /// <summary>
+        /// 添加商品品牌
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns>
+        int AddGoodsBrand(GoodsBrand goods);
+        /// <summary>
+        /// 添加商品分类
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns>
+        int AddGoodsType(GoodsType goods);
+        /// <summary>
+        /// 添加商品单位
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns>
+        int AddGoodsUnit(GoodsUnit goods);
 
     }
 }
