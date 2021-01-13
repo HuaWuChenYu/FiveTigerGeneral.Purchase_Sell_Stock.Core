@@ -5,15 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Purchase_Sell_Stock.API.Controllers
+namespace MyAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class _44Controller1 : ControllerBase
+    public class ValuesController : ControllerBase
     {
+        [Route("/api/AAA")]
         [HttpGet]
-        [Route("/api/aa")]
-        public int aa()
+        public int AAA()
         {
             return 11;
         }

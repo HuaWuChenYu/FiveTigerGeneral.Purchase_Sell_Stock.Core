@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\11271\Desktop\FiveTigerGeneral.Purchase_Sell_Stock.Core\Purchase_Sell_Stock.API\Purchase_Sell_Stock.API.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\11271\Desktop\FiveTigerGeneral.Purchase_Sell_Stock.Core\MyAPI\MyAPI.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

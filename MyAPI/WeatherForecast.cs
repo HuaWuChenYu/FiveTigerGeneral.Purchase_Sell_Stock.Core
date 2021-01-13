@@ -1,6 +1,6 @@
 using System;
 
-namespace Purchase_Sell_StockAPI
+namespace MyAPI
 {
     public class WeatherForecast
     {

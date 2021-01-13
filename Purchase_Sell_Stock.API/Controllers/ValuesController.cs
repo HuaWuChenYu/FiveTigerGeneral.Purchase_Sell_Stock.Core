@@ -4,21 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Purchase_Sell_Stock.DAL.GetDBHelper;
-using Purchase_Sell_Stock.Model.GoodsFunction;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
         [HttpGet]
-        [Route("/api/A")]
-        public List<Goods> A()
+        [Route("/api/AA")]
+        public int AAA()
         {
-            List<Goods> list = SimplyFactoryDB.GetInstance("Ado").GetList<Goods>("select * from Goods");
-            return list;
+            return 11;
         }
     }
 }

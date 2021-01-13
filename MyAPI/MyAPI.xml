@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Purchase_Sell_Stock.API</name>
+        <name>MyAPI</name>
     </assembly>
     <members>
     </members>
