@@ -90,11 +90,11 @@ namespace Purchase_Sell_Stock.DAL
             string sql = "select * from GoodsBrand where 1 = 1";
             if (brandId != 0)
             {
-                sql += " and GoodsBrandId = @id" + ",new {id=" + $"{brandId}" + "}";
+                sql += " and GoodsBrandId = @id";
             }
             if (!string.IsNullOrEmpty(brandName))
             {
-                sql += " and GoodsBrandName = @name" + ",new {name=" + $"{brandName}" + "}";
+                sql += " and GoodsBrandName = @name";
             }
             List<GoodsBrand> list = dBDapper.GetList<GoodsBrand>(sql);
             return list;
@@ -127,7 +127,9 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public int AddGoods(Goods goods)
         {
-            int i = dBDapper.ExecuteNonQuery(goods);
+            string sql = $"insert into Goods values(@GoodsName,@GoodsPhoto,@GoodsSize,@Price,@ProcurementPrice,@GoodsState,@Goodsclassify,@GoodsTypeName,@GoodsUnitName,@GoodsBrandName,@StoreId)";
+            int i = dBDapper.ExecuteNonQuery(sql);
+            //int i = dBDapper.ExecuteNonQuery(sql, new { goods });
             return i;
         }
     }

@@ -9,7 +9,7 @@ namespace Purchase_Sell_Stock.Services
 {
     public class GoodsBll : IGoods
     {
-        //DalFactory dalFactory = new DalFactory();
+        GoodsDal goods1 = DalFactory.GetDal<GoodsDal>("Goods");
 
         ///<summary>
         /// 商品品牌查询
@@ -20,7 +20,7 @@ namespace Purchase_Sell_Stock.Services
         /// <returns></returns>
         public List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName)
         {
-            return DalFactory.GetDal<GoodsDal>("Goods").GetGoodsBrandList<GoodsBrand>(brandId,brandName);
+            return goods1.GetGoodsBrandList<GoodsBrand>(brandId,brandName);
         }
         /// <summary>
         /// 商品档案查询
@@ -35,7 +35,7 @@ namespace Purchase_Sell_Stock.Services
         /// <returns></returns>
         public GoodsPaging<Goods> GetGoodsList<Goods>(int pageIndex, int pageSize,string goodsName, string goodsType, string goodsClassify)
         {
-            GoodsPaging<Goods> goodsPaging = DalFactory.GetDal<GoodsDal>("Goods").GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify);
+            GoodsPaging<Goods> goodsPaging = goods1.GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify);
             return goodsPaging;
         }
         /// <summary>
@@ -47,7 +47,7 @@ namespace Purchase_Sell_Stock.Services
         /// <returns></returns>
         public List<GoodsType> GetGoodsTypeList(int typeId, string typeName)
         {
-            throw new NotImplementedException();
+            return goods1.GetGoodsTypeList<GoodsType>(typeId,typeName);
         }
         /// <summary>
         /// 商品单位查询
@@ -58,7 +58,16 @@ namespace Purchase_Sell_Stock.Services
         /// <returns></returns>
         public List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName)
         {
-            throw new NotImplementedException();
+            return goods1.GetGoodsUnitList<GoodsUnit>(unitId, unitName);
+        }
+        /// <summary>
+        /// 添加商品
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns>
+        public int AddGoods(Goods goods)
+        {
+            return goods1.AddGoods(goods);
         }
     }
 }
