@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,6 +39,10 @@ namespace Purchase_Sell_Stock.API
 
             //services.Add(new ServiceDescriptor(typeof(DBHelper),  DBHelper(Configuration["ConnectionString:locastr"])));
             services.AddControllers();
+            services.AddTransient<ISet,SetBll>();
+            services.AddTransient<PropertyBll>();
+            services.AddSwaggerSetup();
+            //services.Add(new ServiceDescriptor(typeof(DBHelper),  DBHelper(Configuration["ConnectionString:locastr"])));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,11 +53,19 @@ namespace Purchase_Sell_Stock.API
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //AutoFac   IOC    JWT    this 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint($"/swagger/V1/swagger.json", "Purchase_Sell_Stock.API V1");
+
+                //路径配置，设置为空，表示直接在根域名（localhost:8001）访问该文件,注意localhost:8001/swagger是访问不到的，去launchSettings.json把launchUrl去掉，如果你想换一个路径，直接写名字即可，比如直接写c.RoutePrefix = "doc";
+                c.RoutePrefix = "";
+            });
             app.UseRouting();
 
             app.UseAuthorization();

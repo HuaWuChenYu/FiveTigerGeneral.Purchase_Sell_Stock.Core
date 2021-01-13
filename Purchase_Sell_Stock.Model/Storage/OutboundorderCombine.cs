@@ -49,8 +49,10 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// 备注
         /// </summary>
         public string OutboundorderRemark { get; set; }
-
-
+        /// <summary>
+        /// 商品总共数量
+        /// </summary>
+        public int OutboundGoodsNum { get; set; }
         /// <summary>
         /// 订单编号
         /// </summary>
@@ -168,6 +170,31 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// </summary>
         public string Adress { get; set; }
 
+
+        /// <summary>
+        /// 退单主键
+        /// </summary>
+        public int CancelOrderId { get; set; }
+        /// <summary>
+        /// 退单时间
+        /// </summary>
+        public DateTime CancelOrderTime { get; set; }
+        /// <summary>
+        /// 退单申请时间
+        /// </summary>
+        public DateTime CancelOrderApplyTime { get; set; }
+        /// <summary>
+        /// 退款状态
+        /// </summary>
+        public int CancelOrderState { get; set; }
+        /// <summary>
+        /// 退款原因
+        /// </summary>
+        public string CancelOrderReason { get; set; }
+        /// <summary>
+        /// 退款图片
+        /// </summary>
+        public string CancelOrderPhoto { get; set; }
 
     }
 }

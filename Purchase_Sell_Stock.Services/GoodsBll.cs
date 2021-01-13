@@ -20,7 +20,8 @@ namespace Purchase_Sell_Stock.Services
         /// <returns></returns>
         public List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName)
         {
-            throw new NotImplementedException();
+            return new List<GoodsUnit>();
+                /*DalFactory.GetDal<GoodsDal>();*/
         }
         /// <summary>
         /// 商品档案查询
