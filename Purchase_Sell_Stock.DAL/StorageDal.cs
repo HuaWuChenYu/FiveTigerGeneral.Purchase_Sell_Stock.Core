@@ -9,6 +9,8 @@ using Purchase_Sell_Stock.Model.Buyer;
 using Purchase_Sell_Stock.Model.OrderFunction;
 using Purchase_Sell_Stock.Model.GoodsFunction;
 using Purchase_Sell_Stock.Model.ProcurementFunction;
+using System.Linq.Expressions;
+using System.Linq;
 
 namespace Purchase_Sell_Stock.DAL
 {
@@ -71,14 +73,17 @@ namespace Purchase_Sell_Stock.DAL
             return _list;
         }
         /// <summary>
-        /// 确定出库
+        /// 反填详细信息
         /// </summary>
         /// <returns></returns>
-        public int OutboundorderModify()
+        public OutboundorderCombine OutboundorderCombinebackfill(int outboundorderid) //出库订单id
         {
-
-            return 1;
+            //通过出库订单中的id来获取订单信息
+            var _list= OutboundorderShow().FirstOrDefault(x=>x.OutboundorderId==outboundorderid);
+            
+            return _list;
         }
+
 
 
         /// <summary>

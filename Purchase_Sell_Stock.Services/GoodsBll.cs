@@ -20,7 +20,7 @@ namespace Purchase_Sell_Stock.Services
         /// <returns></returns>
         public List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName)
         {
-            return new List<GoodsUnit>();
+            return new List<GoodsBrand>();
                 /*DalFactory.GetDal<GoodsDal>();*/
         }
         /// <summary>
