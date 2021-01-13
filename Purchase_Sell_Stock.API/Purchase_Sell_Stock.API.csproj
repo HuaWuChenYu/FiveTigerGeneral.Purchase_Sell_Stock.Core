@@ -20,5 +20,11 @@
     <ProjectReference Include="..\Purchase_Sell_Stock.Services\Purchase_Sell_Stock.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\辅助文件\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 
 </Project>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Purchase_Sell_Stock.Model.GoodsFunction;
 using Purchase_Sell_Stock.Services;
 using Purchase_Sell_Stock.IServices;
+using Newtonsoft.Json;
 
 
 namespace Purchase_Sell_Stock.API.Controllers
@@ -33,10 +34,17 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="goodsType"></param>
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        public GoodsPaging<Goods> GetGoodsList(int storeId,int pageIndex, int pageSize, string goodsName = "", string goodsType = "", string goodsClassify="")
+        public string GetGoodsList(int storeId, int pageIndex, int pageSize, string goodsName = "", string goodsType = "", string goodsClassify = "")
         {
             GoodsPaging<Goods> goodsPaging = _goods1.GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify, storeId);
-            return goodsPaging;
+            var dataJson = new
+            {
+                code = 0,
+                msg = "",
+                count = goodsPaging.Count,
+                data = goodsPaging
+            };
+            return JsonConvert.SerializeObject(goodsPaging); ;
         }
         [HttpGet]
         [Route("/api/GetGoodsBrandList")]
