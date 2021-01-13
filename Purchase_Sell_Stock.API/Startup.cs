@@ -37,7 +37,7 @@ namespace Purchase_Sell_Stock.API
             services.AddSingleton<ISet, SetBll>();
             services.AddSingleton<PropertyBll>();
 
-            //services.Add(new ServiceDescriptor(typeof(DBHelper),  DBHelper(Configuration["ConnectionString:locastr"])));
+            
             services.AddControllers();
             //services.Add(new ServiceDescriptor(typeof(DBHelper),  DBHelper(Configuration["ConnectionString:locastr"])));
         }
