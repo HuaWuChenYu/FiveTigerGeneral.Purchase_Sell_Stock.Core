@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Purchase_Sell_Stock.IServices;
+using Purchase_Sell_Stock.Services;
 
 namespace Purchase_Sell_Stock.API
 {
@@ -25,7 +27,9 @@ namespace Purchase_Sell_Stock.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddSwaggerSetup();
+            services.AddSingleton<IGoods, GoodsBll>();
             services.AddControllers(); 
         }
 
