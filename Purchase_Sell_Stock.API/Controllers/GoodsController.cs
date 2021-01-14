@@ -55,13 +55,13 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="brandId"></param>
         /// <param name="brandName"></param>
         /// <returns></returns>
-        public List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName)
+        public List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName, int storeId)
         {
-            List<GoodsBrand> list = _goods1.GetGoodsBrandList(brandId, brandName);
+            List<GoodsBrand> list = _goods1.GetGoodsBrandList(brandId, brandName, storeId);
             return list;
         }
         [HttpGet]
-        [Route("/api/GetGoodsTypeList/{typeId}/{typeName}")]
+        [Route("/api/GetGoodsTypeList/{typeId}/{typeName}/{storeId}")]
         /// <summary>
         /// 商品分类查询
         /// </summary>
@@ -69,9 +69,13 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="typeId"></param>
         /// <param name="typeName"></param>
         /// <returns></returns>
-        public List<GoodsType> GetGoodsTypeList(int typeId, string typeName)
+        public List<GoodsType> GetGoodsTypeList(int typeId, string typeName,int storeId)
         {
-            List<GoodsType> list = _goods1.GetGoodsTypeList(typeId, typeName);
+            if (typeName == "哈哈")
+            {
+                typeName = "";
+            }
+            List<GoodsType> list = _goods1.GetGoodsTypeList(typeId, typeName,storeId);
             return list;
         }
         [HttpGet]
@@ -83,9 +87,9 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="unitId"></param>
         /// <param name="unitName"></param>
         /// <returns></returns>
-        public List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName)
+        public List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName, int storeId)
         {
-            List<GoodsUnit> list = _goods1.GetGoodsUnitList(unitId, unitName);
+            List<GoodsUnit> list = _goods1.GetGoodsUnitList(unitId, unitName, storeId);
             return list;
         }
         [HttpPost]
