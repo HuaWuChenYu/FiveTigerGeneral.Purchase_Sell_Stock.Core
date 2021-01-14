@@ -36,6 +36,18 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public string GetGoodsList(int storeId, int pageIndex, int pageSize, string goodsName = "", string goodsType = "", string goodsClassify = "")
         {
+            if (goodsName == "空")
+            {
+                goodsName = "";
+            }
+            if (goodsType == "全部")
+            {
+                goodsType = "";
+            }
+            if (goodsClassify == "空")
+            {
+                goodsClassify = "";
+            }
             GoodsPaging<Goods> goodsPaging = _goods1.GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify, storeId);
             var dataJson = new
             {
