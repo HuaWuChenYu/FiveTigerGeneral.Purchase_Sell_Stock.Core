@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Purchase_Sell_Stock.Model.SettingModels;
 using Purchase_Sell_Stock.Services;
+using Newtonsoft.Json;
+using Purchase_Sell_Stock.IServices;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
@@ -16,20 +18,24 @@ namespace Purchase_Sell_Stock.API.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        LoginBll bll = new LoginBll();
+        private ILogin _login;
+        public LoginController(ILogin login)
+        {
+            _login = login;
+        }
         /// <summary>
         /// 登录
         /// </summary>
         /// <param name="name"></param>
         /// <param name="pwd"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [Route("/api/Login")]
         public List<Users> Login(string name, string pwd)
         {
-            var list = bll.Login(name, pwd);
+            List<Users> list = _login.Login(name, pwd);
             return list;
-        }
+        }    
         [HttpGet]
         [Route("/api/Logins/{phone}")]
         /// <summary>
@@ -39,21 +45,21 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public List<Users> Logins(string phone)
         {
-            var list = bll.Logins(phone);
+            List<Users> list = _login.Logins(phone);
             return list;
         }
-        [HttpPost]
+        [HttpGet]
         [Route("/api/Forgers")]
         /// <summary>
         /// 忘记密码
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public List<Users> Forgers(string name)
+        public int Forgers(Users g)
         {
-            var list = bll.Forget(name);
-            return list;
+            return _login.Forget(g);
         }
+
         [HttpPost]
         [Route("/api/Register")]
         /// <summary>
@@ -63,8 +69,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public int Register(Users a)
         {
-            int i = bll.Register(a);
-            return i;
+            return _login.Register(a);
         }
     }
 }
