@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
+using NetTaste;
 using Purchase_Sell_Stock.DAL.GetDBHelper;
 using Purchase_Sell_Stock.Model.SettingModels;
+using System.Data.SqlClient;
+using System.Data;
+using Dapper;
 
 namespace Purchase_Sell_Stock.DAL
 {
@@ -12,11 +16,19 @@ namespace Purchase_Sell_Stock.DAL
     /// </summary>
     public class SetDal
     {
-        DBHelper dBHelper= SimplyFactoryDB.GetInstance("Dapper");
+        DBHelper dBHelper = SimplyFactoryDB.GetInstance("Dapper");
         public List<Classify> ClassifiesShow()
         {
-            List<Classify> clist= dBHelper.GetList<Classify>();
-            clist.Add(new Classify() { ClassifyId = 1, ClassifyName = "海鲜" });
+            //string name = "主店";
+            ////' or 1=1 --
+            //string name2 = "直销";
+            //object obj = dBHelper.ExecuteScalar("select count(*) from Classify where ClassifyName=@name", new { name});
+            //DynamicParameters dp = new DynamicParameters();
+            //dp.Add("@MemberId", "2019595");
+            //dp.Add("@Name", "张三");
+            //dp.Add("@Name2", "", DbType.String, ParameterDirection.Output);
+            //int n = dBHelper.ExecuteNonQuery("page_Test", dp);
+            List<Classify> clist = dBHelper.GetList<Classify>("select * from Classify");
             return clist;
         }
     }

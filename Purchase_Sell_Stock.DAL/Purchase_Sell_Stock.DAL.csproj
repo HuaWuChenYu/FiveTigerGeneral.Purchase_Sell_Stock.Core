@@ -5,12 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.78" />
+    <PackageReference Include="SqlSugarCore" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Purchase_Sell_Stock.Model\Purchase_Sell_Stock.Model.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="Dapper">
-      <HintPath>bin\Debug\netcoreapp3.1\Dapper.dll</HintPath>
+      <HintPath>..\..\配置文件\Dapper.dll</HintPath>
     </Reference>
   </ItemGroup>
 

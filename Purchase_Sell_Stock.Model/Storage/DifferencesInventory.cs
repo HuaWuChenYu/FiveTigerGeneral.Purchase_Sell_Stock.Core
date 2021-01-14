@@ -5,9 +5,11 @@ using SqlSugar;
 
 namespace Purchase_Sell_Stock.Model.Storage
 {
-    /// 差异库存表
+    /// <summary>
+    ///  差异库存表
     /// </summary>
     [SugarTable("DifferencesInventory")]
+   
     public class DifferencesInventory
     {
         /// <summary>

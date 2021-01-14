@@ -9,19 +9,19 @@ using Purchase_Sell_Stock.Model.SettingModels;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
-    [Route("/api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class TestController : ControllerBase
     {
-        ISet _iset;
+        ISet _set = null;
         public TestController(ISet set)
         {
-            _iset = set;
+            _set = set;
         }
+        [HttpGet]
         public List<Classify> ClassifiesShow()
         {
-            List<Classify> clist = _iset.ClassifiesShow();
-            return clist;
+            return _set.ClassifiesShow();
         }
     }
 }

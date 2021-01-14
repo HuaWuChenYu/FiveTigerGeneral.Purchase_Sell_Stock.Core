@@ -61,5 +61,10 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// </summary>
         [SugarColumn(ColumnName = "IncomingorderRemark")]
         public string IncomingorderRemark { get; set; }
+        /// <summary>
+        /// 退单表外键
+        /// </summary>
+        [SugarColumn(ColumnName = "CancelOrder")]
+        public int CancelOrder { get; set; }
     }
 }
