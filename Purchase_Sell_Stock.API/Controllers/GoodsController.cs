@@ -42,12 +42,12 @@ namespace Purchase_Sell_Stock.API.Controllers
                 code = 0,
                 msg = "",
                 count = goodsPaging.Count,
-                data = goodsPaging
+                data = goodsPaging.list
             };
-            return JsonConvert.SerializeObject(goodsPaging); ;
+            return JsonConvert.SerializeObject(dataJson);
         }
         [HttpGet]
-        [Route("/api/GetGoodsBrandList")]
+        [Route("/api/GetGoodsBrandList/{brandId}/{brandName}")]
         ///<summary>
         /// 商品品牌查询
         /// </summary>
@@ -61,7 +61,7 @@ namespace Purchase_Sell_Stock.API.Controllers
             return list;
         }
         [HttpGet]
-        [Route("/api/GetGoodsTypeList")]
+        [Route("/api/GetGoodsTypeList/{typeId}/{typeName}")]
         /// <summary>
         /// 商品分类查询
         /// </summary>
@@ -75,7 +75,7 @@ namespace Purchase_Sell_Stock.API.Controllers
             return list;
         }
         [HttpGet]
-        [Route("/api/GetGoodsUnitList")]
+        [Route("/api/GetGoodsUnitList/{unitId}/{unitName}")]
         /// <summary>
         /// 商品单位查询
         /// </summary>
