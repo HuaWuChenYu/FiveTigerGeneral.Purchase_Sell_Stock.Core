@@ -36,18 +36,30 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public string GetGoodsList(int storeId, int pageIndex, int pageSize, string goodsName = "", string goodsType = "", string goodsClassify = "")
         {
+            if (goodsName == "空")
+            {
+                goodsName = "";
+            }
+            if (goodsType == "全部")
+            {
+                goodsType = "";
+            }
+            if (goodsClassify == "空")
+            {
+                goodsClassify = "";
+            }
             GoodsPaging<Goods> goodsPaging = _goods1.GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify, storeId);
             var dataJson = new
             {
                 code = 0,
                 msg = "",
                 count = goodsPaging.Count,
-                data = goodsPaging
+                data = goodsPaging.list
             };
-            return JsonConvert.SerializeObject(goodsPaging); ;
+            return JsonConvert.SerializeObject(dataJson);
         }
         [HttpGet]
-        [Route("/api/GetGoodsBrandList")]
+        [Route("/api/GetGoodsBrandList/{brandId}/{brandName}")]
         ///<summary>
         /// 商品品牌查询
         /// </summary>
@@ -55,13 +67,13 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="brandId"></param>
         /// <param name="brandName"></param>
         /// <returns></returns>
-        public List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName)
+        public List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName, int storeId)
         {
-            List<GoodsBrand> list = _goods1.GetGoodsBrandList(brandId, brandName);
+            List<GoodsBrand> list = _goods1.GetGoodsBrandList(brandId, brandName, storeId);
             return list;
         }
         [HttpGet]
-        [Route("/api/GetGoodsTypeList")]
+        [Route("/api/GetGoodsTypeList/{typeId}/{typeName}/{storeId}")]
         /// <summary>
         /// 商品分类查询
         /// </summary>
@@ -69,13 +81,17 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="typeId"></param>
         /// <param name="typeName"></param>
         /// <returns></returns>
-        public List<GoodsType> GetGoodsTypeList(int typeId, string typeName)
+        public List<GoodsType> GetGoodsTypeList(int typeId, string typeName,int storeId)
         {
-            List<GoodsType> list = _goods1.GetGoodsTypeList(typeId, typeName);
+            if (typeName == "哈哈")
+            {
+                typeName = "";
+            }
+            List<GoodsType> list = _goods1.GetGoodsTypeList(typeId, typeName,storeId);
             return list;
         }
         [HttpGet]
-        [Route("/api/GetGoodsUnitList")]
+        [Route("/api/GetGoodsUnitList/{unitId}/{unitName}")]
         /// <summary>
         /// 商品单位查询
         /// </summary>
@@ -83,9 +99,9 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="unitId"></param>
         /// <param name="unitName"></param>
         /// <returns></returns>
-        public List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName)
+        public List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName, int storeId)
         {
-            List<GoodsUnit> list = _goods1.GetGoodsUnitList(unitId, unitName);
+            List<GoodsUnit> list = _goods1.GetGoodsUnitList(unitId, unitName, storeId);
             return list;
         }
         [HttpPost]

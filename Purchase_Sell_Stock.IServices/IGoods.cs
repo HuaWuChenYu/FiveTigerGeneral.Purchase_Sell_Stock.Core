@@ -24,7 +24,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="typeId"></param>
         /// <param name="typeName"></param>
         /// <returns></returns>
-        List<GoodsType> GetGoodsTypeList(int typeId, string typeName);
+        List<GoodsType> GetGoodsTypeList(int typeId, string typeName,int storeId);
         /// <summary>
         /// 商品品牌查询
         /// </summary>
@@ -32,7 +32,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="brandId"></param>
         /// <param name="brandName"></param>
         /// <returns></returns>
-        List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName);
+        List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName, int storeId);
         /// <summary>
         /// 商品单位查询
         /// </summary>
@@ -40,7 +40,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="unitId"></param>
         /// <param name="unitName"></param>
         /// <returns></returns>
-        List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName);
+        List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName, int storeId);
         /// <summary>
         /// 添加商品
         /// </summary>

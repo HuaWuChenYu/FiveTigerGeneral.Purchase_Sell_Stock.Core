@@ -1,10 +1,9 @@
 ﻿using Purchase_Sell_Stock.DAL;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Purchase_Sell_Stock.Model.SettingModels;
 using Purchase_Sell_Stock.IServices;
 using Purchase_Sell_Stock.Model.GoodsFunction;
+using System;
 
 namespace Purchase_Sell_Stock.Services
 {
