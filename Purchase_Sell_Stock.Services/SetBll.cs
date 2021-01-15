@@ -109,9 +109,9 @@ namespace Purchase_Sell_Stock.Services
             throw new NotImplementedException();
         }
 
-        public List<Powers> GetPowersForUp(int employeeId)
+        public List<Powers> GetPowersForUp(int employeeId, int powersParentId)
         {
-            throw new NotImplementedException();
+            return _dal.GetPowersForUp(employeeId,powersParentId);
         }
 
         public List<Roles> GetRoles(int roleTypeId)
