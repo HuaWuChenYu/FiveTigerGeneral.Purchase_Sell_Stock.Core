@@ -33,9 +33,9 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="goodsType"></param>
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        public OrderPaging<Goods> GetGoodsList<Goods>(int pageIndex, int pageSize,string goodsName, string goodsType, string goodsClassify, int storeId)
+        public GoodsPaging<Goods> GetGoodsList<Goods>(int pageIndex, int pageSize,string goodsName, string goodsType, string goodsClassify, int storeId)
         {
-            OrderPaging<Goods> goodsPaging = goods1.GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify,storeId);
+            GoodsPaging<Goods> goodsPaging = goods1.GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify,storeId);
             return goodsPaging;
         }
         /// <summary>
