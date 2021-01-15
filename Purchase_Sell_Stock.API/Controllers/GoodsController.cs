@@ -48,7 +48,7 @@ namespace Purchase_Sell_Stock.API.Controllers
             {
                 goodsClassify = "";
             }
-            GoodsPaging<Goods> goodsPaging = _goods1.GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify, storeId);
+            OrderPaging<Goods> goodsPaging = _goods1.GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify, storeId);
             var dataJson = new
             {
                 code = 0,

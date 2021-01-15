@@ -26,7 +26,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <param name="goodsType"></param>
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        public GoodsPaging<Goods> GetGoodsList<Goods>(int pageIndex, int pageSize, string goodsName, string goodsType, string goodsClassify,int storeId)
+        public OrderPaging<Goods> GetGoodsList<Goods>(int pageIndex, int pageSize, string goodsName, string goodsType, string goodsClassify,int storeId)
         {
             string sql = $"1 = 1 and StoreId = {storeId}";
             if (!string.IsNullOrEmpty(goodsName))
@@ -52,7 +52,7 @@ namespace Purchase_Sell_Stock.DAL
                 new SqlParameter(){ParameterName="@TotalCount",DbType=DbType.Int32,Direction=ParameterDirection.Output},
             };
             List<Goods> listGoods = dBAdo.GetList<Goods>("Proc_Paging", para);
-            GoodsPaging<Goods> paging = new GoodsPaging<Goods>()
+            OrderPaging<Goods> paging = new OrderPaging<Goods>()
             {
                 Count = Convert.ToInt32(para[6].Value),
                 list = listGoods
