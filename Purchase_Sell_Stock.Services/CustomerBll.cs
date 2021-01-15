@@ -17,12 +17,17 @@ namespace Purchase_Sell_Stock.Services
             throw new NotImplementedException();
         }
 
-        public CustomerPaging GetCustomers<T>(int lableId, int pageIndex, int pageSize, string customerName, string customerPhone, string customerIdentity, string whetherEnable)
+        public CustomerPaging<T> GetCustomers<T>(int lableId, int pageIndex, int pageSize, string customerName, string customerPhone, string customerIdentity, string whetherEnable)
         {
             throw new NotImplementedException();
         }
 
         public List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId)
+        {
+            throw new NotImplementedException();
+        }
+
+        CustomerPaging<T> ICustomer.GetCustomers<T>(int lableId, int pageIndex, int pageSize, string customerName, string customerPhone, string customerIdentity, string whetherEnable)
         {
             throw new NotImplementedException();
         }

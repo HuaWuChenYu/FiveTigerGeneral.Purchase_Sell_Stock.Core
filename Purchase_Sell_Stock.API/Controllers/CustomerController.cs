@@ -48,7 +48,7 @@ namespace Purchase_Sell_Stock.API.Controllers
             {
                 whetherEnable = "";
             }
-            CustomerPaging customerPaging = _customer.GetCustomers<Customer>(lableId, pageIndex, pageSize, customerName, customerPhone, customerIdentity, whetherEnable);
+            CustomerPaging<Customer> customerPaging = _customer.GetCustomers<Customer>(lableId, pageIndex, pageSize, customerName, customerPhone, customerIdentity, whetherEnable);
             var dataJson = new
             {
                 code = 0,
