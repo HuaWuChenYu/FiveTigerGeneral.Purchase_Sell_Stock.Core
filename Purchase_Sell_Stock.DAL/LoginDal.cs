@@ -45,7 +45,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public int Forget(Users g)
         {
-            string sql = $"update Users set UserPassword={g.UserPassword} where UserPhone={g.UserPhone}";
+            string sql = $"update Users set UserPhone={g.UserPhone} where UserPassword={g.UserPassword}";
             return dBHelper.ExecuteNonQuery(sql);
         }
         /// <summary>
