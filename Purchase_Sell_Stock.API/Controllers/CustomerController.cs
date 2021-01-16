@@ -65,5 +65,18 @@ namespace Purchase_Sell_Stock.API.Controllers
             List<RechargeRecord> list = _customer.GetRechargeRecord(customerName, customerPhone, denominationId);
             return list;
         }
+        /// <summary>
+        /// 添加标签
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("api/GetLable")]
+        public int GetLable(Lable a)
+        {
+            int i = _customer.GetLable(a);
+            return i;
+        }
+
     }
 }

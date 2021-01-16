@@ -20,7 +20,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <returns></returns>
         List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId);
         CustomerPaging<T> GetCustomers<T>(int lableId, int pageIndex, int pageSize, string customerName, string customerPhone, string customerIdentity, string whetherEnable);
-
-        //List<>
+        List<Lable> GetLableShow();
+        int GetLable(Lable a);
     }
 }
