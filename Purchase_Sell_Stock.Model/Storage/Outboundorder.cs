@@ -61,8 +61,13 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// </summary>
         [SugarColumn(ColumnName = "OutboundorderRemark")]
         public string OutboundorderRemark { get; set; }
+        /// <summary>
+        /// 采购退货表id
+        /// </summary>
+        [SugarColumn(ColumnName = "CancleProcurementId")]
+        public int CancleProcurementId { get; set; }
 
 
-       
+
     }
 }
