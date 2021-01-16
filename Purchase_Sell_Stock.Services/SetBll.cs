@@ -1,10 +1,9 @@
 ﻿using Purchase_Sell_Stock.DAL;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Purchase_Sell_Stock.Model.SettingModels;
 using Purchase_Sell_Stock.IServices;
 using Purchase_Sell_Stock.Model.GoodsFunction;
+using System;
 
 namespace Purchase_Sell_Stock.Services
 {
@@ -110,9 +109,9 @@ namespace Purchase_Sell_Stock.Services
             throw new NotImplementedException();
         }
 
-        public List<Powers> GetPowersForUp(int employeeId)
+        public List<Powers> GetPowersForUp(int employeeId, int powersParentId)
         {
-            throw new NotImplementedException();
+            return _dal.GetPowersForUp(employeeId,powersParentId);
         }
 
         public List<Roles> GetRoles(int roleTypeId)

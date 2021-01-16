@@ -18,9 +18,9 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="brandId"></param>
         /// <param name="brandName"></param>
         /// <returns></returns>
-        public List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName)
+        public List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName,int storeId)
         {
-            return goods1.GetGoodsBrandList<GoodsBrand>(brandId,brandName);
+            return goods1.GetGoodsBrandList<GoodsBrand>(brandId,brandName, storeId);
         }
         /// <summary>
         /// 商品档案查询
@@ -45,9 +45,9 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="typeId"></param>
         /// <param name="typeName"></param>
         /// <returns></returns>
-        public List<GoodsType> GetGoodsTypeList(int typeId, string typeName)
+        public List<GoodsType> GetGoodsTypeList(int typeId, string typeName,int storeId)
         {
-            return goods1.GetGoodsTypeList<GoodsType>(typeId,typeName);
+            return goods1.GetGoodsTypeList<GoodsType>(typeId,typeName, storeId);
         }
         /// <summary>
         /// 商品单位查询
@@ -56,9 +56,9 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="unitId"></param>
         /// <param name="unitName"></param>
         /// <returns></returns>
-        public List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName)
+        public List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName, int storeId)
         {
-            return goods1.GetGoodsUnitList<GoodsUnit>(unitId, unitName);
+            return goods1.GetGoodsUnitList<GoodsUnit>(unitId, unitName, storeId);
         }
         /// <summary>
         /// 添加商品
