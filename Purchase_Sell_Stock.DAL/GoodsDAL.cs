@@ -88,18 +88,18 @@ namespace Purchase_Sell_Stock.DAL
         /// <param name="brandId"></param>
         /// <param name="brandName"></param>
         /// <returns></returns>
-        public List<GoodsBrand> GetGoodsBrandList<GoodsBrand>(int GoodsBrandId, string GoodsBrandName, int StoreId)
+        public List<GoodsBrand> GetGoodsBrandList<GoodsBrand>(int brandId, string brandName, int storeId)
         {
-            string sql = "select * from GoodsBrand where 1 = 1 and StoreId = @StoreId";
-            if (GoodsBrandId != 0)
+            string sql = "select * from GoodsBrand where 1 = 1 and StoreId = @storeId";
+            if (brandId != 0)
             {
-                sql += " and GoodsBrandId = @GoodsBrandId";
+                sql += " and GoodsBrandId = @brandId";
             }
-            if (!string.IsNullOrEmpty(GoodsBrandName))
+            if (!string.IsNullOrEmpty(brandName))
             {
-                sql += " and GoodsBrandName = @GoodsBrandName";
+                sql += " and GoodsBrandName = @brandName";
             }
-            List<GoodsBrand> list = dBDapper.GetList<GoodsBrand>(sql,new { GoodsBrandId, GoodsBrandName, StoreId });
+            List<GoodsBrand> list = dBDapper.GetList<GoodsBrand>(sql,new { brandId, brandName, storeId });
             return list;
         }
         /// <summary>
@@ -111,16 +111,16 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public List<GoodsUnit> GetGoodsUnitList<GoodsType>(int unitId, string unitName, int storeId)
         {
-            string sql = "select * from GoodsUnit where 1 = 1";
+            string sql = "select * from GoodsUnit where 1 = 1 and StoreId = @storeId";
             if (unitId != 0)
             {
-                sql += " and GoodsUnitId = @GoodsUnitId";
+                sql += " and GoodsUnitId = @unitId";
             }
             if (!string.IsNullOrEmpty(unitName))
             {
-                sql += " and GoodsUnitName = @GoodsUnitName";
+                sql += " and GoodsUnitName = @unitName";
             }
-            List<GoodsUnit> list = dBDapper.GetList<GoodsUnit>(sql);
+            List<GoodsUnit> list = dBDapper.GetList<GoodsUnit>(sql,new { unitId , storeId, unitName });
             return list;
         }
         /// <summary>

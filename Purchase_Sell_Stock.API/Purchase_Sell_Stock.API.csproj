@@ -28,5 +28,9 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Img\" />
+  </ItemGroup>
+
 
 </Project>

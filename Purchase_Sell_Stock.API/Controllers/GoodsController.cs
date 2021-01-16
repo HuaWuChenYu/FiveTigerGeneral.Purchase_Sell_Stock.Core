@@ -8,7 +8,7 @@ using Purchase_Sell_Stock.Model.GoodsFunction;
 using Purchase_Sell_Stock.Services;
 using Purchase_Sell_Stock.IServices;
 using Newtonsoft.Json;
-
+using System.IO;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
@@ -59,7 +59,7 @@ namespace Purchase_Sell_Stock.API.Controllers
             return JsonConvert.SerializeObject(dataJson);
         }
         [HttpGet]
-        [Route("/api/GetGoodsBrandList/{brandId}/{brandName}")]
+        [Route("/api/GetGoodsBrandList/{brandId}/{brandName}/{storeId}")]
         ///<summary>
         /// 商品品牌查询
         /// </summary>
@@ -69,6 +69,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName, int storeId)
         {
+
             List<GoodsBrand> list = _goods1.GetGoodsBrandList(brandId, brandName, storeId);
             return list;
         }
@@ -81,17 +82,13 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="typeId"></param>
         /// <param name="typeName"></param>
         /// <returns></returns>
-        public List<GoodsType> GetGoodsTypeList(int typeId, string typeName,int storeId)
+        public List<GoodsType> GetGoodsTypeList(int typeId, string typeName, int storeId)
         {
-            if (typeName == "哈哈")
-            {
-                typeName = "";
-            }
-            List<GoodsType> list = _goods1.GetGoodsTypeList(typeId, typeName,storeId);
+            List<GoodsType> list = _goods1.GetGoodsTypeList(typeId, typeName, storeId);
             return list;
         }
         [HttpGet]
-        [Route("/api/GetGoodsUnitList/{unitId}/{unitName}")]
+        [Route("/api/GetGoodsUnitList/{unitId}/{unitName}/{storeId}")]
         /// <summary>
         /// 商品单位查询
         /// </summary>
@@ -137,5 +134,51 @@ namespace Purchase_Sell_Stock.API.Controllers
         {
             return _goods1.AddGoodsUnit(goods);
         }
+        [HttpPost]
+        [Route("/api/AddGoods")]
+        /// <summary>
+        /// 添加商品
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns> v  
+        public int AddGoods([FromBody] Goods goods)
+        {
+            int i = _goods1.AddGoods(goods);
+            return i;
+        }
+        /// <summary>
+        /// 上传图片
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("/api/UploadPhoto")]
+        public string UploadPhoto([FromForm] IFormCollection formCollection)
+        {
+            FormFileCollection fileCollection = (FormFileCollection)formCollection.Files;
+            foreach (IFormFile file in fileCollection)
+            {
+                StreamReader reader = new StreamReader(file.OpenReadStream());
+                String content = reader.ReadToEnd();
+                String name = file.FileName;//文件名称
+                var path = Directory.GetCurrentDirectory();//文件夹绝对路径
+                string fullPath = path + @"\Img\" + name;//图片绝对路径
+                string filePath = @"\Img\" + name;//文件相对路径,需要保存到数据库
+                using (FileStream fs = System.IO.File.Create(fullPath))
+                {
+                    // 复制文件,保存文件至Img文件夹
+                    file.CopyTo(fs);
+                    // 清空缓冲区数据
+                    fs.Flush();
+                }
+                var dataJson = new
+                {
+                    result = filePath,
+                    code = 0
+                };
+                return JsonConvert.SerializeObject(dataJson);
+            }
+            return "";
+        }
+        
     }
 }
