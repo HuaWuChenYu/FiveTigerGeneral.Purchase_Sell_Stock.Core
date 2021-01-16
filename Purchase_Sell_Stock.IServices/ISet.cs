@@ -96,7 +96,7 @@ namespace Purchase_Sell_Stock.IServices
         /// </summary>
         /// <param name="employeeId">员工id</param>
         /// <returns></returns>
-        List<Powers> GetPowersForUp(int employeeId);
+        List<Powers> GetPowersForUp(int employeeId,int powersParentId);
         /// <summary>
         /// 根据权限的父id  生成不同不同的左边导航
         /// </summary>

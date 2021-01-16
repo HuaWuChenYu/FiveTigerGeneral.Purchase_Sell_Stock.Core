@@ -32,7 +32,23 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("api/GetCustomers/{pageIndex}/{pageSize}/{customerName}/{customerPhone}/{customerIdentity}/{lableId}/{whetherEnable}/{customerId}")]
         public string GetCustomers(int customerId, int lableId, int pageIndex, int pageSize, string customerName="", string customerPhone="", string customerIdentity="", string whetherEnable="")
         {
-            CustomerPaging customerPaging = _customer.GetCustomers<Customer>(lableId, pageIndex, pageSize, customerName, customerPhone, customerIdentity, whetherEnable);
+            if (customerName=="空")
+            {
+                customerName = "";
+            }
+            if (customerPhone == "空")
+            {
+                customerPhone = "";
+            }
+            if (customerIdentity == "空")
+            {
+                customerIdentity = "";
+            }
+            if (whetherEnable=="空")
+            {
+                whetherEnable = "";
+            }
+            CustomerPaging<Customer> customerPaging = _customer.GetCustomers<Customer>(lableId, pageIndex, pageSize, customerName, customerPhone, customerIdentity, whetherEnable);
             var dataJson = new
             {
                 code = 0,
@@ -41,6 +57,13 @@ namespace Purchase_Sell_Stock.API.Controllers
                 data = customerPaging
             };
             return JsonConvert.SerializeObject(dataJson);
+        }
+        [HttpGet]
+        [Route("api/GetRechargeRecord/{customerName}/{customerPhone}/{denominationId}")]
+        public List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId)
+        {
+            List<RechargeRecord> list = _customer.GetRechargeRecord(customerName, customerPhone, denominationId);
+            return list;
         }
     }
 }
