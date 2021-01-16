@@ -39,5 +39,21 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// 仓库名称
         /// </summary>
         public string WarehouseName { get; set; }
+        /// <summary>
+        /// 商品规格
+        /// </summary>
+        public string GoodsSize { get; set; }
+        /// <summary>
+        /// 商品单位名称
+        /// </summary>
+        public string GoodsUnitName { get; set; }
+        /// <summary>
+        /// 店铺外键
+        /// </summary>
+        public int StoreId { get; set; }
+        /// <summary>
+        /// 操作人
+        /// </summary>
+        public string WarehousePrincipal { get; set; }
     }
 }
