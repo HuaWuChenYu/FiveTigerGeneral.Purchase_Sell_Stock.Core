@@ -103,6 +103,12 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="powersId">权限父id</param>
         /// <returns></returns>
         List<Powers> GetPowersForLeft(int powersId);
+        /// <summary>
+        /// 通过用户手机号返回店铺信息
+        /// </summary>
+        /// <param name="userPhone"></param>
+        /// <returns></returns>
+        List<ViewStoreInfo> GetStoresFromLogin(string userPhone);
         //==========================================设置======================================================
         /// <summary>
         /// 店铺信息的反填显示

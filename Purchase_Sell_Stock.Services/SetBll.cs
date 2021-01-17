@@ -134,6 +134,11 @@ namespace Purchase_Sell_Stock.Services
             throw new NotImplementedException();
         }
 
+        public List<ViewStoreInfo> GetStoresFromLogin(string userPhone)
+        {
+            return _dal.GetStores(userPhone);
+        }
+
         public int UpdateDepartment(Department department)
         {
             throw new NotImplementedException();
