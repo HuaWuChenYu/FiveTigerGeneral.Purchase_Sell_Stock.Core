@@ -19,8 +19,8 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="denominationId"></param>
         /// <returns></returns>
         List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId);
-        CustomerPaging GetCustomers<T>(int lableId, int pageIndex, int pageSize, string customerName, string customerPhone, string customerIdentity, string whetherEnable);
-
-        //List<>
+        CustomerPaging<T> GetCustomers<T>(int lableId, int pageIndex, int pageSize, string customerName, string customerPhone, string customerIdentity, string whetherEnable);
+        List<Lable> GetLableShow();
+        int GetLable(Lable a);
     }
 }

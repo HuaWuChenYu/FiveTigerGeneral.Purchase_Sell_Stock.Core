@@ -81,6 +81,60 @@ namespace Purchase_Sell_Stock.Services
             var _list= stdal.OutboundorderShow();
             return _list;
         }
+        /// <summary>
+        /// 所有仓库
+        /// </summary>
+        /// <returns></returns>
+        public List<Warehouse> GetWarehousesShow()
+        {
+            var _list= stdal.GetWarehousesShow();
+            return _list;
+        }
+        /// <summary>
+        /// 仓库类型
+        /// </summary>
+        /// <returns></returns>
+        public List<WarehouseType> GetWarehouseTypesShow()
+        {
+            var _list = stdal.GetWarehouseTypesShow();
+            return _list;
+        }
+        /// <summary>
+        /// 出入库类型
+        /// </summary>
+        /// <returns></returns>
+        public List<StorageType> GetStorageTypesShow()
+        {
+            var _list = stdal.GetStorageTypesShow();
+            return _list;
+        }
+        /// <summary>
+        /// 出库功能
+        /// </summary>
+        /// <param name="arr2"></param>
+        /// <param name="arr4"></param>
+        /// <returns></returns>
+        public int GoodsAmend(string  arr2, string arr4,string sourcenumber,/*string ordersgoodsnum,*/int outboundorderId)
+        {
+            int i= stdal.GoodsAmend(arr2, arr4,sourcenumber, outboundorderId);
+            return i;
+        }
+        /// <summary>
+        /// 商品以及库存量的显示
+        /// </summary>
+        /// <returns></returns>
+        public List<CommodityStocksandGoods> commodityStocksandGoodsShow()
+        {
+            return stdal.commodityStocksandGoodsShow();
+        }
+        /// <summary>
+        /// 商品流水
+        /// </summary>
+        /// <returns></returns>
+        public List<GoodRunningWater> goodRunningWaterShow()
+        {
+            return stdal.goodRunningWaterShow();
+        }
         #endregion
 
     }

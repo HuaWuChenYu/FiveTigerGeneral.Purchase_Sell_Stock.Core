@@ -59,10 +59,6 @@ namespace Purchase_Sell_Stock.Model.Storage
         public string OrdersNum { get; set; }
  
         /// <summary>
-        /// 销售类型
-        /// </summary>
-        public string SellType { get; set; }
-        /// <summary>
         /// 订单状态
         /// </summary>
         public int OrdersState { get; set; }
@@ -112,21 +108,9 @@ namespace Purchase_Sell_Stock.Model.Storage
         public string GoodsSize { get; set; }
  
         /// <summary>
-        /// 商品类型
-        /// </summary>
-        public string Goodsclassify { get; set; }
-        /// <summary>
-        /// 商品分类名称
-        /// </summary>
-        public string GoodsTypeName { get; set; }
-        /// <summary>
         /// 商品单位名称
         /// </summary>
         public string GoodsUnitName { get; set; }
-        /// <summary>
-        /// 商品品牌外键
-        /// </summary>
-        public string GoodsBrandName { get; set; }
         /// <summary>
         /// 店铺外键
         /// </summary>
@@ -171,30 +155,36 @@ namespace Purchase_Sell_Stock.Model.Storage
         public string Adress { get; set; }
 
 
+        
         /// <summary>
-        /// 退单主键
+        /// 采购退货商品表主键
         /// </summary>
-        public int CancelOrderId { get; set; }
+        public int ProcurementGoodsId { get; set; }
         /// <summary>
-        /// 退单时间
+        /// 采购退货表
         /// </summary>
-        public DateTime CancelOrderTime { get; set; }
+        public int CancleProcurementId { get; set; }
         /// <summary>
-        /// 退单申请时间
+        /// 采购退货商品数量
         /// </summary>
-        public DateTime CancelOrderApplyTime { get; set; }
+        public int CancleProcurementGoodsNum { get; set; }
         /// <summary>
-        /// 退款状态
+        /// 退货状态
         /// </summary>
-        public int CancelOrderState { get; set; }
+        public int CancleProcurementState { get; set; }
         /// <summary>
-        /// 退款原因
+        /// 退货单号
         /// </summary>
-        public string CancelOrderReason { get; set; }
+        public string CancleProcurementNum { get; set; }
         /// <summary>
-        /// 退款图片
+        /// 供应商
         /// </summary>
-        public string CancelOrderPhoto { get; set; }
+        public string ProviderName { get; set; }
+        /// <summary>
+        /// 退货方
+        /// </summary>
+        public string CancleProcurementName { get; set; }
+ 
 
     }
 }

@@ -15,13 +15,15 @@ namespace Purchase_Sell_Stock.DAL
     /// </summary>
     public class CustomerDal
     {
-        DBHelper dBHelper = SimplyFactoryDB.GetInstance("Ado");
+        DBHelper dBDapper = SimplyFactoryDB.GetInstance("Dapper");
+        DBHelper dBAdo = SimplyFactoryDB.GetInstance("Ado");
+        SqlSugerDBHelper sqlSugerDB = new SqlSugerDBHelper();
         /// <summary>
         /// 显示出全部的客户
         /// </summary>
         /// <returns></returns>
         /// 
-        public CustomerPaging GetCustomerList<Customer>(int pageIndex, int pageSize, int customerId, string customerName, string customerPhone, string customerIdentity, int lableId, string whetherEnable)
+        public CustomerPaging<Customer> GetCustomerList<Customer>(int pageIndex, int pageSize, int customerId, string customerName, string customerPhone, string customerIdentity, int lableId, string whetherEnable)
         {
             string sql = $"select * from Customer where 1=1";
             if (customerId != 0)
@@ -57,11 +59,11 @@ namespace Purchase_Sell_Stock.DAL
                 new SqlParameter(){ParameterName="@PageSize",DbType=DbType.Int32,Value= pageSize},
                 new SqlParameter(){ParameterName="@@TotalCount",DbType=DbType.Int32,Direction=ParameterDirection.Output},
             };
-            List<Customer> lists = SimplyFactoryDB.GetInstance("Ado").GetList<Customer>("",para);
-            CustomerPaging paging = new CustomerPaging()
+            List<Customer> lists = dBAdo.GetList<Customer>("",para);
+            CustomerPaging<Customer> paging = new CustomerPaging<Customer>()
             {
                 Count = Convert.ToInt32(para[6].Value),
-                list = lists as List<Model.Buyer.Customer>
+                list = lists
             };
             return paging;
         }
@@ -82,6 +84,12 @@ namespace Purchase_Sell_Stock.DAL
             }
             List<RechargeRecord> list = SimplyFactoryDB.GetInstance("Dapper").GetList<RechargeRecord>(sql);
             return list;
+        }
+        public int GetLable(Lable a)
+        {
+            string sql = $"insert into Lable values({a.LableName},{a.LableExplain})";
+            int i = dBDapper.ExecuteNonQuery(sql);
+            return i;
         }
     }
 }

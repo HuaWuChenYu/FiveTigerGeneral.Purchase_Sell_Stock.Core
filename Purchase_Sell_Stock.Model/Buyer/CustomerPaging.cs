@@ -8,9 +8,9 @@ namespace Purchase_Sell_Stock.Model.Buyer
     /// <summary>
     /// 买家表分页
     /// </summary>
-    public class CustomerPaging
+    public class CustomerPaging<T>
     {
-        public List<Customer> list { get; set; }
+        public List<T> list { get; set; }
         public int Count { get; set; }
     }
 }
