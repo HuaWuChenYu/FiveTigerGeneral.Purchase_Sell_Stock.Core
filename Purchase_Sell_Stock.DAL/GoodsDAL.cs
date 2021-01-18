@@ -202,5 +202,16 @@ namespace Purchase_Sell_Stock.DAL
             List<Goods> list = dBDapper.GetList<Goods>(sql,new { goodsId });
             return list;
         }
+        /// <summary>
+        /// 修改商品单位
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns>
+        public int ModifyGoods(Goods goods)
+        {
+            string sql = $"update Goods set GoodsName=@GoodsName,GoodsPhoto=@GoodsPhoto,GoodsSize=@GoodsSize,Price=@Price,ProcurementPrice=@ProcurementPrice,Goodsclassify=@Goodsclassify,GoodsTypeName=@GoodsTypeName,GoodsUnitName=@GoodsUnitName,GoodsBrandName=@GoodsBrandName where GoodsId = @GoodsId";
+            int i = dBDapper.ExecuteNonQuery(sql, goods);
+            return i;
+        }
     }
 }

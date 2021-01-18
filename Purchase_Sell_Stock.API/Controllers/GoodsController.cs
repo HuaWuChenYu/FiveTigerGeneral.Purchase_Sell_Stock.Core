@@ -42,14 +42,15 @@ namespace Purchase_Sell_Stock.API.Controllers
             }
             GoodsPaging<Goods> goodsPaging = _goods1.GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify, storeId);
             //return resource;
-            var dataJson = new
+            var jsonData = new
             {
                 code = 0,
                 msg = "",
                 count = goodsPaging.Count,
                 data = goodsPaging.list
             };
-            return JsonConvert.SerializeObject(dataJson);
+            string str= JsonConvert.SerializeObject(jsonData);
+            return str;
         }
         [HttpGet]
         [Route("/api/GetGoodsBrandList/{brandId}/{brandName}/{storeId}")]
@@ -175,6 +176,18 @@ namespace Purchase_Sell_Stock.API.Controllers
         {
             List<Goods> list = _goods1.GetGoodsById(goodsId);
             return list[0];
+        }
+        [HttpPost]
+        [Route("/api/ModifyGoods")]
+        /// <summary>
+        /// 修改商品单位
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns>
+        public int ModifyGoods(Goods goods)
+        {
+            int i = _goods1.ModifyGoods(goods);
+            return i;
         }
     }
 }

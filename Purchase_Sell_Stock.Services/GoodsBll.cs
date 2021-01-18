@@ -125,5 +125,15 @@ namespace Purchase_Sell_Stock.Services
         {
             return goods1.GetGoodsById(goodsId);
         }
+        /// <summary>
+        /// 修改商品单位
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns>
+        public int ModifyGoods(Goods goods)
+        {
+            int i = goods1.ModifyGoods(goods);
+            return i;
+        }
     }
 }

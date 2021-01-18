@@ -12,8 +12,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Purchase_Sell_Stock.IServices;
 using Purchase_Sell_Stock.Services;
-using Purchase_Sell_Stock.IServices;
-using Purchase_Sell_Stock.Services;
 using Purchase_Sell_Stock.DAL.GetDBHelper;
 
 namespace Purchase_Sell_Stock.API

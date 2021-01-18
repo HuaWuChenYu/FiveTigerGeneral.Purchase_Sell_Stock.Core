@@ -86,6 +86,12 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="id"></param>
         /// <returns></returns>
         List<Goods> GetGoodsById(int id);
+        /// <summary>
+        /// 修改商品单位
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns>
+        int ModifyGoods(Goods goods);
 
     }
 }
