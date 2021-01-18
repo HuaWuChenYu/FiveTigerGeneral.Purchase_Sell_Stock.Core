@@ -76,7 +76,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
         {
             using (IDbConnection conn = new SqlConnection(_locastr))
             {
-                object row = conn.ExecuteScalar(sql,param);
+                object row = conn.ExecuteScalar(sql, param);
                 return row;
             }
         }
@@ -108,7 +108,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
                 List<T> list = multiple.Read<T>().ToList();
                 return list;
             }
-         }
+        }
         /// <summary>
         /// 存储过程获取数据
         /// </summary>

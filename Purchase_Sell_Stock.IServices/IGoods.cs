@@ -65,6 +65,27 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="goods"></param>
         /// <returns></returns>
         int AddGoodsUnit(GoodsUnit goods);
+        /// <summary>
+        /// 修改上下架
+        /// </summary>
+        /// <param name="goodId"></param>
+        /// <param name="storeId"></param>
+        /// <returns></returns>
+        int ModifyState(int goodId, int storeId);
+        /// <summary>
+        /// 删除商品
+        /// </summary>
+        /// <param name="goodId"></param>
+        /// <param name="storeId"></param>
+        /// <returns></returns>
+        int DeleteGoods(string goodIds, int storeId);
+
+        /// <summary>
+        /// 根据Id查询信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        List<Goods> GetGoodsById(int id);
 
     }
 }

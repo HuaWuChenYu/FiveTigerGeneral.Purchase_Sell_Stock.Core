@@ -66,7 +66,6 @@ namespace Purchase_Sell_Stock.API
                 c.RoutePrefix = "";
             });
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

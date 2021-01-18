@@ -22,7 +22,7 @@ namespace Purchase_Sell_Stock.API.Controllers
             _goods1 = goods;
         }
         [HttpGet]
-        [Route("/api/GetGoodsList/{pageIndex}/{pageSize}/{goodsName}/{goodsType}/{goodsClassify}/{storeId}")]
+        [Route("/api/GetGoodsList/{storeId}")]
         /// <summary>
         /// 商品档案查询
         /// </summary>
@@ -36,19 +36,12 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public string GetGoodsList(int storeId, int pageIndex, int pageSize, string goodsName = "", string goodsType = "", string goodsClassify = "")
         {
-            if (goodsName == "空")
-            {
-                goodsName = "";
-            }
             if (goodsType == "全部")
             {
                 goodsType = "";
             }
-            if (goodsClassify == "空")
-            {
-                goodsClassify = "";
-            }
             GoodsPaging<Goods> goodsPaging = _goods1.GetGoodsList<Goods>(pageIndex, pageSize, goodsName, goodsType, goodsClassify, storeId);
+            //return resource;
             var dataJson = new
             {
                 code = 0,
@@ -69,7 +62,6 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName, int storeId)
         {
-
             List<GoodsBrand> list = _goods1.GetGoodsBrandList(brandId, brandName, storeId);
             return list;
         }
@@ -140,45 +132,49 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// 添加商品
         /// </summary>
         /// <param name="goods"></param>
-        /// <returns></returns> v  
+        /// <returns></returns> v
         public int AddGoods([FromBody] Goods goods)
         {
             int i = _goods1.AddGoods(goods);
             return i;
         }
-        /// <summary>
-        /// 上传图片
-        /// </summary>
-        /// <returns></returns>
         [HttpPost]
-        [Route("/api/UploadPhoto")]
-        public string UploadPhoto([FromForm] IFormCollection formCollection)
+        [Route("/api/ModifyState/{goodId}/{storeId}")]
+        /// <summary>
+        /// 修改上下架
+        /// </summary>
+        /// <param name="goodId"></param>
+        /// <param name="storeId"></param>
+        /// <returns></returns>
+        public int ModifyState(int goodId, int storeId)
         {
-            FormFileCollection fileCollection = (FormFileCollection)formCollection.Files;
-            foreach (IFormFile file in fileCollection)
-            {
-                StreamReader reader = new StreamReader(file.OpenReadStream());
-                String content = reader.ReadToEnd();
-                String name = file.FileName;//文件名称
-                var path = Directory.GetCurrentDirectory();//文件夹绝对路径
-                string fullPath = path + @"\Img\" + name;//图片绝对路径
-                string filePath = @"\Img\" + name;//文件相对路径,需要保存到数据库
-                using (FileStream fs = System.IO.File.Create(fullPath))
-                {
-                    // 复制文件,保存文件至Img文件夹
-                    file.CopyTo(fs);
-                    // 清空缓冲区数据
-                    fs.Flush();
-                }
-                var dataJson = new
-                {
-                    result = filePath,
-                    code = 0
-                };
-                return JsonConvert.SerializeObject(dataJson);
-            }
-            return "";
+            int i = _goods1.ModifyState(goodId,storeId);
+            return i;
         }
-        
+        [HttpPost]
+        [Route("/api/DeleteGoods/{goodIds}/{storeId}")]
+        /// <summary>
+        /// 删除商品
+        /// </summary>
+        /// <param name="storeId"></param>
+        /// <param name="goodsIds"></param>
+        /// <returns></returns>
+        /// [HttpPost]
+        public int DeleteGoods(string goodIds, int storeId)
+        {
+            return _goods1.DeleteGoods(goodIds, storeId );
+        }
+        [HttpGet]
+        [Route("/api/GetGoodsById/{goodsId}")]
+        /// <summary>
+        /// 根据Id查询信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Goods GetGoodsById(int goodsId)
+        {
+            List<Goods> list = _goods1.GetGoodsById(goodsId);
+            return list[0];
+        }
     }
 }
