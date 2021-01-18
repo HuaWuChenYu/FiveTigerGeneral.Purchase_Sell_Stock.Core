@@ -22,6 +22,16 @@ namespace Purchase_Sell_Stock.Services
             throw new NotImplementedException();
         }
 
+        public int GetLable(Lable a)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Lable> GetLableShow()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId)
         {
             throw new NotImplementedException();

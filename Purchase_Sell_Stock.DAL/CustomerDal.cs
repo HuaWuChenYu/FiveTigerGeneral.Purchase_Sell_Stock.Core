@@ -85,5 +85,11 @@ namespace Purchase_Sell_Stock.DAL
             List<RechargeRecord> list = SimplyFactoryDB.GetInstance("Dapper").GetList<RechargeRecord>(sql);
             return list;
         }
+        public int GetLable(Lable a)
+        {
+            string sql = $"insert into Lable values({a.LableName},{a.LableExplain})";
+            int i = dBDapper.ExecuteNonQuery(sql);
+            return i;
+        }
     }
 }

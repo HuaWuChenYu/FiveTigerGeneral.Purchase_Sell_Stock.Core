@@ -23,5 +23,10 @@ namespace Purchase_Sell_Stock.API.Controllers
         {
             return _iset.GetPowersForUp(employeeId,powersParentId);
         }
+        [HttpGet]
+        public List<ViewStoreInfo> GetStoresFromLogin(string userPhone)
+        {
+            return _iset.GetStoresFromLogin(userPhone);
+        }
     }
 }
