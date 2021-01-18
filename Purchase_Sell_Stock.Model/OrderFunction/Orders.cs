@@ -77,5 +77,11 @@ namespace Purchase_Sell_Stock.Model.OrderFunction
         /// 店铺外键
         /// </summary>
         public int StoreId { get; set; }
+
+
+        /// <summary>
+        /// 收货人姓名
+        /// </summary>
+        public string CustomerName { get; set; }
     }
 }

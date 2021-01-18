@@ -21,6 +21,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         {
             _goods1 = goods;
         }
+
         [HttpGet]
         [Route("/api/GetGoodsList/{storeId}")]
         /// <summary>
