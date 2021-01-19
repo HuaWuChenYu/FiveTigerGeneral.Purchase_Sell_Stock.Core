@@ -17,27 +17,67 @@ namespace Purchase_Sell_Stock.DAL
         DBHelper dBAdo = SimplyFactoryDB.GetInstance("Ado");
         SqlSugerDBHelper sqlSugerDB = new SqlSugerDBHelper();
 
-        public OrderPaging<Orders> GetGoodsList<Orders>(int pageIndex, int pageSize, string goodsName, string goodsType, string goodsClassify, int storeId)
+        /// <summary>
+        /// 查询订单
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="orderState"></param>
+        /// <param name="orderNum"></param>
+        /// <param name="orderBelong"></param>
+        /// <param name="sellType"></param>
+        /// <param name="time"></param>
+        /// <param name="person"></param>
+        /// <param name="phone"></param>
+        /// <param name="payType"></param>
+        /// <param name="dispatchWay"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="storeId"></param>
+        /// <returns></returns>
+        public OrderPaging<Orders> GetOrderList<Orders>(int orderState,string orderNum,string orderBelong,string sellType,string time,string person,string phone,string payType,string dispatchWay,int pageIndex, int pageSize,int storeId)
         {
             string sql = $"1 = 1 and StoreId = {storeId}";
-            if (!string.IsNullOrEmpty(goodsName))
+            if (!string.IsNullOrEmpty(orderNum))
             {
-                goodsName = goodsName.Substring(1);
-                sql += $" and GoodsName like '%{goodsName}%'";
+                sql += $" and OrdersNum = {orderNum}";
             }
-            if (!string.IsNullOrEmpty(goodsType))
+            if (!string.IsNullOrEmpty(orderBelong))
             {
-                sql += $" and GoodsTypeName = '{goodsType}'";
+                sql += $" and OrdersBelong = {orderBelong}";
             }
-            if (!string.IsNullOrEmpty(goodsClassify))
+            if (!string.IsNullOrEmpty(sellType))
             {
-                sql += $" and Goodsclassify = '{goodsClassify}'";
+                sql += $" and SellType = {sellType}";
+            }
+            if (!string.IsNullOrEmpty(time))
+            {
+                sql += $" and DispatchTime = {time}";
+            }
+            if (!string.IsNullOrEmpty(person))
+            {
+                sql += $" and CustomerName = {person}";
+            }
+            if (!string.IsNullOrEmpty(phone))
+            {
+                sql += $" and OrdersNum = {phone}";
+            }
+            if (!string.IsNullOrEmpty(payType))
+            {
+                sql += $" and DispatchWay = {payType}";
+            }
+            if (!string.IsNullOrEmpty(dispatchWay))
+            {
+                sql += $" and OrdersNum = {dispatchWay}";
+            }
+            if (orderState > 0)
+            {
+                sql += $" and OrdersState = {orderState}";
             }
             SqlParameter[] para = new SqlParameter[] {
-                new SqlParameter(){ParameterName="@TableFields",DbType=DbType.String,Value= "*"},
-                new SqlParameter(){ParameterName="@TableName",DbType=DbType.String,Value= "Goods"},
+                new SqlParameter(){ParameterName="@TableFields",DbType=DbType.String,Value= "od.*,cu.CustomerName"},
+                new SqlParameter(){ParameterName="@TableName",DbType=DbType.String,Value= "Customer cu join Orders od on cu.CustomerId = od.CustomerId"},
                 new SqlParameter(){ParameterName="@SqlWhere",DbType=DbType.String,Value= sql },
-                new SqlParameter(){ParameterName="@OrderBy",DbType=DbType.String,Value= "GoodsId"},
+                new SqlParameter(){ParameterName="@OrderBy",DbType=DbType.String,Value= "OrdersId"},
                 new SqlParameter(){ParameterName="@PageIndex",DbType=DbType.Int32,Value=pageIndex },
                 new SqlParameter(){ParameterName="@PageSize",DbType=DbType.Int32,Value= pageSize},
                 new SqlParameter(){ParameterName="@TotalCount",DbType=DbType.Int32,Direction=ParameterDirection.Output},

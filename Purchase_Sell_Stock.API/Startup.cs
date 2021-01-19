@@ -12,8 +12,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Purchase_Sell_Stock.IServices;
 using Purchase_Sell_Stock.Services;
-using Purchase_Sell_Stock.IServices;
-using Purchase_Sell_Stock.Services;
 using Purchase_Sell_Stock.DAL.GetDBHelper;
 
 namespace Purchase_Sell_Stock.API
@@ -33,7 +31,8 @@ namespace Purchase_Sell_Stock.API
             services.AddSingleton<IStorage, StorageBll>();
             DBHelper._locastr = Configuration["ConnectionString:locastr"];
             services.AddSwaggerSetup();
-            services.AddSingleton<IGoods, GoodsBll>();
+            services.AddSingleton<IGoods, GoodsBll>();//商品
+            services.AddSingleton<IOrder, OrderBll>();//订单
             services.AddTransient<ISet,SetBll>();
             services.AddControllers();
             //配置跨域处理，允许所有来源：
@@ -66,7 +65,6 @@ namespace Purchase_Sell_Stock.API
                 c.RoutePrefix = "";
             });
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
