@@ -12,12 +12,32 @@ namespace Purchase_Sell_Stock.Services
     /// </summary>
     public class CustomerBll : ICustomer
     {
-        public List<T> GetCustomers<T>(int customerId, string customerName, string customerPhone, string customerIdentity, int lableId, string whetherEnable)
+        public List<T> GetCustomers<T>(int customerId, int lableId, int pageIdex, int pageSize, string customerName, string customerPhone, string customerIdentity, string whetherEnable)
+        {
+            throw new NotImplementedException();
+        }
+
+        public CustomerPaging<T> GetCustomers<T>(int lableId, int pageIndex, int pageSize, string customerName, string customerPhone, string customerIdentity, string whetherEnable)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetLable(Lable a)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Lable> GetLableShow()
         {
             throw new NotImplementedException();
         }
 
         public List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId)
+        {
+            throw new NotImplementedException();
+        }
+
+        CustomerPaging<T> ICustomer.GetCustomers<T>(int lableId, int pageIndex, int pageSize, string customerName, string customerPhone, string customerIdentity, string whetherEnable)
         {
             throw new NotImplementedException();
         }

@@ -41,5 +41,14 @@ namespace Purchase_Sell_Stock.Model.ProcurementFunction
         /// 店铺外键
         /// </summary>
         public int StoreId { get; set; }
+
+        /// <summary>
+        /// 供应商电话
+        /// </summary>
+        public string ProvidersPhone { get; set; }
+        /// <summary>
+        /// 供应商地址
+        /// </summary>
+        public string ProvidersAddress { get; set; }
     }
 }

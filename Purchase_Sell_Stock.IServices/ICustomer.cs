@@ -10,7 +10,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <summary>
         /// 全部用户查询
         /// </summary>
-        List<T> GetCustomers<T>(int customerId, string customerName, string customerPhone, string customerIdentity, int lableId, string whetherEnable);
+        List<T> GetCustomers<T>(int customerId, int lableId, int pageIdex,int pageSize,    string customerName, string customerPhone, string customerIdentity,  string whetherEnable);
         /// <summary>
         /// 充值记录查询
         /// </summary>
@@ -19,7 +19,8 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="denominationId"></param>
         /// <returns></returns>
         List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId);
-
-        //List<>
+        CustomerPaging<T> GetCustomers<T>(int lableId, int pageIndex, int pageSize, string customerName, string customerPhone, string customerIdentity, string whetherEnable);
+        List<Lable> GetLableShow();
+        int GetLable(Lable a);
     }
 }

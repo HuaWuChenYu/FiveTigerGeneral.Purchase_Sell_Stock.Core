@@ -76,7 +76,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
         {
             using (IDbConnection conn = new SqlConnection(_locastr))
             {
-                object row = conn.ExecuteScalar(sql,param);
+                object row = conn.ExecuteScalar(sql, param);
                 return row;
             }
         }

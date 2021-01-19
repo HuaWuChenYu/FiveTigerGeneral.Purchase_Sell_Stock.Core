@@ -43,14 +43,10 @@ namespace Purchase_Sell_Stock.DAL
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public List<Users> Forget(string name)
+        public int Forget(Users g)
         {
-            string sql = $"";
-            if (!string.IsNullOrEmpty(name))
-            {
-                sql = $"select * from Users where UserName={name}";
-            }
-            return dBHelper.GetList<Users>(sql);
+            string sql = $"update Users set UserPhone={g.UserPhone} where UserPassword={g.UserPassword}";
+            return dBHelper.ExecuteNonQuery(sql);
         }
         /// <summary>
         /// 注册s

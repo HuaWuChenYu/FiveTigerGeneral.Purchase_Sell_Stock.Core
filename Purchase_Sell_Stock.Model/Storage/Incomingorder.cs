@@ -64,7 +64,7 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// <summary>
         /// 退单表外键
         /// </summary>
-        [SugarColumn(ColumnName = "CancelOrder")]
-        public int CancelOrder { get; set; }
+        [SugarColumn(ColumnName = "CancelOrderId")]
+        public int CancelOrderId { get; set; }
     }
 }

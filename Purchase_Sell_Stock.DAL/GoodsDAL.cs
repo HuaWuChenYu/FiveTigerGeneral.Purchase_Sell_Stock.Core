@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Text;
+using System.Data.SqlClient;
 using Purchase_Sell_Stock.DAL.GetDBHelper;
 using Purchase_Sell_Stock.Model.GoodsFunction;
 using System.Data;
@@ -31,6 +31,7 @@ namespace Purchase_Sell_Stock.DAL
             string sql = $"1 = 1 and StoreId = {storeId}";
             if (!string.IsNullOrEmpty(goodsName))
             {
+                goodsName = goodsName.Substring(1);
                 sql += $" and GoodsName like '%{goodsName}%'";
             }
             if (!string.IsNullOrEmpty(goodsType))
@@ -65,18 +66,19 @@ namespace Purchase_Sell_Stock.DAL
         /// <param name="typeId"></param>
         /// <param name="typeName"></param>
         /// <returns></returns>
-        public List<GoodsType> GetGoodsTypeList<GoodsType>(int typeId, string typeName)
+        public List<GoodsType> GetGoodsTypeList<GoodsType>(int typeId, string typeName,int storeId)
         {
-            string sql = "select * from GoodsType where 1 = 1";
+            string sql = "select * from GoodsType where 1 = 1 and StoreId = @StoreId and GoodsTypePId != 0";
             if (typeId != 0)
             {
-                sql += " and GoodsTypeId = @id" + ",new {id=" + $"{typeId}" + "}";
+                sql += " and GoodsTypeId = @typeId";
             }
             if (!string.IsNullOrEmpty(typeName))
             {
-                sql += " and GoodsTypeName = @name" + ",new {name=" + $"{typeName}" + "}";
+                sql += " and GoodsTypeName = @typeName";
             }
-            List<GoodsType> list = dBDapper.GetList<GoodsType>(sql);
+
+            List<GoodsType> list = dBDapper.GetList<GoodsType>(sql,new { typeId, typeName, storeId });
             return list;
         }
         /// <summary>
@@ -86,18 +88,18 @@ namespace Purchase_Sell_Stock.DAL
         /// <param name="brandId"></param>
         /// <param name="brandName"></param>
         /// <returns></returns>
-        public List<GoodsBrand> GetGoodsBrandList<GoodsBrand>(int brandId, string brandName)
+        public List<GoodsBrand> GetGoodsBrandList<GoodsBrand>(int brandId, string brandName, int storeId)
         {
-            string sql = "select * from GoodsBrand where 1 = 1";
+            string sql = "select * from GoodsBrand where 1 = 1 and StoreId = @storeId";
             if (brandId != 0)
             {
-                sql += " and GoodsBrandId = @id";
+                sql += " and GoodsBrandId = @brandId";
             }
             if (!string.IsNullOrEmpty(brandName))
             {
-                sql += " and GoodsBrandName = @name";
+                sql += " and GoodsBrandName = @brandName";
             }
-            List<GoodsBrand> list = dBDapper.GetList<GoodsBrand>(sql);
+            List<GoodsBrand> list = dBDapper.GetList<GoodsBrand>(sql,new { brandId, brandName, storeId });
             return list;
         }
         /// <summary>
@@ -107,18 +109,18 @@ namespace Purchase_Sell_Stock.DAL
         /// <param name="unitId"></param>
         /// <param name="unitName"></param>
         /// <returns></returns>
-        public List<GoodsUnit> GetGoodsUnitList<GoodsType>(int unitId, string unitName)
+        public List<GoodsUnit> GetGoodsUnitList<GoodsType>(int unitId, string unitName, int storeId)
         {
-            string sql = "select * from GoodsUnit where 1 = 1";
+            string sql = "select * from GoodsUnit where 1 = 1 and StoreId = @storeId";
             if (unitId != 0)
             {
-                sql += " and GoodsUnitId = @id";
+                sql += " and GoodsUnitId = @unitId";
             }
             if (!string.IsNullOrEmpty(unitName))
             {
-                sql += " and GoodsUnitName = @name";
+                sql += " and GoodsUnitName = @unitName";
             }
-            List<GoodsUnit> list = dBDapper.GetList<GoodsUnit>(sql);
+            List<GoodsUnit> list = dBDapper.GetList<GoodsUnit>(sql,new { unitId , storeId, unitName });
             return list;
         }
         /// <summary>
@@ -128,9 +130,8 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns> v  
         public int AddGoods(Goods goods)
         {
-            string sql = $"insert into Goods values(@GoodsName,@GoodsPhoto,@GoodsSize,@Price,@ProcurementPrice,@GoodsState,@Goodsclassify,@GoodsTypeName,@GoodsUnitName,@GoodsBrandName,@StoreId)";
-            int i = dBDapper.ExecuteNonQuery(sql);
-            //int i = dBDapper.ExecuteNonQuery(sql, new { goods });
+            string sql = $"insert into Goods values(@GoodsName,@GoodsPhoto,@GoodsSize,@Price,@ProcurementPrice,1,@Goodsclassify,@GoodsTypeName,@GoodsUnitName,@GoodsBrandName,@StoreId)";
+            int i = dBDapper.ExecuteNonQuery(sql, goods);
             return i;
         }
         /// <summary>
@@ -141,8 +142,7 @@ namespace Purchase_Sell_Stock.DAL
         public int AddGoodsType(GoodsType goods)
         {
             string sql = $"insert into GoodsType values(@GoodsTypeName,@GoodsTypePId,@StoreId)";
-            int i = dBDapper.ExecuteNonQuery(sql);
-            //int i = dBDapper.ExecuteNonQuery(sql, new { goods });
+            int i = dBDapper.ExecuteNonQuery(sql, goods);
             return i;
         }
         /// <summary>
@@ -153,8 +153,7 @@ namespace Purchase_Sell_Stock.DAL
         public int AddGoodsBrand(GoodsBrand goods)
         {
             string sql = $"insert into GoodsBrand values(@GoodsBrandName,@StoreId)";
-            int i = dBDapper.ExecuteNonQuery(sql);
-            //int i = dBDapper.ExecuteNonQuery(sql, new { goods });
+            int i = dBDapper.ExecuteNonQuery(sql, goods);
             return i;
         }
         /// <summary>
@@ -165,10 +164,54 @@ namespace Purchase_Sell_Stock.DAL
         public int AddGoodsUnit(GoodsUnit goods)
         {
             string sql = $"insert into GoodsUnit values(@GoodsUnitName,@GoodsUnitGroup,@StoreId)";
-            int i = dBDapper.ExecuteNonQuery(sql);
-            //int i = dBDapper.ExecuteNonQuery(sql, new { goods });
+            int i = dBDapper.ExecuteNonQuery(sql, goods);
             return i;
         }
-
+        /// <summary>
+        /// 修改上下架
+        /// </summary>
+        /// <param name="goodId"></param>
+        /// <param name="storeId"></param>
+        /// <returns></returns>
+        public int ModifyState(int goodId,int storeId)
+        {
+            string sql = $"update Goods set GoodsState = GoodsState-1 where StoreId = @storeId and GoodsId = @goodId";
+            int i = dBDapper.ExecuteNonQuery(sql, new { goodId , storeId });
+            return i;
+        }
+        /// <summary>
+        /// 删除商品
+        /// </summary>
+        /// <param name="storeId"></param>
+        /// <param name="goodsIds"></param>
+        /// <returns></returns>
+        public int DeleteGoods(string goodsIds, int storeId)
+        {
+            string sql = $"delete Goods where GoodsId in (@goodsIds) and StoreId = @storeId";
+            int i = dBDapper.ExecuteNonQuery(sql, new { goodsIds, storeId });
+            return i;
+        }
+        /// <summary>
+        /// 根据Id查询信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<Goods> GetGoodsById(int goodsId)
+        {
+            string sql = $"select * from Goods where GoodsId = @goodsId";
+            List<Goods> list = dBDapper.GetList<Goods>(sql,new { goodsId });
+            return list;
+        }
+        /// <summary>
+        /// 修改商品单位
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns>
+        public int ModifyGoods(Goods goods)
+        {
+            string sql = $"update Goods set GoodsName=@GoodsName,GoodsPhoto=@GoodsPhoto,GoodsSize=@GoodsSize,Price=@Price,ProcurementPrice=@ProcurementPrice,Goodsclassify=@Goodsclassify,GoodsTypeName=@GoodsTypeName,GoodsUnitName=@GoodsUnitName,GoodsBrandName=@GoodsBrandName where GoodsId = @GoodsId";
+            int i = dBDapper.ExecuteNonQuery(sql, goods);
+            return i;
+        }
     }
 }

@@ -52,7 +52,7 @@ namespace Purchase_Sell_Stock.Model.SettingModels
         /// <summary>
         /// 有效时间(用于显示有效期剩余天数) 
         /// </summary>
-        public string StoreEffectiveDate { get; set; }
+        public DateTime StoreEffectiveDate { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
@@ -81,5 +81,6 @@ namespace Purchase_Sell_Stock.Model.SettingModels
         /// 店铺设置表主键
         /// </summary>
         public int StoreStoreSetId { get; set; }
+        
     }
 }

@@ -31,7 +31,8 @@ namespace Purchase_Sell_Stock.API
             services.AddSingleton<IStorage, StorageBll>();
             DBHelper._locastr = Configuration["ConnectionString:locastr"];
             services.AddSwaggerSetup();
-            services.AddSingleton<IGoods, GoodsBll>();
+            services.AddSingleton<IGoods, GoodsBll>();//商品
+            services.AddSingleton<IOrder, OrderBll>();//订单
             services.AddTransient<ISet,SetBll>();
             services.AddTransient<PropertyBll>();
             services.AddControllers();
@@ -65,7 +66,6 @@ namespace Purchase_Sell_Stock.API
                 c.RoutePrefix = "";
             });
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

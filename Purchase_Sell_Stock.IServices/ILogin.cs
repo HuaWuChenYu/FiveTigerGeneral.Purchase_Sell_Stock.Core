@@ -9,7 +9,7 @@ namespace Purchase_Sell_Stock.IServices
     {
         List<Users> Login(string name, string pwd);
         List<Users> Logins(string phone);
-        List<Users> Forget(string name);
+        int Forget(Users g);
         int Register(Users a);
 
     }

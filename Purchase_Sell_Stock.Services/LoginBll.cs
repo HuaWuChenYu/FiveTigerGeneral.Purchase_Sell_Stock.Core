@@ -11,9 +11,9 @@ namespace Purchase_Sell_Stock.Services
     {
         LoginDal dal = new LoginDal();
 
-        public List<Users> Forget(string name)
+        public int Forget(Users g)
         {
-            throw new NotImplementedException();
+            return dal.Register(g);
         }
 
         public List<Users> Login(string name, string pwd)
@@ -23,12 +23,12 @@ namespace Purchase_Sell_Stock.Services
 
         public List<Users> Logins(string phone)
         {
-            throw new NotImplementedException();
+            return dal.Logins(phone);
         }
 
         public int Register(Users a)
         {
-            throw new NotImplementedException();
+            return dal.Register(a);
         }
     }
 }

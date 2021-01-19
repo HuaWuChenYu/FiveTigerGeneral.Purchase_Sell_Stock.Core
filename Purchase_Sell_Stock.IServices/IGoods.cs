@@ -24,7 +24,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="typeId"></param>
         /// <param name="typeName"></param>
         /// <returns></returns>
-        List<GoodsType> GetGoodsTypeList(int typeId, string typeName);
+        List<GoodsType> GetGoodsTypeList(int typeId, string typeName,int storeId);
         /// <summary>
         /// 商品品牌查询
         /// </summary>
@@ -32,7 +32,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="brandId"></param>
         /// <param name="brandName"></param>
         /// <returns></returns>
-        List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName);
+        List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName, int storeId);
         /// <summary>
         /// 商品单位查询
         /// </summary>
@@ -40,7 +40,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="unitId"></param>
         /// <param name="unitName"></param>
         /// <returns></returns>
-        List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName);
+        List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName, int storeId);
         /// <summary>
         /// 添加商品
         /// </summary>
@@ -65,6 +65,33 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="goods"></param>
         /// <returns></returns>
         int AddGoodsUnit(GoodsUnit goods);
+        /// <summary>
+        /// 修改上下架
+        /// </summary>
+        /// <param name="goodId"></param>
+        /// <param name="storeId"></param>
+        /// <returns></returns>
+        int ModifyState(int goodId, int storeId);
+        /// <summary>
+        /// 删除商品
+        /// </summary>
+        /// <param name="goodId"></param>
+        /// <param name="storeId"></param>
+        /// <returns></returns>
+        int DeleteGoods(string goodIds, int storeId);
+
+        /// <summary>
+        /// 根据Id查询信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        List<Goods> GetGoodsById(int id);
+        /// <summary>
+        /// 修改商品单位
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns>
+        int ModifyGoods(Goods goods);
 
     }
 }

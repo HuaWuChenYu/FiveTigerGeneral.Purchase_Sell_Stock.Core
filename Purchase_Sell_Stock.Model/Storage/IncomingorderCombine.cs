@@ -124,5 +124,14 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// 已入库数量
         /// </summary>
         public int IncomingorderNuming { get; set; }
+        /// <summary>
+        /// 地址
+        /// </summary>
+
+        public string ProvidersAddress { get; set; }
+        /// <summary>
+        /// 电话
+        /// </summary>
+        public string ProvidersPhone { get; set; }
     }
 }

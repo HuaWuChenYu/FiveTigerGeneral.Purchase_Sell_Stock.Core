@@ -10,7 +10,7 @@ namespace Purchase_Sell_Stock.Services
     /// <summary>
     /// 用于设置
     /// </summary>
-    public class SetBll :ISet
+    public class SetBll : ISet
     {   
         SetDal _dal = DalFactory.GetDal<SetDal>("Set");
 
@@ -104,19 +104,29 @@ namespace Purchase_Sell_Stock.Services
             throw new NotImplementedException();
         }
 
+        public List<Powers> GetPowersBySet(int powerParentId, int rolesId)
+        {
+            return _dal.GetPowersBySet(powerParentId,rolesId);
+        }
+
         public List<Powers> GetPowersForLeft(int powersId)
         {
             throw new NotImplementedException();
         }
 
-        public List<Powers> GetPowersForUp(int employeeId)
+        public List<Powers> GetPowersForUp(int employeeId, int powersParentId)
         {
-            throw new NotImplementedException();
+            return _dal.GetPowersForUp(employeeId,powersParentId);
         }
 
         public List<Roles> GetRoles(int roleTypeId)
         {
-            throw new NotImplementedException();
+            return _dal.GetRoles(roleTypeId);
+        }
+
+        public List<RoleType> GetRoleTypes()
+        {
+            return _dal.GetRoleTypes();
         }
 
         public Store GetStore(int storeId)
@@ -134,6 +144,16 @@ namespace Purchase_Sell_Stock.Services
             throw new NotImplementedException();
         }
 
+        public Store GetStoresForUpdate(int storeId)
+        {
+            return _dal.GetStoresForUpdate(storeId);
+        }
+
+        public List<ViewStoreInfo> GetStoresFromLogin(string userPhone)
+        {
+            return _dal.GetStores(userPhone);
+        }
+
         public int UpdateDepartment(Department department)
         {
             throw new NotImplementedException();
@@ -146,7 +166,7 @@ namespace Purchase_Sell_Stock.Services
 
         public int UpdateStore(Store store)
         {
-            throw new NotImplementedException();
+            return _dal.UpdateStore(store);
         }
     }
 }

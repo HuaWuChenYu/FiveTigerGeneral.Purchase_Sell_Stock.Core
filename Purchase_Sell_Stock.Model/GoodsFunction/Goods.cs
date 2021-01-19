@@ -21,6 +21,7 @@ namespace Purchase_Sell_Stock.Model.GoodsFunction
         /// 商品图片
         /// </summary>
         public string GoodsPhoto { get; set; }
+
         /// <summary>
         /// 商品规格
         /// </summary>
