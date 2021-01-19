@@ -96,5 +96,44 @@ namespace Purchase_Sell_Stock.Services
         {
             return goods1.AddGoodsUnit(goods);
         }
+        /// <summary>
+        /// 修改上下架
+        /// </summary>
+        /// <param name="goodId"></param>
+        /// <param name="storeId"></param>
+        /// <returns></returns>
+        public int ModifyState(int goodId, int storeId)
+        {
+            return goods1.ModifyState(goodId,storeId);
+        }
+        /// <summary>
+        /// 删除商品
+        /// </summary>
+        /// <param name="storeId"></param>
+        /// <param name="goodsIds"></param>
+        /// <returns></returns>
+        public int DeleteGoods(string goodIds, int storeId)
+        {
+            return goods1.DeleteGoods(goodIds,storeId);
+        }
+        /// <summary>
+        /// 根据Id查询信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<Goods> GetGoodsById(int goodsId)
+        {
+            return goods1.GetGoodsById(goodsId);
+        }
+        /// <summary>
+        /// 修改商品单位
+        /// </summary>
+        /// <param name="goods"></param>
+        /// <returns></returns>
+        public int ModifyGoods(Goods goods)
+        {
+            int i = goods1.ModifyGoods(goods);
+            return i;
+        }
     }
 }

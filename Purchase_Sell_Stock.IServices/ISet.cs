@@ -103,7 +103,37 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="powersId">权限父id</param>
         /// <returns></returns>
         List<Powers> GetPowersForLeft(int powersId);
+        /// <summary>
+        /// 通过用户手机号返回店铺信息
+        /// </summary>
+        /// <param name="userPhone"></param>
+        /// <returns></returns>
+        List<ViewStoreInfo> GetStoresFromLogin(string userPhone);
         //==========================================设置======================================================
+        /// <summary>
+        /// 通过角色类型获取角色
+        /// </summary>
+        /// <param name="roleTypesId"></param>
+        /// <returns></returns>
+        List<Roles> GetRoles(int roleTypesId);
+        /// <summary>
+        /// 用于显示角色类型
+        /// </summary>
+        /// <returns></returns>
+        List<RoleType> GetRoleTypes();
+        /// <summary>
+        /// 用于修改角色的权限
+        /// </summary>
+        /// <param name="powerParentId"></param>
+        /// <param name="rolesId"></param>
+        /// <returns></returns>
+        List<Powers> GetPowersBySet(int powerParentId, int rolesId);
+        /// <summary>
+        /// 通过店铺id  店铺信息
+        /// </summary>
+        /// <param name="storeId"></param>
+        /// <returns></returns>
+        Store GetStoresForUpdate(int storeId);
         /// <summary>
         /// 店铺信息的反填显示
         /// </summary>
@@ -149,12 +179,7 @@ namespace Purchase_Sell_Stock.IServices
         /// </summary>
         /// <returns></returns>
         List<Powers> GetPowers();
-        /// <summary>
-        /// 角色表的显示
-        /// </summary>
-        /// <param name="roleTypeId">角色类型id</param>
-        /// <returns></returns>
-        List<Roles> GetRoles(int roleTypeId);
+        
         /// <summary>
         /// 员工显示
         /// </summary>

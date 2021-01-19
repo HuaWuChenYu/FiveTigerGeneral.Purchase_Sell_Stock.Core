@@ -5,9 +5,9 @@ using System.Text;
 namespace Purchase_Sell_Stock.Model.SettingModels
 {
     /// <summary>
-    /// 店铺表
+    /// 视图店铺表
     /// </summary>
-    public class Store
+    public class ViewStoreInfo
     {
         /// <summary>
         /// 店铺主键
@@ -81,6 +81,25 @@ namespace Purchase_Sell_Stock.Model.SettingModels
         /// 店铺设置表主键
         /// </summary>
         public int StoreStoreSetId { get; set; }
-        
+        /// <summary>
+        /// 员工名称
+        /// </summary>
+        public string EmployeeName { get; set; }
+        /// <summary>
+        /// 分类名
+        /// </summary>
+        public string ClassifyName { get; set; }
+        /// <summary>
+        /// 行业名
+        /// </summary>
+        public string IndustryName { get; set; }
+        /// <summary>
+        /// 有效日期天数
+        /// </summary>
+        public int StoreTimeOut { get; set; }
+        /// <summary>
+        /// 员工id
+        /// </summary>
+        public int EmployeeId { get; set; }
     }
 }
