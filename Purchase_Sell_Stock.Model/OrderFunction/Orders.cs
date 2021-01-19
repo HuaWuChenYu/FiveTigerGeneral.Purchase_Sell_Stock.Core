@@ -83,5 +83,9 @@ namespace Purchase_Sell_Stock.Model.OrderFunction
         /// 收货人姓名
         /// </summary>
         public string CustomerName { get; set; }
+        /// <summary>
+        /// 收货人手机号码
+        /// </summary>
+        public string CustomerPhone { get; set; }
     }
 }

@@ -36,7 +36,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public OrderPaging<Orders> GetOrderList<Orders>(int orderState,string orderNum,string orderBelong,string sellType,string time,string person,string phone,string payType,string dispatchWay,int pageIndex, int pageSize,int storeId)
         {
-            string sql = $"1 = 1 and StoreId = {storeId}";
+            string sql = $"1 = 1 and od.StoreId = {storeId}";
             if (!string.IsNullOrEmpty(orderNum))
             {
                 sql += $" and OrdersNum = {orderNum}";
@@ -51,7 +51,7 @@ namespace Purchase_Sell_Stock.DAL
             }
             if (!string.IsNullOrEmpty(time))
             {
-                sql += $" and DispatchTime = {time}";
+                sql += $" and DispatchTime > {Convert.ToDateTime( time)}";
             }
             if (!string.IsNullOrEmpty(person))
             {
@@ -74,7 +74,7 @@ namespace Purchase_Sell_Stock.DAL
                 sql += $" and OrdersState = {orderState}";
             }
             SqlParameter[] para = new SqlParameter[] {
-                new SqlParameter(){ParameterName="@TableFields",DbType=DbType.String,Value= "od.*,cu.CustomerName"},
+                new SqlParameter(){ParameterName="@TableFields",DbType=DbType.String,Value= "od.*,cu.CustomerName,cu.CustomerPhone"},
                 new SqlParameter(){ParameterName="@TableName",DbType=DbType.String,Value= "Customer cu join Orders od on cu.CustomerId = od.CustomerId"},
                 new SqlParameter(){ParameterName="@SqlWhere",DbType=DbType.String,Value= sql },
                 new SqlParameter(){ParameterName="@OrderBy",DbType=DbType.String,Value= "OrdersId"},
@@ -82,11 +82,11 @@ namespace Purchase_Sell_Stock.DAL
                 new SqlParameter(){ParameterName="@PageSize",DbType=DbType.Int32,Value= pageSize},
                 new SqlParameter(){ParameterName="@TotalCount",DbType=DbType.Int32,Direction=ParameterDirection.Output},
             };
-            List<Orders> listGoods = dBAdo.GetList<Orders>("Proc_Paging", para);
+            List<Orders> listOrder = dBAdo.GetList<Orders>("Proc_Paging", para);
             OrderPaging<Orders> paging = new OrderPaging<Orders>()
             {
                 Count = Convert.ToInt32(para[6].Value),
-                list = listGoods
+                list = listOrder
             };
             return paging;
         }

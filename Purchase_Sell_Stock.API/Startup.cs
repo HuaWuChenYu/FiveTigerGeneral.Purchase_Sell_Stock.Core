@@ -31,9 +31,10 @@ namespace Purchase_Sell_Stock.API
             services.AddSingleton<IStorage, StorageBll>();
             DBHelper._locastr = Configuration["ConnectionString:locastr"];
             services.AddSwaggerSetup();
-            services.AddSingleton<IGoods, GoodsBll>();//商品
-            services.AddSingleton<IOrder, OrderBll>();//订单
+            services.AddTransient<IGoods, GoodsBll>();//商品
+            services.AddTransient<IOrder, OrderBll>();//订单
             services.AddTransient<ISet,SetBll>();
+            services.AddTransient<PropertyBll>();
             services.AddControllers();
             //配置跨域处理，允许所有来源：
             services.AddCors(options =>

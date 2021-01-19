@@ -40,7 +40,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="pageSize"></param>
         /// <param name="storeId"></param>
         /// <returns></returns>
-        public string GetOrderList<Orders>(int orderState, string orderNum, string orderBelong, string sellType, string time, string person, string phone, string payType, string dispatchWay, int pageIndex, int pageSize, int storeId)
+        public string GetOrderList(int orderState, string orderNum, string orderBelong, string sellType, string time, string person, string phone, string payType, string dispatchWay, int pageIndex, int pageSize, int storeId)
         {
             OrderPaging<Orders> orderPaging = _order.GetOrderList<Orders>(orderState, orderNum, orderBelong, sellType, time, person, phone, payType, dispatchWay, pageIndex, pageSize, storeId);
             var jsonData = new

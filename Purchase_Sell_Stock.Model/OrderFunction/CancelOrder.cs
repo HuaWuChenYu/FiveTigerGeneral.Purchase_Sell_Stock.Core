@@ -37,5 +37,10 @@ namespace Purchase_Sell_Stock.Model.OrderFunction
         /// 订单外键
         /// </summary>
         public int OrdersId { get; set; }
+        /// <summary>
+        /// 退单编号
+        /// </summary>
+
+        public string CancelOrderNumber { get; set; }
     }
 }
