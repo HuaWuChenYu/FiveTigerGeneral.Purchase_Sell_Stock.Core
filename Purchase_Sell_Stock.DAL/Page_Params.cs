@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Purchase_Sell_Stock.DAL
 {
-    public class Page_Parms
+    public class Page_Params
     {
         public SqlParameter[] Page_Param(string TableFields, string TableName, string SqlWhere, string OrderBy, int pageIndex, int pageSize)
         {

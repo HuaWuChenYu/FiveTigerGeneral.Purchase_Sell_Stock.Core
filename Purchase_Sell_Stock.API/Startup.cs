@@ -12,8 +12,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Purchase_Sell_Stock.IServices;
 using Purchase_Sell_Stock.Services;
-using Purchase_Sell_Stock.IServices;
-using Purchase_Sell_Stock.Services;
 using Purchase_Sell_Stock.DAL.GetDBHelper;
 
 namespace Purchase_Sell_Stock.API
@@ -35,6 +33,7 @@ namespace Purchase_Sell_Stock.API
             services.AddSwaggerSetup();
             services.AddSingleton<IGoods, GoodsBll>();
             services.AddTransient<ISet,SetBll>();
+            services.AddTransient<PropertyBll>();
             services.AddControllers();
             //配置跨域处理，允许所有来源：
             services.AddCors(options =>
