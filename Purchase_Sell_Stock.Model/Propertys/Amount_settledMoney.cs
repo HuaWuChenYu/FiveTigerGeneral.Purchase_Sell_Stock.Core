@@ -11,6 +11,8 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// </summary>
         public int Amount_settleId { get; set; }
 
+        //用户外键
+        public int UserId { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

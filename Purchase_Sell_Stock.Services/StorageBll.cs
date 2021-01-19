@@ -22,9 +22,9 @@ namespace Purchase_Sell_Stock.Services
         /// 入库订单的显示
         /// </summary>
         /// <returns></returns>
-        public List<IncomingorderCombine> IncomingorderShow()
+        public List<IncomingorderCombine> IncomingorderShow( )
         {
-            var _list = stdal.IncomingorderShow();
+            var _list = stdal.IncomingorderShow( );
             return _list;
         }
         /// <summary>
@@ -47,6 +47,19 @@ namespace Purchase_Sell_Stock.Services
             var _list = stdal.IncomingordermodityGoods(incomingorderid);
             return _list;
         }
+        /// <summary>
+        /// 确定入库
+        /// </summary>
+        /// <param name="arr2"></param>
+        /// <param name="arr4"></param>
+        /// <param name="procurementId"></param>
+        /// <param name="incomingorderid"></param>
+        /// <returns></returns>
+        public int Storage(string arr2, string arr4, string sourcenumber, int incomingorderid)
+        {
+            return stdal.Storage(arr2, arr4, sourcenumber, incomingorderid);
+        }
+
         #endregion
 
 
@@ -135,6 +148,8 @@ namespace Purchase_Sell_Stock.Services
         {
             return stdal.goodRunningWaterShow();
         }
+
+        
         #endregion
 
     }

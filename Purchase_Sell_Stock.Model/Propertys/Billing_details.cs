@@ -12,6 +12,12 @@ namespace Purchase_Sell_Stock.Model.Storage
         public int Billing_detailsId { get; set; }
 
         /// <summary>
+        /// 用户外键
+        /// </summary>
+        /// 
+        public int UserId { get; set; }
+
+        /// <summary>
         /// 入账日期
         /// </summary>
         public DateTime date_recorded { get; set; }
@@ -25,6 +31,8 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// 金额
         /// </summary>
         public decimal Account_Money { get; set; }
+
+        public decimal Balance_Money { get; set; }
 
         /// <summary>
         /// 收入/支出
