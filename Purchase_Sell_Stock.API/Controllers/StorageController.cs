@@ -35,18 +35,19 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("/api/IncomingorderShow")]
-        public List<IncomingorderCombine> IncomingorderShow()
+        public IActionResult IncomingorderShow( )
         {
-            var _list = _storage.IncomingorderShow();
-            return _list;
+            var _list = _storage.IncomingorderShow( );
+            
+            return Ok(new { code=0,msg="显示成功",count=_list.Count,data=_list });
         }
         /// <summary>
         /// 反填入库信息
         /// </summary>
         /// <param name="incomingorderid"></param>
         /// <returns></returns>
-        [HttpPost]
-        [Route("/api/IncomingordermodityDetail")]
+        [HttpGet]
+        [Route("/api/IncomingordermodityDetail/{incomingorderid}")]
         public IncomingorderCombine IncomingordermodityDetail(int incomingorderid)
         {
             var _list = _storage.IncomingordermodityDetail(incomingorderid);
@@ -57,11 +58,27 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// </summary>
         /// <param name="incomingorderid"></param>
         /// <returns></returns>
-        [HttpPost]
-        [Route("/api/IncomingordermodityGoods")]
-        public List<IncomingorderCombine> IncomingordermodityGoods(int incomingorderid)
+        [HttpGet]
+        [Route("/api/IncomingordermodityGoods/{incomingorderid}")]
+        public IActionResult IncomingordermodityGoods(int incomingorderid)
         {
             var _list = _storage.IncomingordermodityGoods(incomingorderid);
+
+            return Ok(new { code=0,msg="显示成功",count=_list.Count,data=_list});
+        }
+        /// <summary>
+        /// 确定入库
+        /// </summary>
+        /// <param name="arr2"></param>
+        /// <param name="arr4"></param>
+        /// <param name="procurementId"></param>
+        /// <param name="incomingorderid"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("/api/Storage/{arr2}/{arr4}/{sourcenumber}/{incomingorderid}")]
+        public int Storage(string arr2, string arr4, string sourcenumber, int incomingorderid)
+        {
+            var _list = _storage.Storage(arr2, arr4, sourcenumber, incomingorderid);
             return _list;
         }
 
