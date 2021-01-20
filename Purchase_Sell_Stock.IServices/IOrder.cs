@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using Purchase_Sell_Stock.Model.OrderFunction;
+using Purchase_Sell_Stock.Model.GoodsFunction;
 
 namespace Purchase_Sell_Stock.IServices
 {
+    
     public interface IOrder
     {
         /// <summary>
@@ -24,6 +26,18 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="pageSize"></param>
         /// <param name="storeId"></param>
         /// <returns></returns>
-        OrderPaging<T> GetOrderList<T>(int orderState, string orderNum, string orderBelong, string sellType, string time, string person, string phone, string payType, string dispatchWay, int pageIndex, int pageSize, int storeId);
+        OrderPaging<T> GetOrderList<T>(int orderState, string orderNum,string sellType, string time, string person, string phone, string payType, int pageIndex, int pageSize, int storeId);
+        /// <summary>
+        /// 订单明细上
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        Orders GetOrderById_1(int orderId);
+        /// <summary>
+        /// 订单明细下
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        List<Goods> GetOrderById_2(int orderId);
     }
 }

@@ -4,6 +4,7 @@ using System.Text;
 using System.Data.SqlClient;
 using Purchase_Sell_Stock.DAL.GetDBHelper;
 using Purchase_Sell_Stock.Model.OrderFunction;
+using Purchase_Sell_Stock.Model.GoodsFunction;
 using System.Data;
 
 namespace Purchase_Sell_Stock.DAL
@@ -34,40 +35,32 @@ namespace Purchase_Sell_Stock.DAL
         /// <param name="pageSize"></param>
         /// <param name="storeId"></param>
         /// <returns></returns>
-        public OrderPaging<Orders> GetOrderList<Orders>(int orderState,string orderNum,string orderBelong,string sellType,string time,string person,string phone,string payType,string dispatchWay,int pageIndex, int pageSize,int storeId)
+        public OrderPaging<Orders> GetOrderList<Orders>(int orderState,string orderNum,string sellType,string time,string person,string phone,string payType,int pageIndex, int pageSize,int storeId)
         {
             string sql = $"1 = 1 and od.StoreId = {storeId}";
             if (!string.IsNullOrEmpty(orderNum))
             {
-                sql += $" and OrdersNum = {orderNum}";
-            }
-            if (!string.IsNullOrEmpty(orderBelong))
-            {
-                sql += $" and OrdersBelong = {orderBelong}";
+                sql += $" and OrdersNum like '%{orderNum}%'";
             }
             if (!string.IsNullOrEmpty(sellType))
             {
-                sql += $" and SellType = {sellType}";
+                sql += $" and SellType = '{sellType}'";
             }
             if (!string.IsNullOrEmpty(time))
             {
-                sql += $" and DispatchTime > {Convert.ToDateTime( time)}";
+                sql += $" and DispatchTime > '{Convert.ToDateTime( time)}'";
             }
             if (!string.IsNullOrEmpty(person))
             {
-                sql += $" and CustomerName = {person}";
+                sql += $" and CustomerName like '%{person}%'";
             }
             if (!string.IsNullOrEmpty(phone))
             {
-                sql += $" and OrdersNum = {phone}";
+                sql += $" and CustomerPhone like '%{phone}%'";
             }
             if (!string.IsNullOrEmpty(payType))
             {
-                sql += $" and DispatchWay = {payType}";
-            }
-            if (!string.IsNullOrEmpty(dispatchWay))
-            {
-                sql += $" and OrdersNum = {dispatchWay}";
+                sql += $" and PayWay = '{payType}'";
             }
             if (orderState > 0)
             {
@@ -77,7 +70,7 @@ namespace Purchase_Sell_Stock.DAL
                 new SqlParameter(){ParameterName="@TableFields",DbType=DbType.String,Value= "od.*,cu.CustomerName,cu.CustomerPhone"},
                 new SqlParameter(){ParameterName="@TableName",DbType=DbType.String,Value= "Customer cu join Orders od on cu.CustomerId = od.CustomerId"},
                 new SqlParameter(){ParameterName="@SqlWhere",DbType=DbType.String,Value= sql },
-                new SqlParameter(){ParameterName="@OrderBy",DbType=DbType.String,Value= "OrdersId"},
+                new SqlParameter(){ParameterName="@OrderBy",DbType=DbType.String,Value= "OrdersState"},
                 new SqlParameter(){ParameterName="@PageIndex",DbType=DbType.Int32,Value=pageIndex },
                 new SqlParameter(){ParameterName="@PageSize",DbType=DbType.Int32,Value= pageSize},
                 new SqlParameter(){ParameterName="@TotalCount",DbType=DbType.Int32,Direction=ParameterDirection.Output},
@@ -89,6 +82,28 @@ namespace Purchase_Sell_Stock.DAL
                 list = listOrder
             };
             return paging;
+        }
+        /// <summary>
+        /// 订单明细上
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public Orders GetOrderById_1(int orderId)
+        {
+            string sql = "select * from Orders od join Customer cu on od.CustomerId = cu.CustomerId where OrdersId = @orderId";
+            Orders orders = dBDapper.GetList<Orders>(sql,new { orderId})[0];
+            return orders;
+        }
+        /// <summary>
+        /// 订单明细下
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public List<Goods> GetOrderById_2(int orderId)
+        {
+            string sql = "select gd.*,og.OrdersGoodsNum from OrdersGoods og join Goods gd on og.GoodsId = gd.GoodsId where OrdersId = @orderId";
+            List<Goods> list = dBDapper.GetList<Goods>(sql, new { orderId });
+            return list;
         }
     }
 }

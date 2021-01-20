@@ -8,6 +8,7 @@ using Purchase_Sell_Stock.Model.OrderFunction;
 using Purchase_Sell_Stock.Services;
 using Purchase_Sell_Stock.IServices;
 using Newtonsoft.Json;
+using Purchase_Sell_Stock.Model.GoodsFunction;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
@@ -40,9 +41,9 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="pageSize"></param>
         /// <param name="storeId"></param>
         /// <returns></returns>
-        public string GetOrderList(int orderState, string orderNum, string orderBelong, string sellType, string time, string person, string phone, string payType, string dispatchWay, int pageIndex, int pageSize, int storeId)
+        public string GetOrderList(int orderState, string orderNum, string sellType, string time, string person, string phone, string payType, int pageIndex, int pageSize, int storeId)
         {
-            OrderPaging<Orders> orderPaging = _order.GetOrderList<Orders>(orderState, orderNum, orderBelong, sellType, time, person, phone, payType, dispatchWay, pageIndex, pageSize, storeId);
+            OrderPaging<Orders> orderPaging = _order.GetOrderList<Orders>(orderState, orderNum, sellType, time, person, phone, payType, pageIndex, pageSize, storeId);
             var jsonData = new
             {
                 code = 0,
@@ -51,6 +52,36 @@ namespace Purchase_Sell_Stock.API.Controllers
                 data = orderPaging.list
             };
             return JsonConvert.SerializeObject(jsonData);
+        }
+        [HttpGet]
+        [Route("/api/GetOrderById_1/{orderId}")]
+        /// <summary>
+        /// 订单明细上
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public Orders GetOrderById_1(int orderId)
+        {
+            return _order.GetOrderById_1(orderId);
+        }
+        [HttpGet]
+        [Route("/api/GetOrderById_2/{orderId}")]
+        /// <summary>
+        /// 订单明细下
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public string GetOrderById_2(int orderId)
+        {
+            List<Goods> list = _order.GetOrderById_2(orderId);
+            var dataJson = new
+            {
+                code = 0,
+                msg = "",
+                count = list.Count,
+                data = list
+            };
+            return JsonConvert.SerializeObject(dataJson);
         }
     }
 }

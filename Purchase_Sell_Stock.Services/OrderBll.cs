@@ -4,6 +4,7 @@ using System.Text;
 using Purchase_Sell_Stock.IServices;
 using Purchase_Sell_Stock.DAL;
 using Purchase_Sell_Stock.Model.OrderFunction;
+using Purchase_Sell_Stock.Model.GoodsFunction;
 namespace Purchase_Sell_Stock.Services
 {
     /// <summary>
@@ -29,9 +30,27 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="pageSize"></param>
         /// <param name="storeId"></param>
         /// <returns></returns>
-        public OrderPaging<Orders> GetOrderList<Orders>(int orderState, string orderNum, string orderBelong, string sellType, string time, string person, string phone, string payType, string dispatchWay, int pageIndex, int pageSize, int storeId)
+        public OrderPaging<Orders> GetOrderList<Orders>(int orderState, string orderNum,string sellType, string time, string person, string phone, string payType , int pageIndex, int pageSize, int storeId)
         {
-            return orderDal.GetOrderList<Orders>(orderState, orderNum, orderBelong, sellType, time, person, phone, payType, dispatchWay, pageIndex, pageSize, storeId);
+            return orderDal.GetOrderList<Orders>(orderState, orderNum,sellType, time, person, phone, payType, pageIndex, pageSize, storeId);
+        }
+        /// <summary>
+        /// 订单明细上
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public Orders GetOrderById_1(int orderId)
+        {
+            return orderDal.GetOrderById_1(orderId);
+        }
+        /// <summary>
+        /// 订单明细下
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public List<Goods> GetOrderById_2(int orderId)
+        {
+            return orderDal.GetOrderById_2(orderId);
         }
     }
 }
