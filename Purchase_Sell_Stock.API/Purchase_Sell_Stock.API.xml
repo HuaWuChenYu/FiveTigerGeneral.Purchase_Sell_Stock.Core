@@ -21,12 +21,6 @@
             <param name="a"></param>
             <returns></returns>
         </member>
-        <member name="M:Purchase_Sell_Stock.API.Controllers.GoodsController.UploadPhoto(Microsoft.AspNetCore.Http.IFormCollection)">
-            <summary>
-            上传图片
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Purchase_Sell_Stock.API.Controllers.LoginController">
             <summary>
             登录控制器
