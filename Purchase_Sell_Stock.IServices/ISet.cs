@@ -164,17 +164,6 @@ namespace Purchase_Sell_Stock.IServices
         /// <returns></returns>
         List<Department> GetDepartments(string coding,string deptName);
         /// <summary>
-        /// 添加一条部门信息
-        /// </summary>
-        /// <param name="department"></param>
-        /// <returns></returns>
-        int AddDepartment(Department department);
-        /// <summary>
-        /// 编辑部门
-        /// </summary>
-        /// <returns></returns>
-        int UpdateDepartment(Department department);
-        /// <summary>
         /// 角色的权限的显示
         /// </summary>
         /// <returns></returns>
@@ -190,18 +179,85 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="rolesId">所属角色</param>
         /// <returns></returns>
         List<Employee> GetEmployees(string employeeNumber,string employeeName,string employeeContact,int departmentId,int rolesId);
+        
+        List<Classify> ClassifiesShow();
         /// <summary>
-        /// 添加员工
+        /// 根据角色查询权限id
         /// </summary>
-        /// <param name="employee">员工</param>
+        /// <param name="roleId"></param>
         /// <returns></returns>
-        int AddEmployee(Employee employee);
+        List<Powers> GetPowersByShowId(int roleId);
+        /// <summary>
+        /// 删除角色的一项权限
+        /// </summary>
+        /// <param name="powerId"></param>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
+        int DeletePowersAndRoles(string powerId, int roleId);
+        /// <summary>
+        /// 添加角色的一项权限
+        /// </summary>
+        /// <param name="powerId"></param>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
+        int AddPowersAndRoles(string powerId, int roleId);
+        /// <summary>
+        /// 获取员工信息
+        /// </summary>
+        /// <returns></returns>
+        List<Employee> GetEmployeesForShow();
+        /// <summary>
+        /// 获取部门信息
+        /// </summary>
+        /// <returns></returns>
+        List<Department> GetDepartments();
+        /// <summary>
+        /// 获取角色信息
+        /// </summary>
+        /// <returns></returns>
+        List<Roles> GetRolesForSelect();
+        /// <summary>
+        /// 添加员工信息
+        /// </summary>
+        /// <param name="emp"></param>
+        /// <returns></returns>
+        int AddEmployee(Employee emp);
+        /// <summary>
+        /// 通过id查询员工信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Employee GetEmployeeById(int id);
         /// <summary>
         /// 修改员工
         /// </summary>
-        /// <param name="employee">员工</param>
+        /// <param name="emp"></param>
         /// <returns></returns>
-        int UpdateEmployee(Employee employee);
-        List<Classify> ClassifiesShow();
+        int UpdateEmployee(Employee emp);
+        /// <summary>
+        /// 部门信息
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        List<Department> GetDepartmentByShow();
+        /// <summary>
+        /// 添加部门
+        /// </summary>
+        /// <param name="department"></param>
+        /// <returns></returns>
+        int AddDepartment(Department department);
+        /// <summary>
+        /// 修改部门
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        int UpdateDepartment(Department department);
+        /// <summary>
+        /// 通过id获取部门
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Department GetDepartmentById(int id);
     }
 }

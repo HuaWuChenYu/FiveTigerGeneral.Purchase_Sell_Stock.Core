@@ -33,6 +33,102 @@ namespace Purchase_Sell_Stock.DAL
             List<Classify> clist = dBHelper.GetList<Classify>("select * from Classify");
             return clist;
         }
+        //通过id获取部门
+        public Department GetDepartmentById(int id)
+        {
+            string sql = $"select * from Department where DepartmentId={id}";
+            Department department = dBHelper.GetList<Department>(sql).SingleOrDefault();
+            return department;
+        }
+        //修改部门
+        public int UpdateDepartment(Department department)
+        {
+            string sql = $"update Department set DepartmentName='{department.DepartmentName}',DepartmentParentId='{department.DepartmentParentId}' where DepartmentId={department.DepartmentId}";
+            int n = dBHelper.ExecuteNonQuery(sql);
+            return n;
+        }
+        //添加部门
+        public int AddDepartment(Department department)
+        {
+            string sql = " select top 1 * from Department order by DepartmentId desc";
+            department.DepartmentNumber = (dBHelper.GetList<Department>(sql).SingleOrDefault().DepartmentId+1).ToString();
+            string sql2 = $"insert into Department values ('WHSJ10{department.DepartmentNumber}','{department.DepartmentName}','{department.DepartmentParentId}')";
+            int n = dBHelper.ExecuteNonQuery(sql2);
+            return n;
+        }
+        //获取部门信息
+        public List<Department> GetDepartmentByShow()
+        {
+            string sql = $"select * from Department";
+            List<Department> elist = dBHelper.GetList<Department>(sql).OrderBy(s=>s.DepartmentParentId).ToList();
+            List<Department> dlist = new List<Department>();
+            List<Department> nlist = elist.Where(s => s.DepartmentParentId == 0).ToList();
+            foreach (var item in nlist)
+            {
+                item.Level = 1;
+                dlist.Add(item);
+                List<Department> list = elist.Where(s => s.DepartmentParentId == item.DepartmentId).ToList();
+                foreach (var item2 in list)
+                {
+                    item2.Level = 2;
+                    dlist.Add(item2);
+                    List<Department> list2 = elist.Where(s => s.DepartmentParentId == item2.DepartmentId).ToList();
+                    if (list2.Count>0)
+                    {
+                        foreach (var item3 in list2)
+                        {
+                            item3.Level = 3;
+                            dlist.Add(item3);
+                        }
+                    }
+                }
+            }
+            return dlist;
+        }
+        //修改员工
+        public int UpdateEmployee(Employee emp)
+        {
+            string sql = $"update Employee set EmployeeName='{emp.EmployeeName}',EmployeeContact='{emp.EmployeeContact}',EmployeeStates='{(emp.EmployeeStates?1:0)}',EmployeeDepartmentId='{emp.EmployeeDepartmentId}',EmployeeRolesId='{emp.EmployeeRolesId}' where EmployeeId={emp.EmployeeId}";
+            int n = dBHelper.ExecuteNonQuery(sql);
+            return n;
+        }
+        //通过id查询员工信息
+        public Employee GetEmployeeById(int id)
+        {
+            string sql = $"select * from Employee where EmployeeId={id}";
+            Employee emp = dBHelper.GetList<Employee>(sql).ToList().FirstOrDefault();
+            return emp;
+        }
+        //添加员工信息
+        public int AddEmployee(Employee emp)
+        {
+            string sql2 = $"select UserId from Users where UserAccount='{emp.DepartmentName}'";//emp.DepartmentName 当做用户账号来传值
+            Users user = dBHelper.GetList<Users>(sql2).ToList().FirstOrDefault();
+            string sql = $"insert into Employee values ('{emp.EmployeeNumber}','{emp.EmployeeName}','{emp.EmployeeContact}','{DateTime.Now}','{(emp.EmployeeStates?1:0)}','{emp.EmployeeDepartmentId}','{user.UserId}','{emp.EmployeeRolesId}')";
+            int n = dBHelper.ExecuteNonQuery(sql);
+            return n;
+        }
+        //获取角色信息
+        public List<Roles> GetRolesForSelect()
+        {
+            string sql = "select * from Roles";
+            List<Roles> rlist = dBHelper.GetList<Roles>(sql);
+            return rlist;
+        }
+        //获取部门信息
+        public List<Department> GetDepartments()
+        {
+            string sql = "select * from Department";
+            List<Department> dlist = dBHelper.GetList<Department>(sql);
+            return dlist;
+        }
+        //获取员工信息
+        public List<Employee> GetEmployeesForShow()
+        {
+            string sql = "select * from Employee a join Department b on a.EmployeeDepartmentId=b.DepartmentId join Roles c on a.EmployeeRolesId=c.RolesId ";
+            List<Employee> elist = dBHelper.GetList<Employee>(sql);
+            return elist;
+        }
         //用于显示导航
         public List<Powers> GetPowersForUp(int employeeId, int powersParentId)
         {
@@ -87,6 +183,34 @@ namespace Purchase_Sell_Stock.DAL
             string sql = $"select * from Roles where RolesRoleTypeId={roleTypesId}";
             List<Roles> rlist = dBHelper.GetList<Roles>(sql);
             return rlist;
+        }
+        //根据角色查询权限id
+        public List<Powers> GetPowersByShowId(int roleId)
+        {
+            string sql = "select PowersId from Powers a join RolesAndPowers b on a.PowersId=b.RolesAndPowersPowersId " +
+                $"join Roles c on b.RolesAndPowersRolesId=c.RolesId where RolesId={roleId}";
+            List<Powers> plist = dBHelper.GetList<Powers>(sql);
+            return plist;
+        }
+        //删除角色的一项权限
+        
+        public int DeletePowersAndRoles(string powerId,int roleId)
+        {
+            string sql = $"delete RolesAndPowers where RolesAndPowersPowersId in ({powerId}) and  RolesAndPowersRolesId={roleId}";
+            int n = dBHelper.ExecuteNonQuery(sql);
+            return n;
+        }
+        //添加角色的一项权限
+        public int AddPowersAndRoles(string powerId, int roleId)
+        {
+            int n=0;
+            string[] imgArr = powerId.Split(new char[] { ',' });
+            foreach (var item in imgArr)
+            {
+                string sql = $"insert into RolesAndPowers values ({roleId},{item})";
+                n += dBHelper.ExecuteNonQuery(sql);
+            }
+            return n;
         }
     }
 }

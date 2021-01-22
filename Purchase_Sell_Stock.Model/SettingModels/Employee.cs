@@ -45,5 +45,13 @@ namespace Purchase_Sell_Stock.Model.SettingModels
         /// 员工角色外键
         /// </summary>
         public int EmployeeRolesId { get; set; }
+        /// <summary>
+        /// 部门名称
+        /// </summary>
+        public string DepartmentName { get; set; }
+        /// <summary>
+        /// 角色名称
+        /// </summary>
+        public string RolesName { get; set; }
     }
 }
