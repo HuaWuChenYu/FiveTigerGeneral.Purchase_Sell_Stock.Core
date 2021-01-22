@@ -29,11 +29,11 @@ namespace Purchase_Sell_Stock.Model.GoodsFunction
         /// <summary>
         /// 商品价格
         /// </summary>
-        public int Price { get; set; }
+        public float Price { get; set; }
         /// <summary>
         /// 进货价格
         /// </summary>
-        public int ProcurementPrice { get; set; }
+        public float ProcurementPrice { get; set; }
         /// <summary>
         /// 商品上下架状态
         /// </summary>
@@ -58,5 +58,12 @@ namespace Purchase_Sell_Stock.Model.GoodsFunction
         /// 店铺外键
         /// </summary>
         public int StoreId { get; set; }
+
+
+        /// <summary>
+        /// 商品数量
+        /// </summary>
+        public int OrdersGoodsNum { get; set; }
+        public double AllPrice { get { return Math.Round(Price * OrdersGoodsNum * 100) / 100; } }//小计
     }
 }

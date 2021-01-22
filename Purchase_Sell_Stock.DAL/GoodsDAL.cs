@@ -173,10 +173,10 @@ namespace Purchase_Sell_Stock.DAL
         /// <param name="goodId"></param>
         /// <param name="storeId"></param>
         /// <returns></returns>
-        public int ModifyState(int goodId,int storeId)
+        public int ModifyState(int goodId)
         {
-            string sql = $"update Goods set GoodsState = GoodsState-1 where StoreId = @storeId and GoodsId = @goodId";
-            int i = dBDapper.ExecuteNonQuery(sql, new { goodId , storeId });
+            string sql = $"update Goods set GoodsState = GoodsState-1 where GoodsId = @goodId";
+            int i = dBDapper.ExecuteNonQuery(sql, new { goodId});
             return i;
         }
         /// <summary>
@@ -185,10 +185,10 @@ namespace Purchase_Sell_Stock.DAL
         /// <param name="storeId"></param>
         /// <param name="goodsIds"></param>
         /// <returns></returns>
-        public int DeleteGoods(string goodsIds, int storeId)
+        public int DeleteGoods(string goodsIds)
         {
-            string sql = $"delete Goods where GoodsId in (@goodsIds) and StoreId = @storeId";
-            int i = dBDapper.ExecuteNonQuery(sql, new { goodsIds, storeId });
+            string sql = $"delete Goods where GoodsId in (@goodsIds)";
+            int i = dBDapper.ExecuteNonQuery(sql, new { goodsIds});
             return i;
         }
         /// <summary>
