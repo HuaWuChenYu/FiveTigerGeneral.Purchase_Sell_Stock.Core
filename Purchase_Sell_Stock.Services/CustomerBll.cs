@@ -12,32 +12,88 @@ namespace Purchase_Sell_Stock.Services
     /// </summary>
     public class CustomerBll : ICustomer
     {
-        public List<T> GetCustomers<T>(int customerId, int lableId, int pageIdex, int pageSize, string customerName, string customerPhone, string customerIdentity, string whetherEnable)
-        {
-            throw new NotImplementedException();
-        }
-
-        public CustomerPaging<T> GetCustomers<T>(int lableId, int pageIndex, int pageSize, string customerName, string customerPhone, string customerIdentity, string whetherEnable)
-        {
-            throw new NotImplementedException();
-        }
-
+        CustomerDal dal = DalFactory.GetDal<CustomerDal>("Customer");
+        /// <summary>
+        /// 客户
+        /// </summary>
+        /// <summary>
+        /// 添加标签
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
         public int GetLable(Lable a)
         {
-            throw new NotImplementedException();
+            return dal.GetLable(a);
         }
-
+        /// <summary>
+        /// 标签
+        /// </summary>
+        /// <returns></returns>
         public List<Lable> GetLableShow()
         {
-            throw new NotImplementedException();
+            return dal.GetLableShow();
         }
-
+        /// <summary>
+        /// 删除标签
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public int LableDelete(string ids)
+        {
+            return dal.LableDelete(ids);
+        }
+        /// <summary>
+        /// 标签反填
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Lable Ft(int id)
+        {
+            return dal.Ft(id);
+        }
+        /// <summary>
+        /// 标签修改
+        /// </summary>
+        /// <param name="g"></param>
+        /// <returns></returns>
+        public int Modify(Lable g)
+        {
+            return dal.Modify(g);
+        }
+        /// <summary>
+        /// 充值面额
+        /// </summary>
+        /// <returns></returns>
+        public List<Denomination> GetListDen()
+        {
+            return dal.GetListDen();
+        }
+        /// <summary>
+        /// 新建面额
+        /// </summary>
+        /// <returns></returns>
+        public int AddDenomination(Denomination a)
+        {
+            return dal.AddDenomination(a);
+        }
+        /// <summary>
+        /// 充值记录查询
+        /// </summary>
+        /// <param name="customerName"></param>
+        /// <param name="customerPhone"></param>
+        /// <param name="denominationId"></param>
+        /// <returns></returns>
         public List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId)
         {
-            throw new NotImplementedException();
+            return dal.GetRechargeRecord(customerName, customerPhone, denominationId);
         }
 
-        CustomerPaging<T> ICustomer.GetCustomers<T>(int lableId, int pageIndex, int pageSize, string customerName, string customerPhone, string customerIdentity, string whetherEnable)
+        public List<Customer> GetCustomerShow(string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable)
+        {
+            return dal.GetCustomerShow(customerName, customerPhone, customeridentity, lableId, whetherEnable);
+        }
+
+        public List<Customer> GetCustomerShow()
         {
             throw new NotImplementedException();
         }

@@ -23,60 +23,145 @@ namespace Purchase_Sell_Stock.API.Controllers
         {
             _customer = customer;
         }
-
         /// <summary>
-        /// 实例化
+        /// 全部客户
         /// </summary>
-        CustomerBll bll = new CustomerBll();
+        
         [HttpGet]
-        [Route("api/GetCustomers/{pageIndex}/{pageSize}/{customerName}/{customerPhone}/{customerIdentity}/{lableId}/{whetherEnable}/{customerId}")]
-        public string GetCustomers(int customerId, int lableId, int pageIndex, int pageSize, string customerName="", string customerPhone="", string customerIdentity="", string whetherEnable="")
+        [Route("/api/GetCustomerShow")]
+        public string GetCustomerShow(int pageIndex, int pageSize, string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable)
         {
-            if (customerName=="空")
-            {
-                customerName = "";
-            }
-            if (customerPhone == "空")
-            {
-                customerPhone = "";
-            }
-            if (customerIdentity == "空")
-            {
-                customerIdentity = "";
-            }
-            if (whetherEnable=="空")
-            {
-                whetherEnable = "";
-            }
-            CustomerPaging<Customer> customerPaging = _customer.GetCustomers<Customer>(lableId, pageIndex, pageSize, customerName, customerPhone, customerIdentity, whetherEnable);
+            List<Customer> list = _customer.GetCustomerShow(customerName, customerPhone, customeridentity, lableId, whetherEnable);
             var dataJson = new
             {
                 code = 0,
                 msg = "",
-                count = customerPaging.Count,
-                data = customerPaging
+                count = list.Count,
+                data = list.Skip((pageIndex - 1) * pageSize).Take(pageSize)
             };
-            return JsonConvert.SerializeObject(dataJson);
+            string str = JsonConvert.SerializeObject(dataJson);
+            return str;
         }
+        /// <summary>
+        /// 充值记录查询
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="customerName"></param>
+        /// <param name="customerPhone"></param>
+        /// <param name="denominationId"></param>
+        /// <returns></returns>
         [HttpGet]
-        [Route("api/GetRechargeRecord/{customerName}/{customerPhone}/{denominationId}")]
-        public List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId)
+        [Route("/api/GetRechargeRecord")]
+        public string GetRechargeRecord(int pageIndex,int pageSize, string customerName, string customerPhone, int denominationId)
         {
             List<RechargeRecord> list = _customer.GetRechargeRecord(customerName, customerPhone, denominationId);
-            return list;
+            var dataJson = new
+            {
+                code = 0,
+                msg = "",
+                count = list.Count,
+                data = list.Skip((pageIndex - 1) * pageSize).Take(pageSize)
+            };
+            string str = JsonConvert.SerializeObject(dataJson);
+            return str;
         }
         /// <summary>
         /// 添加标签
         /// </summary>
-        /// <param name="a"></param>
+        /// <param name="obj"></param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("api/GetLable")]
-        public int GetLable(Lable a)
+        [HttpPost]
+        [Route("/api/GetLable")]
+        public int GetLable([FromBody]Lable obj)
         {
-            int i = _customer.GetLable(a);
+            int i = _customer.GetLable(obj);
             return i;
         }
-
+        /// <summary>
+        /// 显示标签
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("/api/GetLableShow")]
+        public string GetLableShow(int pageIndex, int pageSize)
+        {
+            List<Lable> list = _customer.GetLableShow();
+            var dataJson = new
+            {
+                code = 0,
+                msg = "",
+                count = list.Count,
+                data = list.Skip((pageIndex - 1) * pageSize).Take(pageSize)
+            };
+            string str = JsonConvert.SerializeObject(dataJson);
+            return str;
+        }
+        /// <summary>
+        /// 删除标签
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("/api/LableDelete")]
+        public int LableDelete(string ids)
+        {
+            return _customer.LableDelete(ids);
+        }
+        /// <summary>
+        /// 修改标签
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("/api/Modify")]
+        public int Modify([FromBody] Lable obj)
+        {
+            return _customer.Modify(obj);
+        }
+        /// <summary>
+        /// 标签反填
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("/api/Ft")]
+        public string Ft(int id)
+        {
+            Lable lable = _customer.Ft(id);
+            return JsonConvert.SerializeObject(lable);
+        }
+        /// <summary>
+        /// 充值面额
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("/api/GetListDen")]
+        public string GetListDen(int pageIndex, int pageSize)
+        {
+            List<Denomination> list = _customer.GetListDen();
+            var dataJson = new
+            {
+                code = 0,
+                msg = "",
+                count = list.Count,
+                data = list.Skip((pageIndex - 1) * pageSize).Take(pageSize)
+            };
+            string str = JsonConvert.SerializeObject(dataJson);
+            return str;
+        }
+        /// <summary>
+        /// 新建面额
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("/api/AddDenomination")]
+        public int AddDenomination(Denomination a)
+        {
+            return _customer.AddDenomination(a);
+        }
+        
     }
 }

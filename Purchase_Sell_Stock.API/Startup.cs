@@ -33,7 +33,9 @@ namespace Purchase_Sell_Stock.API
             services.AddSwaggerSetup();
             services.AddTransient<IGoods, GoodsBll>();//商品
             services.AddTransient<IOrder, OrderBll>();//订单
+            services.AddTransient<ICustomer, CustomerBll>();
             services.AddTransient<ISet,SetBll>();
+            services.AddTransient<ILogin,LoginBll>();
             services.AddTransient<PropertyBll>();
             services.AddControllers();
             //配置跨域处理，允许所有来源：

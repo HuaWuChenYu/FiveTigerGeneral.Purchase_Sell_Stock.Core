@@ -10,17 +10,55 @@ namespace Purchase_Sell_Stock.IServices
         /// <summary>
         /// 全部用户查询
         /// </summary>
-        List<T> GetCustomers<T>(int customerId, int lableId, int pageIdex,int pageSize,    string customerName, string customerPhone, string customerIdentity,  string whetherEnable);
+        List<Customer> GetCustomerShow(string customerName,string customerPhone,string customeridentity,int lableId,int whetherEnable);
         /// <summary>
         /// 充值记录查询
         /// </summary>
-        /// <param name="customerName"></param>
+        /// <param name="customerName"></param>int 
         /// <param name="customerPhone"></param>
         /// <param name="denominationId"></param>
         /// <returns></returns>
         List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId);
-        CustomerPaging<T> GetCustomers<T>(int lableId, int pageIndex, int pageSize, string customerName, string customerPhone, string customerIdentity, string whetherEnable);
+        /// <summary>
+        /// 用户标签
+        /// </summary>
+        /// <returns></returns>
         List<Lable> GetLableShow();
+
+        /// <summary>
+        /// 添加标签
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
         int GetLable(Lable a);
+        /// <summary>
+        /// 删除标签
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        int LableDelete(string ids);
+        /// <summary>
+        /// 标签反填
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Lable Ft(int id);
+        /// <summary>
+        /// 标签修改
+        /// </summary>
+        /// <param name="g"></param>
+        /// <returns></returns>
+        int Modify(Lable g);
+        /// <summary>
+        /// 充值面额
+        /// </summary>
+        /// <returns></returns>
+        List<Denomination> GetListDen();
+        /// <summary>
+        /// 添加面额
+        /// </summary>
+        /// <returns></returns>
+        int AddDenomination(Denomination a);
+        
     }
 }

@@ -18,78 +18,132 @@ namespace Purchase_Sell_Stock.DAL
         DBHelper dBDapper = SimplyFactoryDB.GetInstance("Dapper");
         DBHelper dBAdo = SimplyFactoryDB.GetInstance("Ado");
         SqlSugerDBHelper sqlSugerDB = new SqlSugerDBHelper();
-        /// <summary>
-        /// 显示出全部的客户
-        /// </summary>
-        /// <returns></returns>
-        /// 
-        public CustomerPaging<Customer> GetCustomerList<Customer>(int pageIndex, int pageSize, int customerId, string customerName, string customerPhone, string customerIdentity, int lableId, string whetherEnable)
+
+        public List<Customer> GetCustomerShow(string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable)
         {
-            string sql = $"select * from Customer where 1=1";
-            if (customerId != 0)
-            {
-                sql += $" and CustomerId=@id" + ",new {id=" + $"{customerId}" + "}";
-            }
+            string sql = $"select * from Customer";
             if (!string.IsNullOrEmpty(customerName))
             {
-                sql += $" and CustomerName=@name" + ",new {name=" + $"{customerName}" + "}";
+                sql += $" and CustomerName like '%{customerName}%'";
             }
             if (!string.IsNullOrEmpty(customerPhone))
             {
-                sql += $" and CustomerPhone=@phone" + ",new {phone=" + $"{customerPhone}" + "}";
+                sql += $" and CustomerPhone= '%{customerPhone}%'";
             }
-            if (!string.IsNullOrEmpty(customerIdentity))
+            if (!string.IsNullOrEmpty(customeridentity))
             {
-                sql += $" and CustomerIdentity=@identity" + ",new {identity=" + $"{customerIdentity}" + "}";
+                sql += $" and Customeridentity= '%{customeridentity}%'";
             }
             if (lableId != 0)
             {
-                sql += $" and LableId=@labId" + ",new {labId=" + $"{lableId}" + "}";
+                sql += " and LableId= lableId";
             }
-            if (!string.IsNullOrEmpty(whetherEnable))
+            if (whetherEnable != 0)
             {
-                sql += $" and WhetherEnable=@Enable" + ",new {Enable=" + $"{whetherEnable}" + "}";
+                sql += " and WhetherEnable= whetherEnable";
             }
-            SqlParameter[] para = new SqlParameter[] {
-                new SqlParameter(){ParameterName="@TableFields",DbType=DbType.String,Value= "*"},
-                new SqlParameter(){ParameterName="@TableName",DbType=DbType.String,Value= "Goods"},
-                new SqlParameter(){ParameterName="@SqlWhere",DbType=DbType.String,Value= sql },
-                new SqlParameter(){ParameterName="@OrderBy",DbType=DbType.String,Value= "GoodsId"},
-                new SqlParameter(){ParameterName="@PageIndex",DbType=DbType.Int32,Value=pageIndex },
-                new SqlParameter(){ParameterName="@PageSize",DbType=DbType.Int32,Value= pageSize},
-                new SqlParameter(){ParameterName="@@TotalCount",DbType=DbType.Int32,Direction=ParameterDirection.Output},
-            };
-            List<Customer> lists = dBAdo.GetList<Customer>("",para);
-            CustomerPaging<Customer> paging = new CustomerPaging<Customer>()
-            {
-                Count = Convert.ToInt32(para[6].Value),
-                list = lists
-            };
-            return paging;
+            List<Customer> list = dBAdo.GetList<Customer>(sql);
+            return list;
         }
+        /// <summary>
+        /// 充值记录查询
+        /// </summary>
+        /// <param name="customerName"></param>
+        /// <param name="customerPhone"></param>
+        /// <param name="denominationId"></param>
+        /// <returns></returns>
         public List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId)
         {
-            string sql = $"select * from RechargeRecord where 1=1";
+            string sql = $"select cu.*,rr.* from RechargeRecord rr join Customer cu on cu.CustomerId = rr.CustomerId join Store st on st.StoreId = rr.StoreId where rr.StoreId = 1";
             if (!string.IsNullOrEmpty(customerName))
             {
-                sql += " and CustomerName=@name" + ",new {name=" + $"{customerName}" + "}";
+                sql += $" and CustomerName like '%{customerName}%'";
             }
             if (!string.IsNullOrEmpty(customerPhone))
             {
-                sql += " and CustomerPhone=@phone" + ",new {phone=" + $"{customerPhone}" + "}";
+                sql += $" and CustomerPhone= '%{customerPhone}%'";
             }
             if (denominationId!=0)
             {
-                sql += " and DenominationId=@id" + ",new {id=" + $"{denominationId}" + "}";
+                sql +=" and DenominationId= denominationId";
             }
-            List<RechargeRecord> list = SimplyFactoryDB.GetInstance("Dapper").GetList<RechargeRecord>(sql);
+            List<RechargeRecord> list = dBAdo.GetList<RechargeRecord>(sql);
             return list;
         }
+       
+        /// <summary>
+        /// 添加标签
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
         public int GetLable(Lable a)
         {
-            string sql = $"insert into Lable values({a.LableName},{a.LableExplain})";
-            int i = dBDapper.ExecuteNonQuery(sql);
+            string sql = $"insert into Lable values('{a.LableName}',0,'{a.LableExplain}','{DateTime.Now}')";
+            var i= dBAdo.ExecuteNonQuery(sql);
             return i;
         }
+        /// <summary>
+        /// 用户标签
+        /// </summary>
+        /// <returns></returns>
+        public List<Lable> GetLableShow()
+        {
+            string sql = $"select * from Lable";
+            List<Lable> list = dBAdo.GetList<Lable>(sql);
+            return list;
+        }
+        /// <summary>
+        /// 删除标签
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public int LableDelete(string ids)
+        {
+            string sql = $"delete Lable where LableId in ({ids})";
+            return dBAdo.ExecuteNonQuery(sql);
+        }
+        /// <summary>
+        /// 标签反填
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Lable Ft(int id)
+        {
+            string sql = $"select * from Lable where LableId={id}";
+            List<Lable> list = dBAdo.GetList<Lable>(sql);
+            return list[0];
+        }
+        /// <summary>
+        /// 标签修改
+        /// </summary>
+        /// <param name="g"></param>
+        /// <returns></returns>
+        public int Modify(Lable g)
+        {
+            string sql = $"update Lable set LableName='{g.LableName}',LableExplain='{g.LableExplain}'";
+            return dBAdo.ExecuteNonQuery(sql);
+        }
+        /// <summary>
+        /// 充值面额
+        /// </summary>
+        /// <returns></returns>
+        public List<Denomination> GetListDen()
+        {
+            string sql = "select * from Denomination";
+            List<Denomination> list = dBAdo.GetList<Denomination>(sql);
+            return list;
+        }
+        /// <summary>
+        /// 新建面额
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        public int AddDenomination(Denomination a)
+        {
+            string sql = $"insert into Denomination values('{a.DenominationLable}','{a.DenominationMoney}','{a.ActuallyMoney}','{a.GivenMoney}','{a.PeriodValidity}')";
+            int i= dBAdo.ExecuteNonQuery(sql,a);
+            return i;
+        }
+        
     }
 }
