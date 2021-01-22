@@ -83,5 +83,106 @@ namespace Purchase_Sell_Stock.API.Controllers
             };
             return JsonConvert.SerializeObject(dataJson);
         }
+        [HttpPost]
+        [Route("/api/ModifyOrderState/{orderId}")]
+        /// <summary>
+        /// 订单发货
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public int ModifyOrderState(int orderId)
+        {
+            return _order.ModifyOrderState(orderId);
+        }
+
+
+        //========================================================//
+        [HttpGet]
+        [Route("/api/CancelOrderList/{storeId}")]
+        /// <summary>
+        /// 查询退单
+        /// </summary>
+        /// <typeparam name="CancelOrder"></typeparam>
+        /// <param name="CancelOrderNumber"></param>
+        /// <param name="OrdersNum"></param>
+        /// <param name="goState"></param>
+        /// <param name="cancelState"></param>
+        /// <param name="time"></param>
+        /// <param name="storeId"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public string CancelOrderList(string CancelOrderNumber, string OrdersNum, int goState, int cancelState, string time, int storeId, int pageIndex, int pageSize)
+        {
+            OrderPaging<CancelOrder> cancelOrderPaging= _order.CancelOrderList<CancelOrder>(CancelOrderNumber, OrdersNum, goState, cancelState, time, storeId, pageIndex, pageSize);
+            var jsonData = new
+            {
+                code = 0,
+                msg = "",
+                count = cancelOrderPaging.Count,
+                data = cancelOrderPaging.list
+            };
+            return JsonConvert.SerializeObject(jsonData);
+        }
+        [HttpGet]
+        [Route("/api/GetCancelOneById/{orderId}")]
+        /// <summary>
+        /// 退单明细
+        /// </summary>
+        /// <param name="cancelOrderId"></param>
+        /// <returns></returns>
+        public CancelOrderOneViewModel GetCancelOneById(int orderId)
+        {
+            CancelOrderOneViewModel obj= _order.GetCancelOneById(orderId);
+            return obj;
+        }
+        [HttpPost]
+        [Route("/api/ModifyCancelState/{orderId}")]
+        /// <summary>
+        /// 修改状态
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public int ModifyCancelState(int orderId)
+        {
+            return _order.ModifyCancelState(orderId);
+        }
+        [HttpGet]
+        [Route("/api/CancelCommentList/{storeId}")]
+        /// <summary>
+        /// 查询评价
+        /// </summary>
+        /// <typeparam name="Comment"></typeparam>
+        /// <param name="content"></param>
+        /// <param name="person"></param>
+        /// <param name="time"></param>
+        /// <param name="type"></param>
+        /// <param name="storeId"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public string CancelCommentList(string content, string person, string time, string type, int storeId, int pageIndex, int pageSize)
+        {
+            OrderPaging<Comment> comment = _order.CommentList<Comment>(content, person, time, type, storeId, pageIndex, pageSize);
+            var jsonData = new
+            {
+                code = 0,
+                msg = "",
+                count = comment.Count,
+                data = comment.list
+            };
+            return JsonConvert.SerializeObject(jsonData);
+        }
+        [HttpPost]
+        [Route("/api/ReplyComment")]
+        /// <summary>
+        /// 回复评价
+        /// </summary>
+        /// <param name="commentId"></param>
+        /// <returns></returns>
+        public int ReplyComment(Comment comment)
+        {
+            return _order.ReplyComment(comment.CommentId, comment.CommentContent);
+        }
     }
 }
