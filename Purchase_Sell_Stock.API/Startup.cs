@@ -29,6 +29,7 @@ namespace Purchase_Sell_Stock.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IStorage, StorageBll>();
+            //xiaoMi11locastr
             DBHelper._locastr = Configuration["ConnectionString:locastr"];
             services.AddSwaggerSetup();
             services.AddTransient<IGoods, GoodsBll>();//商品

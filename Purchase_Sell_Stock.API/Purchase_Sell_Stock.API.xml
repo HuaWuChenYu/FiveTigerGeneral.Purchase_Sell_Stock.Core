@@ -34,6 +34,32 @@
             <param name="pwd"></param>
             <returns></returns>
         </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.PropertyController.PropertyShow(System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            余额
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.PropertyController.Amount_settledMoney">
+            <summary>
+            待结算金额
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.PropertyController.ShowBilling_details(System.String,System.Int32,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            对账详细
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.PropertyController.ShowRechanged_record(System.Int32,System.Int32)">
+            <summary>
+            充值记录
+            </summary>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
         <member name="F:Purchase_Sell_Stock.API.Controllers.StorageController._storage">
             <summary>
             定义一个接口
@@ -62,6 +88,16 @@
             <summary>
             反填入库商品
             </summary>
+            <param name="incomingorderid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.Storage(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            确定入库
+            </summary>
+            <param name="arr2"></param>
+            <param name="arr4"></param>
+            <param name="procurementId"></param>
             <param name="incomingorderid"></param>
             <returns></returns>
         </member>
