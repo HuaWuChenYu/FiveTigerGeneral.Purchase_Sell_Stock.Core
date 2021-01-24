@@ -47,7 +47,7 @@ namespace Purchase_Sell_Stock.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Lable Ft(int id)
+        public List<Lable> Ft(int id)
         {
             return dal.Ft(id);
         }
@@ -83,17 +83,22 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="customerPhone"></param>
         /// <param name="denominationId"></param>
         /// <returns></returns>
-        public List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId)
+        public List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId, int cusId)
         {
             return dal.GetRechargeRecord(customerName, customerPhone, denominationId);
         }
 
-        public List<Customer> GetCustomerShow(string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable)
+        public List<Customer> GetCustomerShow(int customerId, string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable, int cusId)
         {
-            return dal.GetCustomerShow(customerName, customerPhone, customeridentity, lableId, whetherEnable);
+            return dal.GetCustomerShow(customerId, customerName, customerPhone, customeridentity, lableId, whetherEnable, cusId);
         }
 
         public List<Customer> GetCustomerShow()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Customer> GetCustomerShow(string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable, int cusId)
         {
             throw new NotImplementedException();
         }

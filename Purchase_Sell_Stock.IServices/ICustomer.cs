@@ -10,7 +10,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <summary>
         /// 全部用户查询
         /// </summary>
-        List<Customer> GetCustomerShow(string customerName,string customerPhone,string customeridentity,int lableId,int whetherEnable);
+        List<Customer> GetCustomerShow(int customerId, string customerName,string customerPhone,string customeridentity,int lableId,int whetherEnable, int cusId);
         /// <summary>
         /// 充值记录查询
         /// </summary>
@@ -18,12 +18,13 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="customerPhone"></param>
         /// <param name="denominationId"></param>
         /// <returns></returns>
-        List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId);
+        List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId, int cusId);
         /// <summary>
         /// 用户标签
         /// </summary>
         /// <returns></returns>
         List<Lable> GetLableShow();
+        List<Customer> GetCustomerShow(string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable, int cusId);
 
         /// <summary>
         /// 添加标签
@@ -42,7 +43,7 @@ namespace Purchase_Sell_Stock.IServices
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Lable Ft(int id);
+        List<Lable> Ft(int id);
         /// <summary>
         /// 标签修改
         /// </summary>

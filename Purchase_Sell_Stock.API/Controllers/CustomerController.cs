@@ -29,9 +29,9 @@ namespace Purchase_Sell_Stock.API.Controllers
         
         [HttpGet]
         [Route("/api/GetCustomerShow")]
-        public string GetCustomerShow(int pageIndex, int pageSize, string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable)
+        public string GetCustomerShow(int pageIndex, int pageSize, string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable,int cusId)
         {
-            List<Customer> list = _customer.GetCustomerShow(customerName, customerPhone, customeridentity, lableId, whetherEnable);
+            List<Customer> list = _customer.GetCustomerShow(customerName, customerPhone, customeridentity, lableId, whetherEnable, cusId);
             var dataJson = new
             {
                 code = 0,
@@ -50,12 +50,13 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="customerName"></param>
         /// <param name="customerPhone"></param>
         /// <param name="denominationId"></param>
+        /// <param name="cusId"></param>
         /// <returns></returns>
         [HttpGet]
         [Route("/api/GetRechargeRecord")]
-        public string GetRechargeRecord(int pageIndex,int pageSize, string customerName, string customerPhone, int denominationId)
+        public string GetRechargeRecord(int pageIndex,int pageSize, string customerName, string customerPhone, int denominationId ,int cusId)
         {
-            List<RechargeRecord> list = _customer.GetRechargeRecord(customerName, customerPhone, denominationId);
+            List<RechargeRecord> list = _customer.GetRechargeRecord(customerName, customerPhone, denominationId, cusId);
             var dataJson = new
             {
                 code = 0,
@@ -124,12 +125,12 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPost]
-        [Route("/api/Ft")]
-        public string Ft(int id)
+        [HttpGet]
+        [Route("/api/Ft/{id}")]
+        public Lable Ft(int id)
         {
-            Lable lable = _customer.Ft(id);
-            return JsonConvert.SerializeObject(lable);
+            List<Lable> lable = _customer.Ft(id);
+            return lable[0];
         }
         /// <summary>
         /// 充值面额
@@ -158,9 +159,10 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("/api/AddDenomination")]
-        public int AddDenomination(Denomination a)
+        public int AddDenomination([FromBody] Denomination obj)
         {
-            return _customer.AddDenomination(a);
+            int i = _customer.AddDenomination(obj);
+            return i;
         }
         
     }

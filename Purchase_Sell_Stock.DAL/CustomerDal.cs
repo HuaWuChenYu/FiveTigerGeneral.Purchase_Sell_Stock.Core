@@ -19,9 +19,13 @@ namespace Purchase_Sell_Stock.DAL
         DBHelper dBAdo = SimplyFactoryDB.GetInstance("Ado");
         SqlSugerDBHelper sqlSugerDB = new SqlSugerDBHelper();
 
-        public List<Customer> GetCustomerShow(string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable)
+        public List<Customer> GetCustomerShow(int customerId, string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable,int cusId)
         {
-            string sql = $"select * from Customer";
+            string sql = $"select * from Customer where 1 = 1 and CusId=cusId";
+            if (customerId != 0)
+            {
+                sql += " and CustomerId= customerId";
+            }
             if (!string.IsNullOrEmpty(customerName))
             {
                 sql += $" and CustomerName like '%{customerName}%'";
@@ -54,7 +58,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId)
         {
-            string sql = $"select cu.*,rr.* from RechargeRecord rr join Customer cu on cu.CustomerId = rr.CustomerId join Store st on st.StoreId = rr.StoreId where rr.StoreId = 1";
+            string sql = $"select * from RechargeRecord a join Customer b on a.RechargeId=b.CustomerId ";
             if (!string.IsNullOrEmpty(customerName))
             {
                 sql += $" and CustomerName like '%{customerName}%'";
@@ -107,11 +111,11 @@ namespace Purchase_Sell_Stock.DAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Lable Ft(int id)
+        public List<Lable> Ft(int id)
         {
             string sql = $"select * from Lable where LableId={id}";
             List<Lable> list = dBAdo.GetList<Lable>(sql);
-            return list[0];
+            return list;
         }
         /// <summary>
         /// 标签修改
@@ -120,7 +124,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public int Modify(Lable g)
         {
-            string sql = $"update Lable set LableName='{g.LableName}',LableExplain='{g.LableExplain}'";
+            string sql = $"update Lable set LableName='{g.LableName}', LableExplain='{g.LableExplain}' where LableId={g.LableId}";
             return dBAdo.ExecuteNonQuery(sql);
         }
         /// <summary>
@@ -140,8 +144,8 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public int AddDenomination(Denomination a)
         {
-            string sql = $"insert into Denomination values('{a.DenominationLable}','{a.DenominationMoney}','{a.ActuallyMoney}','{a.GivenMoney}','{a.PeriodValidity}')";
-            int i= dBAdo.ExecuteNonQuery(sql,a);
+            string sql = $"insert into Denomination values('{a.DenominationLable}','{a.DenominationMoney}','{a.ActuallyMoney}','{a.GivenMoney}',0,'{a.PeriodValidity}',0)";
+            int i= dBAdo.ExecuteNonQuery(sql);
             return i;
         }
         
