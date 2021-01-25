@@ -18,6 +18,66 @@ namespace Purchase_Sell_Stock.API.Controllers
         {
             _iset = set;
         }
+        //角色名称获取角色id
+        [HttpGet]
+        public int GetRoleId(string name)
+        {
+            return _iset.GetRoleId(name);
+        }
+        //获取手机号
+        [HttpGet]
+        public string GetPhoneByEId(int eid)
+        {
+            return _iset.GetPhoneByEId(eid);
+        }
+        //添加店铺
+        [HttpPost]
+        public int AddStore(Store store)
+        {
+            return _iset.AddStore(store);
+        }
+        //获取行业
+        [HttpGet]
+        public List<Industry> GetIndustriesForShow()
+        {
+            return _iset.GetIndustriesForShow();
+        }
+        //获取分类
+        [HttpGet]
+        public List<Classify> GetClassifiesForShow()
+        {
+            return _iset.GetClassifiesForShow();
+        }
+        //根据小菜单id 查询出中大菜单的主键
+        [HttpGet]
+        public int GetPowerIdForBig(int pid)
+        {
+            return _iset.GetPowerIdForBig(pid);
+        }
+        //通过权限名称获取权限路径
+        [HttpGet]
+        public Powers GetPowersBySel(string name, int empId)
+        {
+            return _iset.GetPowersBySel(name,empId);
+        }
+        //添加店铺设置
+        [HttpPost]
+        public int AddStoreSet(StoreSet storeSet)
+        {
+            return _iset.AddStoreSet(storeSet);
+        }
+        //查询店铺是否认证主体 认证过返回值
+        [HttpGet]
+        public List<Company> IsHaveCompany(int storeid)
+        {
+            return _iset.IsHaveCompany(storeid);
+        }
+        //添加主体
+        [HttpPost]
+        public int AddCompany(Company company)
+        {
+            return _iset.AddCompany(company);
+        }
         //通过id获取部门
         [HttpGet]
         public Department GetDepartmentById(int id)

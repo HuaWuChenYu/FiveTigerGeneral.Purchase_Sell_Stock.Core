@@ -13,6 +13,56 @@ namespace Purchase_Sell_Stock.Services
     public class SetBll : ISet
     {   
         SetDal _dal = DalFactory.GetDal<SetDal>("Set");
+        //角色名称获取角色id
+        public int GetRoleId(string name)
+        {
+            return _dal.GetRoleId(name);
+        }
+        //获取手机号
+        public string GetPhoneByEId(int eid)
+        {
+            return _dal.GetPhoneByEId(eid);
+        }
+        //添加店铺
+        public int AddStore(Store store)
+        {
+            return _dal.AddStore(store);
+        }
+        //获取行业
+        public List<Industry> GetIndustriesForShow()
+        {
+            return _dal.GetIndustriesForShow();
+        }
+        //获取分类
+        public List<Classify> GetClassifiesForShow()
+        {
+            return _dal.GetClassifiesForShow();
+        }
+        //根据小菜单id 查询出中大菜单的主键
+        public int GetPowerIdForBig(int pid)
+        {
+            return _dal.GetPowerIdForBig(pid);
+        }
+        //通过权限名称获取权限路径
+        public Powers GetPowersBySel(string name, int empId)
+        {
+            return _dal.GetPowersBySel(name,empId);
+        }
+        //添加店铺设置
+        public int AddStoreSet(StoreSet storeSet)
+        {
+            return _dal.AddStoreSet(storeSet);
+        }
+        //查询店铺是否认证主体 认证过返回值
+        public List<Company> IsHaveCompany(int storeid)
+        {
+            return _dal.IsHaveCompany(storeid);
+        }
+        //添加主体
+        public int AddCompany(Company company)
+        {
+            return _dal.AddCompany(company);
+        }
         //通过id获取部门
         public Department GetDepartmentById(int id)
         {
@@ -78,17 +128,6 @@ namespace Purchase_Sell_Stock.Services
         {
             return _dal.GetPowersByShowId(roleId);
         }
-        public int AddCompany(Company company)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public int AddStoreSet(StoreSet storeSet)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Classify> ClassifiesShow()
         {
             return _dal.ClassifiesShow();
