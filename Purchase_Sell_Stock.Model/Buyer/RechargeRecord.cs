@@ -14,6 +14,10 @@ namespace Purchase_Sell_Stock.Model.Buyer
         /// </summary>
         public int RechargeId { get; set; }
         /// <summary>
+        /// 充值用户
+        /// </summary>
+        public string RechargeName { get; set; }
+        /// <summary>
         /// 充值时间
         /// </summary>
         public DateTime PrepaidTime { get; set; }
