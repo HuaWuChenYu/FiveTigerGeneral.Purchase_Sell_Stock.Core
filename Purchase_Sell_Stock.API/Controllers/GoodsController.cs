@@ -37,6 +37,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public string GetGoodsList(int storeId, int pageIndex, int pageSize, string goodsName = "", string goodsType = "", string goodsClassify = "")
         {
+            
             if (goodsType == "全部")
             {
                 goodsType = "";

@@ -133,5 +133,9 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// 电话
         /// </summary>
         public string ProvidersPhone { get; set; }
+        /// <summary>
+        /// 订单id
+        /// </summary>
+        public int Orders { get; set; }
     }
 }

@@ -47,11 +47,6 @@ namespace Purchase_Sell_Stock.Model.Storage
         [SugarColumn(ColumnName = "WarehouseRemark")]
         public string WarehouseRemark { get; set; }
         /// <summary>
-        /// 仓库状态（开启关闭）	
-        /// </summary>
-        [SugarColumn(ColumnName = "WarehouseState")]
-        public int WarehouseState { get; set; }
-        /// <summary>
         /// 仓库类型(仓库类型外键)	
         /// </summary>
         [SugarColumn(ColumnName = "WarehouseTypeId")]
