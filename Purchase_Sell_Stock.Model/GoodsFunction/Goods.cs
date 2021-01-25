@@ -65,5 +65,8 @@ namespace Purchase_Sell_Stock.Model.GoodsFunction
         /// </summary>
         public int OrdersGoodsNum { get; set; }
         public double AllPrice { get { return Math.Round(Price * OrdersGoodsNum * 100) / 100; } }//小计
+
+        public int GoodsSum { get; set; }//商品排行销量
+        public int Num { get; set; }//排行
     }
 }

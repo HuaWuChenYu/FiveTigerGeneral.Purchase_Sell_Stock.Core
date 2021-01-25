@@ -33,6 +33,7 @@ namespace Purchase_Sell_Stock.API
             services.AddSwaggerSetup();
             services.AddTransient<IGoods, GoodsBll>();//商品
             services.AddTransient<IOrder, OrderBll>();//订单
+            services.AddTransient<IFirst, FirstBll>();//首页
             services.AddTransient<ISet,SetBll>();
             services.AddTransient<PropertyBll>();
             services.AddControllers();
