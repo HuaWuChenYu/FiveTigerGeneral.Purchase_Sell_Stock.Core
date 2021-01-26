@@ -9,6 +9,7 @@ using Purchase_Sell_Stock.Services;
 using Purchase_Sell_Stock.Model.Buyer;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
@@ -17,6 +18,7 @@ namespace Purchase_Sell_Stock.API.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CustomerController : ControllerBase
     {
         private ICustomer _customer;

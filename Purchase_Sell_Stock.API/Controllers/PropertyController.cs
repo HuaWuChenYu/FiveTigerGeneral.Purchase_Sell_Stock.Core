@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,7 @@ using Purchase_Sell_Stock.Services;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
+    [Authorize]
     public class PropertyController : Controller
     {
     

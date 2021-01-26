@@ -10,11 +10,13 @@ using Purchase_Sell_Stock.IServices;
 using Newtonsoft.Json;
 using System.IO;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class GoodsController : ControllerBase
     {
         private readonly ILogger<CustomerController> _logger;
