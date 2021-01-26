@@ -33,6 +33,100 @@ namespace Purchase_Sell_Stock.DAL
             List<Classify> clist = dBHelper.GetList<Classify>("select * from Classify");
             return clist;
         }
+        //角色名称获取角色id
+        public int GetRoleId(string name)
+        {
+            string sql = $"select RolesId from Roles where RolesName='{name}'";
+            int id = dBHelper.GetList<Roles>(sql).SingleOrDefault().RolesId;
+            return id;
+        }
+        //获取手机号
+        public string GetPhoneByEId(int eid)
+        {
+            string sql = $"select UserPhone from Employee a join Users b on a.EmployeeUserId=b.UserId where EmployeeId={eid}";
+            string phone= dBHelper.GetList<Users>(sql).SingleOrDefault().UserPhone;
+            return phone;
+        }
+        //添加店铺
+        public int AddStore(Store store)
+        {
+            string sql2 = "select top 1 * from Store order by StoreId desc";
+            int s = dBHelper.GetList<Store>(sql2).SingleOrDefault().StoreId;
+            string sql = $"insert into Store values ('WH100{s+1}','{store.StoreName}',NULL,'{store.StoreLinkman}',NULL,'{store.StoreLinkmanPhone}',NULL,NULL,'1','{DateTime.Now.AddMonths(1)}','{DateTime.Now}','{store.StoreLogo}','{store.StoreIntroduction}','{store.StoreIndustryId}','{store.StoreClassifyId}','{store.StoreCompanyId}',NULL)";
+            int n = dBHelper.ExecuteNonQuery(sql);
+            string sql4 = $"select StoreId from Store where StoreCoding='WH100{s + 1}'";
+            int id = dBHelper.GetList<Store>(sql4)[0].StoreId;
+            string sql3 = $"insert into EmployeeAndStore values ('{store.StoreId}','{id}')";
+            int nn = dBHelper.ExecuteNonQuery(sql3);
+            return n;
+        }
+        //获取行业
+        public List<Industry> GetIndustriesForShow()
+        {
+            string sql = "select * from Industry";
+            List<Industry> ilist = dBHelper.GetList<Industry>(sql);
+            return ilist;
+        }
+        //获取分类
+        public List<Classify> GetClassifiesForShow()
+        {
+            string sql = "select * from Classify";
+            List<Classify> clist = dBHelper.GetList<Classify>(sql);
+            return clist;
+        }
+        //根据小菜单id 查询出中大菜单的主键
+        public int GetPowerIdForBig(int pid)
+        {
+            string sql = $"select PowersParentId from Powers where PowersId={pid}";
+            int n = dBHelper.GetList<Powers>(sql).ToList().SingleOrDefault().PowersParentId;
+            return n;
+        }
+        //通过权限名称获取权限路径
+        public Powers GetPowersBySel(string name,int empId)
+        {
+            string sql = "select d.* from Employee a join Roles b on a.EmployeeRolesId=b.RolesId join RolesAndPowers c on c.RolesAndPowersRolesId=b.RolesId " +
+                $"join Powers d on d.PowersId=c.RolesAndPowersPowersId where EmployeeId={empId} and PowersName='{name}'";
+            Powers power = dBHelper.GetList<Powers>(sql).SingleOrDefault();
+            return power;
+        }
+        //添加店铺设置
+        public int AddStoreSet(StoreSet storeSet)
+        {
+            string sql = $"insert into StoreSet values('{storeSet.StoreSetInformation}','{storeSet.StoreSetPoster}',{(storeSet.StoreSetIsService?1:0)},{(storeSet.StoreSetIsEmpty?1:0)},{storeSet.StoreSetIsEvaluate},{(storeSet.StoreSetIsSales?1:0)},{(storeSet.StoreSetIsDeduction?1:0)},{storeSet.StoreSetAtuoCancel},{(storeSet.StoreSetMakeInvoice?1:0)},{storeSet.StoreSetChangeStore},{(storeSet.StoreSetOrder?1:0)},{storeSet.StoreSetOperation},'{storeSet.StoreSetClose}',{storeSet.StoreId})";
+            int n= dBHelper.ExecuteNonQuery(sql);
+            return n;
+        }
+        //查询店铺是否认证主体 认证过返回值
+        public List<Company> IsHaveCompany(int storeid)
+        {
+            string sql = $"select * from Store where StoreId={storeid}";
+            int n= dBHelper.GetList<Store>(sql).SingleOrDefault().StoreCompanyId;
+            if (n!=default &&n > 0)
+            {
+                string sql2 = $"select a.* from Company a join Store b on b.StoreCompanyId=a.CompanyId where StoreId={storeid}";
+                List<Company> clist = dBHelper.GetList<Company>(sql2);
+                return clist;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        //添加主体
+        public int AddCompany(Company company)
+        {
+            string sql = $"insert into Company values ('{company.CompanyName}','{company.CompanyAddress}','{company.CompanyLegalPerson}','{company.CompanyIDNUM}','{company.CompanyUnifyNUM}','{company.CompanyPhoto}','{company.CompanyPersonName}','{company.CompanyPersonIDNUM}','{company.CompanyLinkmanPhone}','{company.IDFront}','{company.IDBack}','1','{(company.CompanyType?1:0)}')";
+            int n = dBHelper.ExecuteNonQuery(sql);
+            string sql2 = "select * from Company";
+            int id = dBHelper.GetList<Company>(sql2).OrderByDescending(s=>s.CompanyId).FirstOrDefault().CompanyId;
+            string sql3 = $"update Store set StoreCompanyId='{id}' where StoreId={company.StoreId}";
+            int j = dBHelper.ExecuteNonQuery(sql3);
+            if (n>0&&j>0)
+            {
+                return 1;
+            }
+            return 0;
+        }
         //通过id获取部门
         public Department GetDepartmentById(int id)
         {

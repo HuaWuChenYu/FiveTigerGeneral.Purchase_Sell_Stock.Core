@@ -42,6 +42,8 @@ namespace Purchase_Sell_Stock.Services
                     return new StorageDal() as T;
                 case "Stores":
                     return new StorageDal() as T;
+                case "First":
+                    return new FirstDal() as T;
                 default:
                     return null;
             }

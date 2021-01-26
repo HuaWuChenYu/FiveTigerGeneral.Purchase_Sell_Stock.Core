@@ -35,6 +35,7 @@ namespace Purchase_Sell_Stock.API
             services.AddTransient<IGoods, GoodsBll>();//商品
             services.AddTransient<IOrder, OrderBll>();//订单
             services.AddTransient<ICustomer, CustomerBll>();
+            services.AddTransient<IFirst, FirstBll>();//首页
             services.AddTransient<ISet,SetBll>();
             services.AddTransient<ILogin,LoginBll>();
             services.AddTransient<PropertyBll>();
