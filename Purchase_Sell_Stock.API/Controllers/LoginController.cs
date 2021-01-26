@@ -36,22 +36,27 @@ namespace Purchase_Sell_Stock.API.Controllers
             List<Users> list = _login.Login(users.UserPhone, users.UserPassword);
             if (list.Count>0)
             {
-                return 1;
+                int s = _login.IsEmployeeOrBoss(list[0].UserId);
+                return s;
             }
             return 0;
         }
         /// <summary>
         /// 短信登陆
         /// </summary>
-        /// <param name="phone"></param>
+        /// <param name="users"></param>
         /// <returns></returns>
         [HttpPost]
         [Route("/api/Logins")]
-        
-        public List<Users> Logins(string phone)
+        public int Logins(Users users)
         {
-            List<Users> list = _login.Logins(phone);
-            return list;
+            List<Users> list = _login.Logins(users.UserPhone);
+            if (list.Count > 0)
+            {
+                int s = _login.IsEmployeeOrBoss(list[0].UserId);
+                return s;
+            }
+            return 0;
         }
         /// <summary>
         /// 忘记密码

@@ -18,14 +18,10 @@ namespace Purchase_Sell_Stock.DAL
         DBHelper dBDapper = SimplyFactoryDB.GetInstance("Dapper");
         DBHelper dBAdo = SimplyFactoryDB.GetInstance("Ado");
         SqlSugerDBHelper sqlSugerDB = new SqlSugerDBHelper();
-
-        public List<Customer> GetCustomerShow(int customerId, string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable,int cusId)
+        
+        public List<Customer> GetCustomerShow(string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable)
         {
-            string sql = $"select * from Customer where 1 = 1 and CusId=cusId";
-            if (customerId != 0)
-            {
-                sql += " and CustomerId= customerId";
-            }
+            string sql = $"select * from Customer";
             if (!string.IsNullOrEmpty(customerName))
             {
                 sql += $" and CustomerName like '%{customerName}%'";
@@ -56,9 +52,9 @@ namespace Purchase_Sell_Stock.DAL
         /// <param name="customerPhone"></param>
         /// <param name="denominationId"></param>
         /// <returns></returns>
-        public List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId)
+        public List<RechargCustomer> GetRechargeRecord(string customerName, string customerPhone, int denominationId)
         {
-            string sql = $"select * from RechargeRecord a join Customer b on a.RechargeId=b.CustomerId ";
+            string sql = $"select * from RechargeRecord a join Customer b on a.RechargeId=b.CustomerId join Denomination c on c.DenominationId=b.CustomerId";
             if (!string.IsNullOrEmpty(customerName))
             {
                 sql += $" and CustomerName like '%{customerName}%'";
@@ -69,9 +65,9 @@ namespace Purchase_Sell_Stock.DAL
             }
             if (denominationId!=0)
             {
-                sql +=" and DenominationId= denominationId";
+                sql +=$" and DenominationId= {denominationId}";
             }
-            List<RechargeRecord> list = dBAdo.GetList<RechargeRecord>(sql);
+            List<RechargCustomer> list = dBAdo.GetList<RechargCustomer>(sql);
             return list;
         }
        
@@ -86,6 +82,9 @@ namespace Purchase_Sell_Stock.DAL
             var i= dBAdo.ExecuteNonQuery(sql);
             return i;
         }
+
+        
+
         /// <summary>
         /// 用户标签
         /// </summary>
@@ -148,6 +147,39 @@ namespace Purchase_Sell_Stock.DAL
             int i= dBAdo.ExecuteNonQuery(sql);
             return i;
         }
-        
+        /// <summary>
+        /// 钱包查询
+        /// </summary>
+        /// <returns></returns>
+        public List<wallet> GetWallet(string customerName, string customerPhone)
+        {
+            string sql = $"select * from PurseRecord a join Customer b on a.MounyId=b.CustomerId";
+            if (!string.IsNullOrEmpty(customerName))
+            {
+                sql += $" and CustomerName like '%{customerName}%'";
+            }
+            if (!string.IsNullOrEmpty(customerPhone))
+            {
+                sql += $" and CustomerPhone= '%{customerPhone}%'";
+            }
+            List<wallet> list = dBAdo.GetList<wallet>(sql);
+            return list;
+        }
+        /// <summary>
+        /// 流水表
+        /// </summary>
+        /// <returns></returns>
+        public List<Water> GetWater()
+        {
+            string sql = "select * from Water";
+            List<Water> list = dBAdo.GetList<Water>(sql);
+            return list;
+        }
+        public List<Water> LSFt(int ids)
+        {
+            string sql = $"select * from Water where LXId={ids}";
+            List<Water> list = dBAdo.GetList<Water>(sql);
+            return list;
+        }
     }
 }
