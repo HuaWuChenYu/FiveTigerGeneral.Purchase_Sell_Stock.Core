@@ -18,6 +18,7 @@ namespace Purchase_Sell_Stock.API.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
+        
         private ICustomer _customer;
         public CustomerController(ICustomer customer)
         {
