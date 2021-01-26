@@ -22,7 +22,6 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// 依赖注入
         /// </summary>
         /// <param name="set"></param>
-        public SettingController(ISet set)
         public SettingController(ISet set, ILogger<CustomerController> logger)
         {
             _logger = logger;

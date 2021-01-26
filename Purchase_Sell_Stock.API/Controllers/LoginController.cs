@@ -23,10 +23,8 @@ namespace Purchase_Sell_Stock.API.Controllers
         LoginBll bll = new LoginBll();
         private ILogin _login;
         private readonly ILogger<CustomerController> _logined;
-
-        public LoginController(ILogin login, ILogger<CustomerController> loggered)
         JwtBuilder _jwt;
-        public LoginController(ILogin login, JwtBuilder _builder)
+        public LoginController(ILogin login, JwtBuilder _builder, ILogger<CustomerController> loggered)
         {
             _login = login;
             _jwt = _builder;
@@ -53,9 +51,8 @@ namespace Purchase_Sell_Stock.API.Controllers
             if (list.Count>0)
             {
                 int s = _login.IsEmployeeOrBoss(list[0].UserId);
-                return s;
                 _logined.LogInformation($"{users.UserPhone}登录成功");
-                return 1;
+                return s;
             }
             return 0;
         }
@@ -68,9 +65,11 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/Logins")]
         public int Logins(Users users)
         {
+           
             List<Users> list = _login.Logins(users.UserPhone);
             if (list.Count > 0)
             {
+                _logined.LogInformation($"{users.UserPhone}");
                 int s = _login.IsEmployeeOrBoss(list[0].UserId);
                 return s;
             }

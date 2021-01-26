@@ -34,6 +34,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/GetCustomerShow")]
         public string GetCustomerShow(int pageIndex, int pageSize, string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable)
         {
+            _logger.LogInformation("显示全部客户");
             List<Customer> list = _customer.GetCustomerShow(customerName, customerPhone, customeridentity, lableId, whetherEnable);
             var dataJson = new
             {
@@ -59,6 +60,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/GetRechargeRecord")]
         public string GetRechargeRecord(int pageIndex,int pageSize, string customerName, string customerPhone, int denominationId )
         {
+            _logger.LogInformation("充值记录查询");
             List<RechargCustomer> list = _customer.GetRechargeRecord(customerName, customerPhone, denominationId);
             var dataJson = new
             {
@@ -183,6 +185,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/GetWallet")]
         public string GetWallet(int pageIndex, int pageSize, string customerName, string customerPhone)
         {
+            _logger.LogInformation("钱包查询显示");
             List<wallet> list = _customer.GetWallet(customerName, customerPhone);
             var dataJson = new
             {
@@ -205,6 +208,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/GetWater")]
         public string GetWater(int pageIndex, int pageSize)
         {
+            _logger.LogInformation("流水显示");
             List<Water> list = _customer.GetWater();
             var dataJson = new
             {
@@ -225,6 +229,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/LSFt/{ids}")]
         public Water LSFt(int ids)
         {
+            _logger.LogInformation("流水反填功能");
             List<Water> lable = _customer.LSFt(ids);
             return lable[0];
         }
