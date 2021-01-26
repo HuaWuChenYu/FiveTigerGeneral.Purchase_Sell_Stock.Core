@@ -9,11 +9,13 @@ using Purchase_Sell_Stock.Model.Storage;
 using Purchase_Sell_Stock.Services;
 using Purchase_Sell_Stock.IServices;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class StorageController : ControllerBase
     {
         /// <summary>

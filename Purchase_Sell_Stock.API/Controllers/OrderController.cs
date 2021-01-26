@@ -9,11 +9,13 @@ using Purchase_Sell_Stock.Services;
 using Purchase_Sell_Stock.IServices;
 using Newtonsoft.Json;
 using Purchase_Sell_Stock.Model.GoodsFunction;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class OrderController : ControllerBase
     {
         private IOrder _order;
