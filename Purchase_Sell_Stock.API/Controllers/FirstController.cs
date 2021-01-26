@@ -16,6 +16,7 @@ using Purchase_Sell_Stock.Model.SettingModels;
 using Purchase_Sell_Stock.Services;
 using Purchase_Sell_Stock.IServices;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
@@ -24,9 +25,14 @@ namespace Purchase_Sell_Stock.API.Controllers
     public class FirstController : ControllerBase
     {
         private IFirst _first;
-        public FirstController(IFirst first) {
+        private readonly ILogger<CustomerController> _logger;
+
+        public FirstController(IFirst first, ILogger<CustomerController> logger) {
             _first = first;
+            _logger = logger;
         }
+       
+        
         [HttpGet]
         [Route("/api/GetStore/{storeId}")]
         /// <summary>
@@ -36,6 +42,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public Store GetStore(int storeId)
         {
+            _logger.LogInformation("获取店铺信息显示");
             Store store = _first.GetStore(storeId);
             return store;
         }
@@ -48,6 +55,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public string GetHelp(int storeId)
         {
+            _logger.LogInformation("获取帮助显示");
             List<Helps> list = _first.GetHelp(storeId);
             var jsonData = new
             {
@@ -67,6 +75,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public string GetStoreMessage(int storeId)
         {
+            _logger.LogInformation("获取消息显示");
             List<StoreMessage> list = _first.GetStoreMessage(storeId);
             var jsonData = new
             {
@@ -87,6 +96,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public int NewOrders(int storeId, int date)
         {
+            _logger.LogInformation("新增订单数显示");
             return _first.NewOrders(storeId, date);
         }
         [HttpGet]
@@ -99,6 +109,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public decimal orderMoney(int storeId, int date)
         {
+            _logger.LogInformation("支付金额显示");
             return _first.orderUser(storeId, date);
         }
         [HttpGet]
@@ -111,6 +122,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public int orderUser(int storeId, int date)
         {
+            _logger.LogInformation("下单客户数显示");
             return _first.orderUser(storeId, date);
         }
         [HttpGet]
@@ -123,6 +135,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public int newUser(int storeId, int date)
         {
+            _logger.LogInformation("新增用户数显示");
             return _first.newUser(storeId, date);
         }
         [HttpGet]
@@ -135,6 +148,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public int activeUser(int storeId, int date)
         {
+            _logger.LogInformation("新增用户数显示");
             return _first.activeUser(storeId, date);
         }
         [HttpGet]
@@ -146,6 +160,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public Cake Cake(int storeId)
         {
+            _logger.LogInformation("饼图显示");
             return _first.Cake(storeId);
         }
         [HttpGet]
@@ -157,6 +172,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public string SellSum(int storeId)
         {
+            _logger.LogInformation("商品销售品排行显示");
             List<Goods> list = _first.SellSum(storeId);
             return JsonConvert.SerializeObject(new { code=0,msg="",count=list.Count,data=list});
         }
@@ -169,6 +185,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public string ChangeOrder(int storeId,int pageIndex,int pageSize)
         {
+            _logger.LogInformation("切换订单代办显示");
             List<Orders> list = _first.ChangeOrder(storeId);
             int a = list.Count;
             list = list.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
@@ -183,6 +200,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public string ChangeIncomingorder(int storeId, int pageIndex, int pageSize)
         {
+            _logger.LogInformation("切换入库代办显示");
             List<Incomingorder> list = _first.ChangeIncomingorder(storeId);
             int a = list.Count;
             list = list.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
@@ -197,6 +215,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public string ChangeProcurement(int storeId, int pageIndex, int pageSize)
         {
+            _logger.LogInformation("切换采购代办显示");
             List<Procurement> list = _first.ChangeProcurement(storeId);
             int a = list.Count;
             list = list.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();

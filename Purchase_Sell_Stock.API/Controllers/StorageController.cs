@@ -124,6 +124,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/OutboundorderCombinebackfill/{outboundorderid}")]
         public OutboundorderCombine OutboundorderCombinebackfill(int outboundorderid)
         {
+            _logger.LogInformation("出库详情信息显示");
             var _list = _storage.OutboundorderCombinebackfill(outboundorderid);
             return _list;
         }
@@ -152,6 +153,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/Outboundordercommoditybackfill/{outboundorderid}")]
         public IActionResult Outboundordercommoditybackfill(int outboundorderid)
         {
+            _logger.LogInformation("出库商品反填");
             List<OutboundorderCombine> _list = _storage.Outboundordercommoditybackfill(outboundorderid);
             return Ok(new { code=0,msg="显示成功",count=_list.Count,data=_list });
         }
@@ -164,6 +166,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         public IActionResult OutboundorderShow(string warehouseName ="",string  outboundorderOrderNumber="",string adress="",string storageTypeName = "",
             DateTime? outboundordercreationtimeone=null, DateTime? outboundordercreationtimetwo=null)
         {
+            _logger.LogInformation("出库订单显示");
             var _list = _storage.OutboundorderShow();
             //发货方
             if (!string.IsNullOrEmpty(warehouseName))
@@ -252,6 +255,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/AddWarehouses")]
         public int AddWarehouses(Warehouse ws)
         {
+            _logger.LogInformation("添加仓库");
             return _storage.AddWarehouses(ws);
         }
         /// <summary>
@@ -263,6 +267,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/BackfillWarehouse/{WarehouseId}")]
         public Warehouse BackfillWarehouse(int WarehouseId)
         {
+            _logger.LogInformation("反填仓库");
             return _storage.BackfillWarehouse(WarehouseId);
         }
         /// <summary>
@@ -274,6 +279,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/ModifyWarehouse")]
         public int ModifyWarehouse(Warehouse ws)
         {
+            _logger.LogInformation("修改仓库");
             return _storage.ModifyWarehouse(ws);
         }
 
@@ -337,6 +343,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/Goodsflowingwater/{goodsid}")]
         public IActionResult Goodsflowingwater(int goodsid,string warehouseName="",string goodsName="",string Source="",string sourceNumber="")
         {
+            _logger.LogInformation("单个商品的流水记录");
             var _list= _storage.Goodsflowingwater(goodsid);
             //根据仓库查询
             if (!string.IsNullOrEmpty(warehouseName))
@@ -383,6 +390,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/DifferencesInventoryedShow")]
         public IActionResult DifferencesInventoryedShow(string Consigner="",string Receiving="",string DocumentType="",string DocumentNumber="",string DifferentTypesName="",string DifferencesInventoryedTime="")
         {
+            _logger.LogInformation("差异库存显示");
             var _list= _storage.DifferencesInventoryedShow();
             //foreach (var item in _list)
             //{
@@ -424,6 +432,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/DifferentTypesShow")]
         public List<DifferentTypes> DifferentTypesShow()
         {
+            _logger.LogInformation("差异类型显示");
             var _list = _storage.DifferentTypesShow();
             return _list;
         }

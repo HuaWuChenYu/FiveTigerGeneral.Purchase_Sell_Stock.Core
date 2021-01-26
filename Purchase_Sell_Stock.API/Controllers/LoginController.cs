@@ -8,6 +8,7 @@ using Purchase_Sell_Stock.Model.Login;
 using Purchase_Sell_Stock.Services;
 using Newtonsoft.Json;
 using Purchase_Sell_Stock.IServices;
+using Microsoft.Extensions.Logging;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
@@ -20,9 +21,12 @@ namespace Purchase_Sell_Stock.API.Controllers
     {
         LoginBll bll = new LoginBll();
         private ILogin _login;
-        public LoginController(ILogin login)
+        private readonly ILogger<CustomerController> _logined;
+
+        public LoginController(ILogin login, ILogger<CustomerController> loggered)
         {
             _login = login;
+            _logined = loggered;
         }
         /// <summary>
         /// 登录
@@ -36,6 +40,7 @@ namespace Purchase_Sell_Stock.API.Controllers
             List<Users> list = _login.Login(users.UserPhone, users.UserPassword);
             if (list.Count>0)
             {
+                _logined.LogInformation($"{users.UserPhone}登录成功");
                 return 1;
             }
             return 0;
@@ -51,6 +56,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         public List<Users> Logins(string phone)
         {
             List<Users> list = _login.Logins(phone);
+            _logined.LogInformation($"{phone}登录成功");
             return list;
         }
         /// <summary>
@@ -63,6 +69,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         
         public int Forgers(Users g)
         {
+            _logined.LogInformation($"{g}忘记密码");
             return _login.Forget(g);
         }
 
@@ -76,6 +83,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/Register")]
         public int Register(Users a)
         {
+            _logined.LogInformation($"注册{a}成功");
             return _login.Register(a);
         }
     }

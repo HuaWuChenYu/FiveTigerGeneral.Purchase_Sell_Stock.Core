@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Purchase_Sell_Stock.IServices;
 using Purchase_Sell_Stock.Model.GoodsFunction;
 using Purchase_Sell_Stock.Model.ProcurementFunction;
@@ -15,10 +16,12 @@ namespace Purchase_Sell_Stock.API.Controllers
     [ApiController]
     public class ProcurementController : ControllerBase
     {
+        private readonly ILogger<CustomerController> _logger;
         private IProcurement _procurement;
 
-        public ProcurementController(IProcurement procurement)
+        public ProcurementController(IProcurement procurement, ILogger<CustomerController> logger)
         {
+            _logger = logger;
             _procurement = procurement;
         }
 
@@ -30,6 +33,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/GetProcurementsShow")]
         public IActionResult GetProcurementsShow()
         {
+            _logger.LogInformation("采购订单显示");
             var _list = _procurement.GetProcurementsShow();
 
             return Ok(new { code = 0, msg = "显示成功", count = _list.Count, data = _list });
@@ -42,6 +46,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/GetGoodsShow")]
         public IActionResult GetGoodsShow()
         {
+            _logger.LogInformation("选择商品显示");
             var _list = _procurement.GetGoodsShow();
             return Ok(new { code = 0, msg = "显示成功", count = _list.Count, data = _list });
         }
@@ -58,6 +63,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/AddProcurements")]
         public int AddProcurements(Procuert procuert)
         {
+            _logger.LogInformation("添加");
             return _procurement.AddProcurements( procuert);
         }
         /// <summary>
@@ -71,6 +77,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/GetGoodsbuyersShow/{goodid}")]
         public IActionResult GetGoodsbuyersShow(string goodid)
         {
+            _logger.LogInformation("选中商品显示");
             var _list= _procurement.GetGoodsbuyersShow(goodid);
             if (_list!=null)
             {
@@ -90,6 +97,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/UptProviders/{procurementId}")]
         public int UptProviders(int procurementId)
         {
+            _logger.LogInformation("审核通过");
             return _procurement.UptProviders(procurementId);
         }
 
@@ -102,6 +110,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public List<Warehouse> GetWarehousesShow()
         {
+            _logger.LogInformation("采购方加载成功");
             return _procurement.GetWarehousesShow();
         }
         [HttpGet]
@@ -112,6 +121,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public List<Providers> GetProvidersShow()
         {
+            _logger.LogInformation("供应商加载成功");
             return _procurement.GetProvidersShow();
         }
         #endregion
