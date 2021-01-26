@@ -9,12 +9,12 @@
             客户控制器
             </summary>
         </member>
-        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.GetCustomerShow(System.Int32,System.Int32,System.String,System.String,System.String,System.Int32,System.Int32,System.Int32)">
+        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.GetCustomerShow(System.Int32,System.Int32,System.String,System.String,System.String,System.Int32,System.Int32)">
             <summary>
             全部客户
             </summary>
         </member>
-        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.GetRechargeRecord(System.Int32,System.Int32,System.String,System.String,System.Int32,System.Int32)">
+        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.GetRechargeRecord(System.Int32,System.Int32,System.String,System.String,System.Int32)">
             <summary>
             充值记录查询
             </summary>
@@ -74,6 +74,29 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.GetWallet(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            钱包查询
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.GetWater(System.Int32,System.Int32)">
+            <summary>
+            流水表
+            </summary>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+            
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.LSFt(System.Int32)">
+            <summary>
+            流水反填
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
         <member name="T:Purchase_Sell_Stock.API.Controllers.LoginController">
             <summary>
             登录控制器
@@ -86,11 +109,11 @@
             <param name="users"></param>
             <returns></returns>
         </member>
-        <member name="M:Purchase_Sell_Stock.API.Controllers.LoginController.Logins(System.String)">
+        <member name="M:Purchase_Sell_Stock.API.Controllers.LoginController.Logins(Purchase_Sell_Stock.Model.Login.Users)">
             <summary>
             短信登陆
             </summary>
-            <param name="phone"></param>
+            <param name="users"></param>
             <returns></returns>
         </member>
         <member name="M:Purchase_Sell_Stock.API.Controllers.LoginController.Forgers(Purchase_Sell_Stock.Model.Login.Users)">
