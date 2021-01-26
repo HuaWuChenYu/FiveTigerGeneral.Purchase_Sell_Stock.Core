@@ -71,14 +71,14 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="goodId"></param>
         /// <param name="storeId"></param>
         /// <returns></returns>
-        int ModifyState(int goodId, int storeId);
+        int ModifyState(int goodId);
         /// <summary>
         /// 删除商品
         /// </summary>
         /// <param name="goodId"></param>
         /// <param name="storeId"></param>
         /// <returns></returns>
-        int DeleteGoods(string goodIds, int storeId);
+        int DeleteGoods(string goodIds);
 
         /// <summary>
         /// 根据Id查询信息

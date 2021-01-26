@@ -145,17 +145,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="store"></param>
         /// <returns></returns>
         int UpdateStore(Store store);
-        /// <summary>
-        /// 主体认证  添加主体
-        /// </summary>
-        /// <param name="company"></param>
-        /// <returns></returns>
-        int AddCompany(Company company);
-        /// <summary>
-        /// 店铺设置  添加一条店铺设置
-        /// </summary>
-        /// <returns></returns>
-        int AddStoreSet(StoreSet storeSet);
+        
         /// <summary>
         /// 显示所有部门
         /// </summary>
@@ -163,17 +153,6 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="deptName">部门名称</param>
         /// <returns></returns>
         List<Department> GetDepartments(string coding,string deptName);
-        /// <summary>
-        /// 添加一条部门信息
-        /// </summary>
-        /// <param name="department"></param>
-        /// <returns></returns>
-        int AddDepartment(Department department);
-        /// <summary>
-        /// 编辑部门
-        /// </summary>
-        /// <returns></returns>
-        int UpdateDepartment(Department department);
         /// <summary>
         /// 角色的权限的显示
         /// </summary>
@@ -190,18 +169,144 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="rolesId">所属角色</param>
         /// <returns></returns>
         List<Employee> GetEmployees(string employeeNumber,string employeeName,string employeeContact,int departmentId,int rolesId);
+        
+        List<Classify> ClassifiesShow();
         /// <summary>
-        /// 添加员工
+        /// 根据角色查询权限id
         /// </summary>
-        /// <param name="employee">员工</param>
+        /// <param name="roleId"></param>
         /// <returns></returns>
-        int AddEmployee(Employee employee);
+        List<Powers> GetPowersByShowId(int roleId);
+        /// <summary>
+        /// 删除角色的一项权限
+        /// </summary>
+        /// <param name="powerId"></param>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
+        int DeletePowersAndRoles(string powerId, int roleId);
+        /// <summary>
+        /// 添加角色的一项权限
+        /// </summary>
+        /// <param name="powerId"></param>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
+        int AddPowersAndRoles(string powerId, int roleId);
+        /// <summary>
+        /// 获取员工信息
+        /// </summary>
+        /// <returns></returns>
+        List<Employee> GetEmployeesForShow();
+        /// <summary>
+        /// 获取部门信息
+        /// </summary>
+        /// <returns></returns>
+        List<Department> GetDepartments();
+        /// <summary>
+        /// 获取角色信息
+        /// </summary>
+        /// <returns></returns>
+        List<Roles> GetRolesForSelect();
+        /// <summary>
+        /// 添加员工信息
+        /// </summary>
+        /// <param name="emp"></param>
+        /// <returns></returns>
+        int AddEmployee(Employee emp);
+        /// <summary>
+        /// 通过id查询员工信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Employee GetEmployeeById(int id);
         /// <summary>
         /// 修改员工
         /// </summary>
-        /// <param name="employee">员工</param>
+        /// <param name="emp"></param>
         /// <returns></returns>
-        int UpdateEmployee(Employee employee);
-        List<Classify> ClassifiesShow();
+        int UpdateEmployee(Employee emp);
+        /// <summary>
+        /// 部门信息
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        List<Department> GetDepartmentByShow();
+        /// <summary>
+        /// 添加部门
+        /// </summary>
+        /// <param name="department"></param>
+        /// <returns></returns>
+        int AddDepartment(Department department);
+        /// <summary>
+        /// 修改部门
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        int UpdateDepartment(Department department);
+        /// <summary>
+        /// 通过id获取部门
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Department GetDepartmentById(int id);
+        /// <summary>
+        /// 添加公司
+        /// </summary>
+        /// <param name="company"></param>
+        /// <returns></returns>
+        int AddCompany(Company company);
+        /// <summary>
+        /// 查询店铺是否认证主体 认证过返回值
+        /// </summary>
+        /// <param name="storeid"></param>
+        /// <returns></returns>
+        List<Company> IsHaveCompany(int storeid);
+        /// <summary>
+        /// 添加店铺设置
+        /// </summary>
+        /// <param name="storeSet"></param>
+        /// <returns></returns>
+        int AddStoreSet(StoreSet storeSet);
+        /// <summary>
+        /// 通过权限名称获取权限路径
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="empId"></param>
+        /// <returns></returns>
+        Powers GetPowersBySel(string name, int empId);
+        /// <summary>
+        /// 根据小菜单id 查询出中大菜单的主键
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <returns></returns>
+        int GetPowerIdForBig(int pid);
+        /// <summary>
+        /// 获取分类
+        /// </summary>
+        /// <returns></returns>
+        List<Classify> GetClassifiesForShow();
+        /// <summary>
+        /// 获取行业
+        /// </summary>
+        /// <returns></returns>
+        List<Industry> GetIndustriesForShow();
+        /// <summary>
+        /// 添加店铺
+        /// </summary>
+        /// <param name="store"></param>
+        /// <returns></returns>
+        int AddStore(Store store);
+        /// <summary>
+        /// 获取电话通过员工id
+        /// </summary>
+        /// <param name="eid"></param>
+        /// <returns></returns>
+        string GetPhoneByEId(int eid);
+        /// <summary>
+        /// 获取角色id
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        int GetRoleId(string name);
     }
 }

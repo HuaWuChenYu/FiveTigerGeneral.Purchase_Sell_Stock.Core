@@ -27,6 +27,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
             }
         }
         static int count = 1;
+        static readonly object obj = new object();
         /// <summary>
         /// 获取工厂实例化
         /// </summary>
@@ -35,10 +36,13 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
         public static DBHelper GetInstance(string name)
         {
             DBHelper _dBHelper = null;
-            if (count==1)
+            lock (obj)
             {
-                Fullfactories();
-                count++;
+                if (count == 1)
+                {
+                    Fullfactories();
+                    count++;
+                }
             }
             foreach (Tuple<string,DBHelper> t in factories)
             {

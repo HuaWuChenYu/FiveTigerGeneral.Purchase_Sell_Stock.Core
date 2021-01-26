@@ -43,18 +43,18 @@ namespace Purchase_Sell_Stock.IServices
         /// 显示余额信息
         /// </summary>
         /// <returns></returns>
-        Coods_Page<balance_Money> balance_MoneyShowInfos(int pageIndex, int pageSize, string Order_num, string starttime_quantum, string endttime_quantum, string remark);
+        Coods_Page<balance_Money> balance_MoneyShowInfos(string Order_num,string starttime_quantum, string endttime_quantum, string remark,int pageIndex, int pageSize);
 
         /// <summary>
         /// 显示充值记录信息
         /// </summary>
         /// <returns></returns>
-        List<Rechanged_record> Rechanged_recordShowInfos();
+         Coods_Page<Rechanged_record> Rechanged_recordShowInfos(int pageIndex, int pageSize);
 
         /// <summary>
         /// 显示详细账单信息
         /// </summary>
         /// <returns></returns>
-        List<Billing_details> Billing_detailsShowInfos();
+        Coods_Page<Billing_details> Billing_detailsShowInfos(string page, int pageIndex, int pageSize, string Account_Type, string Order_NUm, int InorOut, string Order_type, string statrtime, string endtime);
     }
 }

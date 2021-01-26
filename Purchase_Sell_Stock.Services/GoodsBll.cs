@@ -102,9 +102,9 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="goodId"></param>
         /// <param name="storeId"></param>
         /// <returns></returns>
-        public int ModifyState(int goodId, int storeId)
+        public int ModifyState(int goodId)
         {
-            return goods1.ModifyState(goodId,storeId);
+            return goods1.ModifyState(goodId);
         }
         /// <summary>
         /// 删除商品
@@ -112,9 +112,9 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="storeId"></param>
         /// <param name="goodsIds"></param>
         /// <returns></returns>
-        public int DeleteGoods(string goodIds, int storeId)
+        public int DeleteGoods(string goodIds)
         {
-            return goods1.DeleteGoods(goodIds,storeId);
+            return goods1.DeleteGoods(goodIds);
         }
         /// <summary>
         /// 根据Id查询信息

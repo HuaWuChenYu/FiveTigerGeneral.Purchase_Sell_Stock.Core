@@ -12,9 +12,9 @@ namespace Purchase_Sell_Stock.Model.Storage
         public int balance_MoneyId { get; set; }
 
         /// <summary>
-        /// 订单外键
+        /// 用户外键
         /// </summary>
-        public int OrderId { get; set; }
+        public int UserId { get; set; }
 
         /// <summary>
         /// 交易完成时间

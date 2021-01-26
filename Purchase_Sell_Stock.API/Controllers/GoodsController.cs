@@ -142,20 +142,20 @@ namespace Purchase_Sell_Stock.API.Controllers
             return i;
         }
         [HttpPost]
-        [Route("/api/ModifyState/{goodId}/{storeId}")]
+        [Route("/api/ModifyState/{goodId}")]
         /// <summary>
         /// 修改上下架
         /// </summary>
         /// <param name="goodId"></param>
         /// <param name="storeId"></param>
         /// <returns></returns>
-        public int ModifyState(int goodId, int storeId)
+        public int ModifyState(int goodId)
         {
-            int i = _goods1.ModifyState(goodId,storeId);
+            int i = _goods1.ModifyState(goodId);
             return i;
         }
         [HttpPost]
-        [Route("/api/DeleteGoods/{goodIds}/{storeId}")]
+        [Route("/api/DeleteGoods/{goodIds}")]
         /// <summary>
         /// 删除商品
         /// </summary>
@@ -163,9 +163,9 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="goodsIds"></param>
         /// <returns></returns>
         /// [HttpPost]
-        public int DeleteGoods(string goodIds, int storeId)
+        public int DeleteGoods(string goodIds)
         {
-            return _goods1.DeleteGoods(goodIds, storeId );
+            return _goods1.DeleteGoods(goodIds );
         }
         [HttpGet]
         [Route("/api/GetGoodsById/{goodsId}")]
