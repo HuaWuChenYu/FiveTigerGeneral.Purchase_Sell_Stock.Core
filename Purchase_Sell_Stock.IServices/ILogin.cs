@@ -8,6 +8,12 @@ namespace Purchase_Sell_Stock.IServices
     public interface ILogin
     {
         /// <summary>
+        /// 判断是不是员工还是老板
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        int IsEmployeeOrBoss(int id);
+        /// <summary>
         /// 账号登录
         /// </summary>
         /// <param name="phone"></param>

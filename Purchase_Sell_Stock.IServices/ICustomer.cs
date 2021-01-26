@@ -10,7 +10,7 @@ namespace Purchase_Sell_Stock.IServices
         /// <summary>
         /// 全部用户查询
         /// </summary>
-        List<Customer> GetCustomerShow(int customerId, string customerName,string customerPhone,string customeridentity,int lableId,int whetherEnable, int cusId);
+        List<Customer> GetCustomerShow( string customerName,string customerPhone,string customeridentity,int lableId,int whetherEnable);
         /// <summary>
         /// 充值记录查询
         /// </summary>
@@ -18,13 +18,13 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="customerPhone"></param>
         /// <param name="denominationId"></param>
         /// <returns></returns>
-        List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId, int cusId);
+        List<RechargCustomer> GetRechargeRecord(string customerName, string customerPhone, int denominationId);
         /// <summary>
         /// 用户标签
         /// </summary>
         /// <returns></returns>
         List<Lable> GetLableShow();
-        List<Customer> GetCustomerShow(string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable, int cusId);
+       
 
         /// <summary>
         /// 添加标签
@@ -60,6 +60,18 @@ namespace Purchase_Sell_Stock.IServices
         /// </summary>
         /// <returns></returns>
         int AddDenomination(Denomination a);
-        
+        /// <summary>
+        /// 钱包查询
+        /// </summary>
+        /// <returns></returns>
+        List<wallet> GetWallet(string customerName, string customerPhone);
+        /// <summary>
+        /// 流水表
+        /// </summary>
+        /// <returns></returns>
+        List<Water> GetWater();
+        List<Water> LSFt(int ids);
+
+
     }
 }

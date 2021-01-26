@@ -83,14 +83,14 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="customerPhone"></param>
         /// <param name="denominationId"></param>
         /// <returns></returns>
-        public List<RechargeRecord> GetRechargeRecord(string customerName, string customerPhone, int denominationId, int cusId)
+        public List<RechargCustomer> GetRechargeRecord(string customerName, string customerPhone, int denominationId)
         {
             return dal.GetRechargeRecord(customerName, customerPhone, denominationId);
         }
 
-        public List<Customer> GetCustomerShow(int customerId, string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable, int cusId)
+        public List<Customer> GetCustomerShow(string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable)
         {
-            return dal.GetCustomerShow(customerId, customerName, customerPhone, customeridentity, lableId, whetherEnable, cusId);
+            return dal.GetCustomerShow(customerName, customerPhone, customeridentity, lableId, whetherEnable);
         }
 
         public List<Customer> GetCustomerShow()
@@ -98,9 +98,22 @@ namespace Purchase_Sell_Stock.Services
             throw new NotImplementedException();
         }
 
-        public List<Customer> GetCustomerShow(string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable, int cusId)
+        public List<wallet> GetWallet(string customerName, string customerPhone)
         {
-            throw new NotImplementedException();
+            return dal.GetWallet(customerName, customerPhone);
+        }
+        /// <summary>
+        /// 流水表
+        /// </summary>
+        /// <returns></returns>
+        public List<Water> GetWater()
+        {
+            return dal.GetWater();
+        }
+
+        public List<Water> LSFt(int ids)
+        {
+            return dal.LSFt(ids);
         }
     }
 }
