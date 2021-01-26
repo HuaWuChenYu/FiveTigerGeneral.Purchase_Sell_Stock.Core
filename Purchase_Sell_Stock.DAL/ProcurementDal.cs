@@ -75,8 +75,8 @@ namespace Purchase_Sell_Stock.DAL
                     goodsbuyer.GoodsName = _listed.GoodsName; //商品名称
                     goodsbuyer.GoodsSize = _listed.GoodsSize;//商品规格
                     goodsbuyer.GoodsUnitName = _listed.GoodsUnitName;//单位
-                    goodsbuyer.ProcurementPrice = _listed.ProcurementPrice;//进货价格
-                    goodsbuyer.Total = _listed.ProcurementPrice;
+                    goodsbuyer.ProcurementPrice = Convert.ToInt32(_listed.ProcurementPrice);//进货价格
+                    goodsbuyer.Total = Convert.ToInt32(_listed.ProcurementPrice);
                     //将对象加入到集合中
                     list.Add(goodsbuyer);
                 }

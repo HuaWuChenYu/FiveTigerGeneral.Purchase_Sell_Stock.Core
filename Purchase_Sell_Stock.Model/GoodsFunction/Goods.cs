@@ -35,15 +35,15 @@ namespace Purchase_Sell_Stock.Model.GoodsFunction
         /// <summary>
         /// 商品价格
         /// </summary>
-        public float Price { get; set; }
+      
         [SugarColumn(ColumnName = "Price")]
-        public int Price { get; set; }
+        public float Price { get; set; }
         /// <summary>
         /// 进货价格
         /// </summary>
-        public float ProcurementPrice { get; set; }
+       
         [SugarColumn(ColumnName = "ProcurementPrice")]
-        public int ProcurementPrice { get; set; }
+        public float ProcurementPrice { get; set; }
         /// <summary>
         /// 商品上下架状态
         /// </summary>
@@ -80,9 +80,17 @@ namespace Purchase_Sell_Stock.Model.GoodsFunction
         /// 商品数量
         /// </summary>
         public int OrdersGoodsNum { get; set; }
-        public double AllPrice { get { return Math.Round(Price * OrdersGoodsNum * 100) / 100; } }//小计
-
-        public int GoodsSum { get; set; }//商品排行销量
-        public int Num { get; set; }//排行
+        /// <summary>
+        /// 小计
+        /// </summary>
+        public double AllPrice { get { return Math.Round(Price * OrdersGoodsNum * 100) / 100; } }
+        /// <summary>
+        /// 商品排行销量
+        /// </summary>
+        public int GoodsSum { get; set; }
+        /// <summary>
+        /// 排行
+        /// </summary>
+        public int Num { get; set; }
     }
 }
