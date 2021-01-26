@@ -12,7 +12,6 @@ using Purchase_Sell_Stock.Services;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
-    [Authorize]
     public class PropertyController : Controller
     {
     

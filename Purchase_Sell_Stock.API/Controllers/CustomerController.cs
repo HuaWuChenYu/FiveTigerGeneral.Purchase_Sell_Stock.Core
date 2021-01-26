@@ -17,7 +17,7 @@ namespace Purchase_Sell_Stock.API.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    
     public class CustomerController : ControllerBase
     {
         private ICustomer _customer;

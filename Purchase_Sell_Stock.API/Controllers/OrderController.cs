@@ -15,7 +15,7 @@ namespace Purchase_Sell_Stock.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    
     public class OrderController : ControllerBase
     {
         private IOrder _order;

@@ -156,6 +156,11 @@
             <param name="pageSize"></param>
             <returns></returns>
         </member>
+        <member name="T:Purchase_Sell_Stock.API.Controllers.SettingController">
+            <summary>
+            设置
+            </summary>
+        </member>
         <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.#ctor(Purchase_Sell_Stock.IServices.ISet)">
             <summary>
             依赖注入
