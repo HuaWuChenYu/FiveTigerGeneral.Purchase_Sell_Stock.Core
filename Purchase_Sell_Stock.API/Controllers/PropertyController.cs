@@ -18,10 +18,8 @@ namespace Purchase_Sell_Stock.API.Controllers
     public class PropertyController : Controller
     {
     
-        List<Amount_settledMoney> am;
-        List<Billing_details> bd;
-        Coods_Page<Rechanged_record> Rechanged_record;
-        Coods_Page<balance_Money> balance_Money;
+        
+       
         private readonly ILogger<CustomerController> _logger;
         PropertyBll pb;
 
