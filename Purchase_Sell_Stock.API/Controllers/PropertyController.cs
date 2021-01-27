@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Purchase_Sell_Stock.DAL.GetDBHelper;
 using Purchase_Sell_Stock.Model.Propertys;
 using Purchase_Sell_Stock.Model.Storage;
 using Purchase_Sell_Stock.Services;
@@ -15,31 +18,49 @@ namespace Purchase_Sell_Stock.API.Controllers
     public class PropertyController : Controller
     {
     
-        List<Amount_settledMoney> am;
-        List<Billing_details> bd;
-        Coods_Page<Rechanged_record> Rechanged_record;
-        Coods_Page<balance_Money> balance_Money;
+        
+       
+        private readonly ILogger<CustomerController> _logger;
         PropertyBll pb;
 
-        public PropertyController(IServiceProvider service)
+        public PropertyController(IServiceProvider service, ILogger<CustomerController> logger)
         {
+            _logger = logger;
             pb = service.GetService<PropertyBll>();  
         }
 
+        /// <summary>
+        /// 插入对账详细数据
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <param name="Account_Type"></param>
+        /// <param name="Account_Money"></param>
+        /// <param name="InorOut"></param>
+        /// <param name="Order_type"></param>
+        /// <param name="Order_NUm"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("/api/AddBilling_detailsInfos")]
+        public int AddBilling_detailsInfos(int UserId, string Account_Type, decimal Account_Money, int InorOut, string Order_type, string Order_NUm)
+        {
+            var s = pb.AddBilling_detailsInfos(UserId, Account_Type, Account_Money, InorOut, Order_type, Order_NUm);
+            return s;
+        }
         /// <summary>
         /// 余额
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [Route("/api/Show")]
-        public string PropertyShow(string Order_num, string starttime_quantum, string endttime_quantum,string remark,int pageIndex=1,int pageSize=3)
+        public string PropertyShow(string Order_num, string starttime_quantum, string endttime_quantum, string remark, int pageIndex = 1, int pageSize = 3)
         {
+            _logger.LogInformation("余额显示成功");
             Coods_Page<balance_Money> ss = pb.balance_MoneyShowInfos(Order_num, starttime_quantum,endttime_quantum, remark, pageIndex, pageSize);
             var jsondate = new
             {
                 code = 0,
                 msg = "",
-                count =ss.AllCount ,
+                count = ss.AllCount,
                 data = ss.list,
             };
             return JsonConvert.SerializeObject(jsondate);
@@ -51,9 +72,17 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("/api/ShowAmount_settledMoney")]
-        public List<Amount_settledMoney> Amount_settledMoney()
+        public string Amount_settledMoney(string OrderUnm, int pageIndex = 1, int pageSize = 2)
         {
-            return am;
+            Coods_Page<Amount_settledMoney> am = pb.Amount_settledMoneyShowInfos(OrderUnm, pageIndex, pageSize);
+            var jsondate = new
+            {
+                code = 0,
+                msg = "",
+                count = am.AllCount,
+                data = am.list,
+            };
+            return JsonConvert.SerializeObject(jsondate);
         }
 
         /// <summary>
@@ -62,9 +91,9 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("/api/ShowBilling_details")]
-        public string ShowBilling_details(string page, int pageIndex, int pageSize, string Account_Type, string Order_NUm, int InorOut, string Order_type, string statrtime, string endtime)
+        public string ShowBilling_details(string UserId, string page, int pageIndex, int pageSize, string Account_Type, string Order_NUm, int InorOut, string Order_type, string statrtime, string endtime)
         {
-            Coods_Page<Billing_details> ss = pb.Billing_detailsShowInfos(page, pageIndex, pageSize, Account_Type, Order_NUm, InorOut, Order_type, statrtime, endtime);
+            Coods_Page<Billing_details> ss = pb.Billing_detailsShowInfos(UserId, page, pageIndex, pageSize, Account_Type, Order_NUm, InorOut, Order_type, statrtime, endtime);
             var jsondate = new
             {
                 code = 0,
@@ -85,15 +114,91 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/ShowRechanged_record")]
         public string ShowRechanged_record(int pageIndex = 1, int pageSize = 3)
         {
+            _logger.LogInformation("重置记录显示成功");
             List<Rechanged_record> ss = pb.Rechanged_recordShowInfos(pageIndex, pageSize).list;
             var jsondate = new
             {
                 code = 0,
                 msg = "",
-                count = Rechanged_record.AllCount,
+                count = ss.Count,
                 data = ss,
             };
             return JsonConvert.SerializeObject(jsondate);
         }
+        DBHelper ado = DAL.GetDBHelper.SimplyFactoryDB.GetInstance("Ado");
+        /// <returns></returns>
+        [HttpPost]
+        [Route("/api/tim")]
+        public MoneyData Tim(string beginDate= "2021-1-1", string endDate= "2021-5-6")
+        {
+            
+            string[] strArray = new string[12];
+            DateTime oldDate = new DateTime();
+            DateTime newDate = new DateTime();
+            try
+            {
+                oldDate = Convert.ToDateTime(beginDate);
+                newDate = Convert.ToDateTime(endDate);
+            }
+            catch
+            {
+            }
+
+            int ts = newDate.Month - oldDate.Month;
+            int differenceInMonths = ts;
+            DateTime tempTime = oldDate;
+            string tempStr = "";
+            for (int i = 0; i <= differenceInMonths; i++)
+            {
+                if (i < strArray.Length)
+                {
+                    tempStr = tempTime.ToString("yyyy-MM");
+                    strArray[i] = tempStr;
+                    tempTime = tempTime.AddMonths(1);
+
+
+                }
+
+            }
+            strArray = (from str in strArray where str != null select str).ToArray();
+          
+           
+            string begintim = "select SUM(Account_Money)as Alipaymoney from Billing_details  where CONVERT(varchar(7),date_recorded,120)>=";
+            string endtime = "and CONVERT(varchar(7),date_recorded,120)<=";
+
+            string sql = $"{begintim}'{strArray.First()}'{endtime} '{strArray.Last()}'and  InorOut=1 and Order_type ='支付宝充值' group by CONVERT(varchar(7), date_recorded, 120) ";
+            var alipayM = ado.GetList<Datastatistics>(sql);
+
+            string sql1 = $"{begintim}'{strArray.First()}'{endtime} '{strArray.Last()}'and  InorOut=1 and Order_type ='订单完结' group by CONVERT(varchar(7), date_recorded, 120) ";
+            var OrderFinshM = ado.GetList<Datastatistics>(sql1);
+            ArrayList AliList = new ArrayList();
+            ArrayList OrderList = new ArrayList();
+
+            foreach (var item in alipayM)
+            {
+                AliList.Add(item.Alipaymoney);
+            }
+            foreach (var item in OrderFinshM)
+            {
+                OrderList.Add(item.Alipaymoney); 
+            }
+            MoneyData moneyData = new MoneyData() {
+                arrtime = strArray,
+                list= AliList,
+                Orderlist=OrderList
+            };
+            return moneyData;
+        }
+
+        [HttpPost]
+        [Route("/api/Reset")]
+        public string Rechanged(string UserId="1") 
+        {
+            string sql = $"select StoreCoding,StoreName,Balance_Money from Employee a join EmployeeAndStore b on a.EmployeeId=b.EmployeeAndStoreEmployeeId join Store c on b.EmployeeAndStoreStoreId=c.StoreId join MoneyBalance d on a.EmployeeId=d.UserId where a.EmployeeId={UserId}";
+            List<RechangedReSet>sets= ado.GetList<RechangedReSet>(sql);
+            return JsonConvert.SerializeObject(sets);
+        }
+
+      
     }
 }

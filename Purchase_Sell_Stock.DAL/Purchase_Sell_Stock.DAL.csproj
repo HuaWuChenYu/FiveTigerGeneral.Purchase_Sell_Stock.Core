@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.78" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="5.0.0" />
     <PackageReference Include="SqlSugarCore" Version="5.0.2" />
     <PackageReference Include="System.Linq" Version="4.3.0" />
   </ItemGroup>

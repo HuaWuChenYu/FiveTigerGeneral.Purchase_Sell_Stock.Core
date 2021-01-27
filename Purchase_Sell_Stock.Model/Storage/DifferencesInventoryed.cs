@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using SqlSugar;
 
@@ -26,32 +27,32 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// 商品名称
         /// </summary>
         [SugarColumn(ColumnName = "GoodName")]
-        public int GoodName { get; set; }
+        public string GoodName { get; set; }
         /// <summary>
         /// 发货方
         /// </summary>
         [SugarColumn(ColumnName = "Consigner")]
-        public int Consigner { get; set; }
+        public string Consigner { get; set; }
         /// <summary>
         /// 收货方
         /// </summary>
         [SugarColumn(ColumnName = "Receiving")]
-        public int Receiving { get; set; }
+        public string Receiving { get; set; }
         /// <summary>
         /// 单据类型
         /// </summary>
         [SugarColumn(ColumnName = "DocumentType")]
-        public int DocumentType { get; set; }
+        public string DocumentType { get; set; }
         /// <summary>
         /// 单据编号
         /// </summary>
         [SugarColumn(ColumnName = "DocumentNumber")]
-        public int DocumentNumber { get; set; }
+        public string DocumentNumber { get; set; }
         /// <summary>
         /// 差异类型
         /// </summary>
         [SugarColumn(ColumnName = "DifferentTypesName")]
-        public int DifferentTypesName { get; set; }
+        public string DifferentTypesName { get; set; }
         /// <summary>
         /// 差异数量
         /// </summary>
@@ -61,6 +62,11 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// 创建时间
         /// </summary>
         [SugarColumn(ColumnName = "DifferencesInventoryedTime")]
-        public int DifferencesInventoryedTime { get; set; }
+        public DateTime DifferencesInventoryedTime { get; set; }
+        /// <summary>
+        /// 创建时间  用于转换
+        /// </summary>
+         
+        //public string DifferencesInventoryedTimeed { get; set; }
     }
 }

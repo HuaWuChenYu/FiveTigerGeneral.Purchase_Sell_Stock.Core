@@ -22,9 +22,9 @@ namespace Purchase_Sell_Stock.Services
 
         }
 
-        public int AddBilling_detailsInfos()
+        public int AddBilling_detailsInfos(int UserId, string Account_Type, decimal Account_Money, int InorOut, string Order_type, string Order_NUm)
         {
-            return pd.AddBilling_detailsInfos();
+            return pd.AddBilling_detailsInfos(UserId, Account_Type, Account_Money, InorOut, Order_type, Order_NUm);
         }
 
         public int AddRechanged_recordInfos()
@@ -32,9 +32,9 @@ namespace Purchase_Sell_Stock.Services
             return pd.AddRechanged_recordInfos();
         }
 
-        public List<Amount_settledMoney> Amount_settledMoneyShowInfos()
+        public Coods_Page<Amount_settledMoney> Amount_settledMoneyShowInfos(string OrderUnm,int pageIndex, int pageSize)
         {
-            return pd.Amount_settledMoneyShowInfos();
+            return pd.Amount_settledMoneyShowInfos(OrderUnm, pageIndex, pageSize);
         }
 
         public Coods_Page<balance_Money> balance_MoneyShowInfos(string Order_num, string starttime_quantum, string endttime_quantum, string remark, int pageIndex, int pageSize)
@@ -52,9 +52,9 @@ namespace Purchase_Sell_Stock.Services
         //    return pd.Billing_detailsShowInfos(page, pageIndex, pageSize, Account_Type, Order_NUm, InorOut, Order_type, statrtime, endtime);
         //}
 
-        public Coods_Page<Billing_details> Billing_detailsShowInfos(string page, int pageIndex, int pageSize, string Account_Type, string Order_NUm, int InorOut, string Order_type, string statrtime, string endtime)
+        public Coods_Page<Billing_details> Billing_detailsShowInfos(string UserId, string page, int pageIndex, int pageSize, string Account_Type, string Order_NUm, int InorOut, string Order_type, string statrtime, string endtime)
         {
-            return pd.Billing_detailsShowInfos(page, pageIndex, pageSize, Account_Type, Order_NUm, InorOut, Order_type, statrtime, endtime);
+            return pd.Billing_detailsShowInfos(UserId,page, pageIndex, pageSize, Account_Type, Order_NUm, InorOut, Order_type, statrtime, endtime);
         }
 
         public Coods_Page<Rechanged_record> Rechanged_recordShowInfos(int pageIndex, int pageSize)

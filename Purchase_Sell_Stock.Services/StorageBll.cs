@@ -55,14 +55,12 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="procurementId"></param>
         /// <param name="incomingorderid"></param>
         /// <returns></returns>
-        public int Storage(string arr2, string arr4, string sourcenumber, int incomingorderid)
+        public int Storage(string arr2, string arr4, string sourcenumber, int incomingorderid, string providerName, string warehouseName)
         {
-            return stdal.Storage(arr2, arr4, sourcenumber, incomingorderid);
+            return stdal.Storage(arr2, arr4, sourcenumber, incomingorderid,providerName, warehouseName);
         }
 
         #endregion
-
-
         #region 出库
         /// <summary>
         /// 反填详细信息
@@ -94,15 +92,77 @@ namespace Purchase_Sell_Stock.Services
             var _list= stdal.OutboundorderShow();
             return _list;
         }
+       
+        /// <summary>
+        /// 出库功能
+        /// </summary>
+        /// <param name="arr2"></param>
+        /// <param name="arr4"></param>
+        /// <returns></returns>
+        public int GoodsAmend(string  arr2, string arr4,string sourcenumber,/*string ordersgoodsnum,*/int outboundorderId, string warehouseName, string customerName)
+        {
+            int i= stdal.GoodsAmend(arr2, arr4,sourcenumber, outboundorderId,  warehouseName, customerName);
+            return i;
+        }
+
+
+        #endregion
+        #region 商品流水 商品差异 商品库存
+        /// <summary>
+        /// 商品以及库存量的显示
+        /// </summary>
+        /// <returns></returns>
+        public List<CommodityStocksandGoods> commodityStocksandGoodsShow()
+        {
+            return stdal.commodityStocksandGoodsShow();
+        }
+        /// <summary>
+        /// 单个商品的流水记录
+        /// </summary>
+        /// <param name="goodsid"></param>
+        /// <returns></returns>
+        public List<GoodRunningWater> Goodsflowingwater(int goodsid)
+        {
+            return stdal.Goodsflowingwater(goodsid);
+        }
+        /// <summary>
+        /// 商品流水
+        /// </summary>
+        /// <returns></returns>
+        public List<GoodRunningWater> goodRunningWaterShow()
+        {
+            return stdal.goodRunningWaterShow();
+        }
+        /// <summary>
+        /// 差异库存表
+        /// </summary>
+        /// <returns></returns>
+        public List<DifferencesInventoryed> DifferencesInventoryedShow()
+        {
+            return stdal.DifferencesInventoryedShow();
+        }
+        /// <summary>
+        /// 差异类型
+        /// </summary>
+        /// <returns></returns>
+        public List<DifferentTypes> DifferentTypesShow()
+        {
+            return stdal.DifferentTypesShow();
+        }
+
+
+        #endregion
+        #region 仓库
         /// <summary>
         /// 所有仓库
         /// </summary>
         /// <returns></returns>
         public List<Warehouse> GetWarehousesShow()
         {
-            var _list= stdal.GetWarehousesShow();
+            var _list = stdal.GetWarehousesShow();
             return _list;
         }
+      
         /// <summary>
         /// 仓库类型
         /// </summary>
@@ -122,34 +182,34 @@ namespace Purchase_Sell_Stock.Services
             return _list;
         }
         /// <summary>
-        /// 出库功能
+        /// 添加仓库
         /// </summary>
-        /// <param name="arr2"></param>
-        /// <param name="arr4"></param>
+        /// <param name="ws"></param>
         /// <returns></returns>
-        public int GoodsAmend(string  arr2, string arr4,string sourcenumber,/*string ordersgoodsnum,*/int outboundorderId)
+        public int AddWarehouses(Warehouse ws)
         {
-            int i= stdal.GoodsAmend(arr2, arr4,sourcenumber, outboundorderId);
-            return i;
+            return stdal.AddWarehouses(ws);
         }
         /// <summary>
-        /// 商品以及库存量的显示
+        /// 反填仓库
         /// </summary>
+        /// <param name="WarehouseId"></param>
         /// <returns></returns>
-        public List<CommodityStocksandGoods> commodityStocksandGoodsShow()
+        public Warehouse BackfillWarehouse(int WarehouseId)
         {
-            return stdal.commodityStocksandGoodsShow();
+            return stdal.BackfillWarehouse(WarehouseId);
         }
         /// <summary>
-        /// 商品流水
+        /// 修改仓库
         /// </summary>
+        /// <param name="ws"></param>
         /// <returns></returns>
-        public List<GoodRunningWater> goodRunningWaterShow()
+        public int ModifyWarehouse(Warehouse ws)
         {
-            return stdal.goodRunningWaterShow();
+            return stdal.ModifyWarehouse(ws);
         }
 
-        
+      
         #endregion
 
     }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Purchase_Sell_Stock.Model.SettingModels;
 using Purchase_Sell_Stock.IServices;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Purchase_Sell_Stock.API.Controllers
@@ -17,13 +18,15 @@ namespace Purchase_Sell_Stock.API.Controllers
     [ApiController]
     public class SettingController : ControllerBase
     {
+        private readonly ILogger<CustomerController> _logger;
         ISet _iset;
         /// <summary>
         /// 依赖注入
         /// </summary>
         /// <param name="set"></param>
-        public SettingController(ISet set)
+        public SettingController(ISet set, ILogger<CustomerController> logger)
         {
+            _logger = logger;
             _iset = set;
         }
         /// <summary>
@@ -34,6 +37,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public int GetRoleId(string name)
         {
+            _logger.LogInformation($"获取角色名称{name}");
             return _iset.GetRoleId(name);
         }
         /// <summary>
@@ -44,6 +48,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public string GetPhoneByEId(int eid)
         {
+            _logger.LogInformation($"获取的手机号:{eid}");
             return _iset.GetPhoneByEId(eid);
         }
         /// <summary>
@@ -54,6 +59,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpPost]
         public int AddStore(Store store)
         {
+            _logger.LogInformation($"添加的店铺:{store.StoreName}");
             return _iset.AddStore(store);
         }
         /// <summary>
@@ -63,6 +69,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public List<Industry> GetIndustriesForShow()
         {
+            _logger.LogInformation("获取行业成功");
             return _iset.GetIndustriesForShow();
         }
         /// <summary>
@@ -72,6 +79,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public List<Classify> GetClassifiesForShow()
         {
+            _logger.LogInformation("获取分类");
             return _iset.GetClassifiesForShow();
         }
         /// <summary>
@@ -82,6 +90,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public int GetPowerIdForBig(int pid)
         {
+            _logger.LogInformation("查询大菜单");
             return _iset.GetPowerIdForBig(pid);
         }
         /// <summary>
@@ -93,6 +102,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public Powers GetPowersBySel(string name, int empId)
         {
+            _logger.LogInformation($"权限名以及路径{name}{empId}");
             return _iset.GetPowersBySel(name,empId);
         }
         /// <summary>
@@ -103,6 +113,11 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpPost]
         public int AddStoreSet(StoreSet storeSet)
         {
+            _logger.LogInformation($"添加店铺设置{storeSet.StoreId},{storeSet.StoreSetAtuoCancel},{storeSet.StoreSetChangeStore}" +
+                $"{storeSet.StoreSetClose},{storeSet.StoreSetId},{storeSet.StoreSetInformation},{storeSet.StoreSetIsDeduction}," +
+                $"{storeSet.StoreSetIsEmpty},{storeSet.StoreSetIsEvaluate},{storeSet.StoreSetIsSales},{storeSet.StoreSetIsService}" +
+                $"{storeSet.StoreSetMakeInvoice},{storeSet.StoreSetOperation},{storeSet.StoreSetOrder},{storeSet.StoreSetPoster}" +
+                $"{storeSet.StoreSetPoster}");
             return _iset.AddStoreSet(storeSet);
         }
         /// <summary>
@@ -113,6 +128,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public List<Company> IsHaveCompany(int storeid)
         {
+            _logger.LogInformation($"查询店铺是否认证主题,认真返回值{storeid}");
             return _iset.IsHaveCompany(storeid);
         }
         /// <summary>
@@ -123,6 +139,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpPost]
         public int AddCompany(Company company)
         {
+            _logger.LogInformation("添加主题");
             return _iset.AddCompany(company);
         }
         /// <summary>
@@ -133,6 +150,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public Department GetDepartmentById(int id)
         {
+            _logger.LogInformation($"通过id获取部门:{id}");
             return _iset.GetDepartmentById(id);
         }
         /// <summary>
@@ -143,6 +161,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpPost]
         public int UpdateDepartment(Department department)
         {
+            _logger.LogInformation("修改部门");
             return _iset.UpdateDepartment(department);
         }
         /// <summary>
@@ -153,6 +172,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpPost]
         public int AddDepartment(Department department)
         {
+            _logger.LogInformation("添加部门");
             return _iset.AddDepartment(department);
         }
         /// <summary>
@@ -164,6 +184,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public object GetDepartmentByShow(string number, string name)
         {
+            _logger.LogInformation($"通过{number},{name}查询员工");
             List<Department> dlist = _iset.GetDepartmentByShow();
             if (!string.IsNullOrEmpty(number))
             {
@@ -190,6 +211,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpPost]
         public int UpdateEmployee(Employee emp)
         {
+            _logger.LogInformation("修改员工");
             return _iset.UpdateEmployee(emp);
         }
         /// <summary>
@@ -200,6 +222,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public Employee GetEmployeeById(int id)
         {
+            _logger.LogInformation("通过id获取员工信息");
             return _iset.GetEmployeeById(id);
         }
         /// <summary>
@@ -210,6 +233,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpPost]
         public int AddEmployee(Employee emp)
         {
+            _logger.LogInformation("添加员工信息");
             return _iset.AddEmployee(emp);
         }
         /// <summary>
@@ -219,6 +243,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public List<Roles> GetRolesForSelect()
         {
+            _logger.LogInformation("获取角色信息");
             return _iset.GetRolesForSelect();
         }
         /// <summary>
@@ -228,6 +253,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public List<Department> GetDepartments()
         {
+            _logger.LogInformation("获取部门信息");
             return _iset.GetDepartments();
         }
         /// <summary>
@@ -244,6 +270,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public object GetEmployeesForShow(int pageIndex=1,int pageSize=3, string eNumber="", string eName="", string ePhone="", int eDepartId=-1, int eRoleId=-1)
         {
+            _logger.LogInformation("获取员工信息");
             List<Employee> elist= _iset.GetEmployeesForShow();
             if (!string.IsNullOrEmpty(eNumber))
             {
@@ -283,6 +310,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public List<Powers> GetPowers(int employeeId, int powersParentId)
         {
+            _logger.LogInformation("根据员工id生成不同的导航栏");
             return _iset.GetPowersForUp(employeeId,powersParentId);
         }
         /// <summary>
@@ -294,6 +322,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public List<ViewStoreInfo> GetStoresFromLogin(string userPhone)
         {
+            _logger.LogInformation("通过手机号返回店铺信息");
             return _iset.GetStoresFromLogin(userPhone);
         }
         /// <summary>
@@ -304,6 +333,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public Store GetStoresForUpdate(int storeId)
         {
+            _logger.LogInformation($"获取店铺id:{storeId}");
             return _iset.GetStoresForUpdate(storeId);
         }
         /// <summary>
@@ -314,6 +344,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpPost]
         public int UpdateStore(Store store)
         {
+            _logger.LogInformation("修改店铺信息");
             return _iset.UpdateStore(store);
         }
         /// <summary>
@@ -323,6 +354,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public List<RoleType> GetRoleTypes()
         {
+            _logger.LogInformation("角色类型加载");
             List<RoleType> rlist= _iset.GetRoleTypes();
             foreach (var item in rlist)
             {
@@ -343,6 +375,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public List<Roles> GetRoles(int roleTypesId)
         {
+            _logger.LogInformation($"角色类型获取角色{roleTypesId}");
             return _iset.GetRoles(roleTypesId);
         }
         /// <summary>
@@ -354,6 +387,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public List<Powers> GetPowersBySet(int powerParentId, int rolesId)
         {
+            _logger.LogInformation("修改角色权限");
             return _iset.GetPowersBySet(powerParentId,rolesId);
         }
         /// <summary>
@@ -364,6 +398,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public List<Powers> GetPowersByShowId(int roleId)
         {
+            _logger.LogInformation("根据角色id查询权限");
             return _iset.GetPowersByShowId(roleId);
         }
         /// <summary>
@@ -375,6 +410,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public int DeletePowersAndRoles(string powerId, int roleId)
         {
+            _logger.LogInformation("删除角色");
             return _iset.DeletePowersAndRoles(powerId, roleId);
         }
         /// <summary>
@@ -386,6 +422,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [HttpGet]
         public int AddPowersAndRoles(string powerId, int roleId)
         {
+            _logger.LogInformation("获取角色的一项权限");
             return _iset.AddPowersAndRoles(powerId,roleId);
         }
     }

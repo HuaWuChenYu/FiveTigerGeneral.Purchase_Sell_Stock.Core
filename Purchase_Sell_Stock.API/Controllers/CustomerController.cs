@@ -8,6 +8,7 @@ using Purchase_Sell_Stock.IServices;
 using Purchase_Sell_Stock.Services;
 using Purchase_Sell_Stock.Model.Buyer;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Purchase_Sell_Stock.API.Controllers
@@ -22,9 +23,11 @@ namespace Purchase_Sell_Stock.API.Controllers
     {
         
         private ICustomer _customer;
-        public CustomerController(ICustomer customer)
+        private readonly ILogger<CustomerController> _logger;
+        public CustomerController(ICustomer customer,ILogger<CustomerController> logger)
         {
             _customer = customer;
+            _logger = logger;
         }
         /// <summary>
         /// 全部客户
@@ -34,6 +37,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/GetCustomerShow")]
         public string GetCustomerShow(int pageIndex, int pageSize, string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable)
         {
+            _logger.LogInformation("显示全部客户");
             List<Customer> list = _customer.GetCustomerShow(customerName, customerPhone, customeridentity, lableId, whetherEnable);
             var dataJson = new
             {
@@ -59,6 +63,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/GetRechargeRecord")]
         public string GetRechargeRecord(int pageIndex,int pageSize, string customerName, string customerPhone, int denominationId )
         {
+            _logger.LogInformation("充值记录查询");
             List<RechargCustomer> list = _customer.GetRechargeRecord(customerName, customerPhone, denominationId);
             var dataJson = new
             {
@@ -79,6 +84,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/GetLable")]
         public int GetLable([FromBody]Lable obj)
         {
+            _logger.LogInformation("添加标签");
             int i = _customer.GetLable(obj);
             return i;
         }
@@ -90,6 +96,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/GetLableShow")]
         public string GetLableShow(int pageIndex, int pageSize)
         {
+            _logger.LogInformation("显示标签");
             List<Lable> list = _customer.GetLableShow();
             var dataJson = new
             {
@@ -110,6 +117,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/LableDelete")]
         public int LableDelete(string ids)
         {
+            _logger.LogInformation("删除标签");
             return _customer.LableDelete(ids);
         }
         /// <summary>
@@ -121,6 +129,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/Modify")]
         public int Modify([FromBody] Lable obj)
         {
+            _logger.LogInformation("修改标签");
             return _customer.Modify(obj);
         }
         /// <summary>
@@ -132,6 +141,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/Ft/{id}")]
         public Lable Ft(int id)
         {
+            _logger.LogInformation("反填标签");
             List<Lable> lable = _customer.Ft(id);
             return lable[0];
         }
@@ -145,6 +155,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/GetListDen")]
         public string GetListDen(int pageIndex, int pageSize)
         {
+            _logger.LogInformation("充值面额");
             List<Denomination> list = _customer.GetListDen();
             var dataJson = new
             {
@@ -164,6 +175,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/AddDenomination")]
         public int AddDenomination([FromBody] Denomination obj)
         {
+            _logger.LogInformation("新建面额");
             int i = _customer.AddDenomination(obj);
             return i;
         }
@@ -176,6 +188,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/GetWallet")]
         public string GetWallet(int pageIndex, int pageSize, string customerName, string customerPhone)
         {
+            _logger.LogInformation("钱包查询显示");
             List<wallet> list = _customer.GetWallet(customerName, customerPhone);
             var dataJson = new
             {
@@ -198,6 +211,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/GetWater")]
         public string GetWater(int pageIndex, int pageSize)
         {
+            _logger.LogInformation("流水显示");
             List<Water> list = _customer.GetWater();
             var dataJson = new
             {
@@ -218,6 +232,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/LSFt/{ids}")]
         public Water LSFt(int ids)
         {
+            _logger.LogInformation("流水反填功能");
             List<Water> lable = _customer.LSFt(ids);
             return lable[0];
         }
