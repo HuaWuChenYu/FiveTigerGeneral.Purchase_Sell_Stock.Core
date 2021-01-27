@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Purchase_Sell_Stock.Model.SettingModels;
+using Purchase_Sell_Stock.Model.Login;
 using Purchase_Sell_Stock.Services;
 using Newtonsoft.Json;
 using Purchase_Sell_Stock.IServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
@@ -18,55 +19,77 @@ namespace Purchase_Sell_Stock.API.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
+        LoginBll bll = new LoginBll();
         private ILogin _login;
-        public LoginController(ILogin login)
+        JwtBuilder _jwt;
+        public LoginController(ILogin login, JwtBuilder _builder)
         {
             _login = login;
+            _jwt = _builder;
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("/api/Login/GetToken")]
+        public string GetToken(Users users)
+        {
+            string token = _jwt.GetJwt(users);
+            return token;
         }
         /// <summary>
         /// 登录
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="pwd"></param>
+        /// <param name="users"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [Route("/api/Login")]
-        public List<Users> Login(string name, string pwd)
+        public int Login(Users users)
         {
-            List<Users> list = _login.Login(name, pwd);
-            return list;
-        }    
-        [HttpGet]
-        [Route("/api/Logins/{phone}")]
+            List<Users> list = _login.Login(users.UserPhone, users.UserPassword);
+            if (list.Count>0)
+            {
+                int s = _login.IsEmployeeOrBoss(list[0].UserId);
+                return s;
+            }
+            return 0;
+        }
         /// <summary>
         /// 短信登陆
         /// </summary>
-        /// <param name="phone"></param>
+        /// <param name="users"></param>
         /// <returns></returns>
-        public List<Users> Logins(string phone)
+        [HttpPost]
+        [Route("/api/Logins")]
+        public int Logins(Users users)
         {
-            List<Users> list = _login.Logins(phone);
-            return list;
+            List<Users> list = _login.Logins(users.UserPhone);
+            if (list.Count > 0)
+            {
+                int s = _login.IsEmployeeOrBoss(list[0].UserId);
+                return s;
+            }
+            return 0;
         }
-        [HttpGet]
-        [Route("/api/Forgers")]
         /// <summary>
         /// 忘记密码
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="g"></param>
         /// <returns></returns>
+        [HttpPost]
+        [Route("/api/Forgers")]
+        
         public int Forgers(Users g)
         {
             return _login.Forget(g);
         }
 
-        [HttpPost]
-        [Route("/api/Register")]
+
         /// <summary>
         /// 注册
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
+        [HttpPost]
+        [Route("/api/Register")]
         public int Register(Users a)
         {
             return _login.Register(a);

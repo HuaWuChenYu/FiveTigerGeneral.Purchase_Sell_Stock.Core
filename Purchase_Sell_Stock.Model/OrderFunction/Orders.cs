@@ -21,22 +21,11 @@ namespace Purchase_Sell_Stock.Model.OrderFunction
         /// 下单时间
         /// </summary>
         public DateTime OrdersTime { get; set; }
-        /// <summary>
-        /// 订单归属
-        /// </summary>
-        public string OrdersBelong { get; set; }
+        public string StrOrdersTime { get { return OrdersTime.ToString("yyyy年MM月dd日 hh时MM分ss秒"); } }//下单时间显示
         /// <summary>
         /// 支付方式
         /// </summary>
         public string PayWay { get; set; }
-        /// <summary>
-        /// 配送方式
-        /// </summary>
-        public string DispatchWay { get; set; }
-        /// <summary>
-        /// 配送时间
-        /// </summary>
-        public DateTime DispatchTime { get; set; }
         /// <summary>
         /// 销售类型
         /// </summary>
@@ -83,5 +72,9 @@ namespace Purchase_Sell_Stock.Model.OrderFunction
         /// 收货人姓名
         /// </summary>
         public string CustomerName { get; set; }
+        /// <summary>
+        /// 收货人手机号码
+        /// </summary>
+        public string CustomerPhone { get; set; }
     }
 }

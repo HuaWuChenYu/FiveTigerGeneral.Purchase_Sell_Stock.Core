@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -22,5 +23,16 @@ namespace Purchase_Sell_Stock.API
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+        public static IWebHost BuildWebHost(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+      //发布程序出现错误帮助定位详细错误信息
+      // .UseKestrel()
+      //.UseContentRoot(Directory.GetCurrentDirectory())
+      //.UseSetting("detailedErrors", "true")
+      //.UseIISIntegration()
+
+      .CaptureStartupErrors(true)
+                .UseStartup<Startup>()
+                .Build();
     }
 }

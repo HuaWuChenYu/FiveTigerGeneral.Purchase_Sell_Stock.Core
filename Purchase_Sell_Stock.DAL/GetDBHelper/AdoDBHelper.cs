@@ -9,7 +9,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
 {
     public class AdoDBHelper : DBHelper
     {
-        string connStr = "Data Source=192.168.137.64;Initial Catalog=OurProject;User ID=sa;Password=123456";
+        //string connStr = "Data Source=192.168.137.64;Initial Catalog=OurProject;User ID=sa;Password=123456";
         /// <summary>
         /// 增删改
         /// </summary>
@@ -17,7 +17,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
         /// <returns></returns>
         public override int ExecuteNonQuery(string sql)
         {
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(_locastr))
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -33,7 +33,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
         public override int ExecuteNonQuery(string procName, SqlParameter[] parameter = null)
         {
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(_locastr))
             {
                 conn.Open();
                 //实例化命令对象
@@ -55,7 +55,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
         /// <returns></returns>
         public override object ExecuteScalar(string sql)
         {
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(_locastr))
             {
                 conn.Open();
                 //实例化命令对象
@@ -71,7 +71,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
         /// <returns></returns>
         public override List<T> GetList<T>(string sql)
         {
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(_locastr))
             {
                 SqlDataAdapter sda = new SqlDataAdapter(sql, conn);
                 DataTable dt = new DataTable();
@@ -89,7 +89,7 @@ namespace Purchase_Sell_Stock.DAL.GetDBHelper
         /// <returns></returns>
         public override List<T> GetList<T>(string procName, SqlParameter[] parameter = null)
         {
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(_locastr))
             {
                 DataTable dt = new DataTable();
                 SqlCommand cmd = new SqlCommand(procName, conn);

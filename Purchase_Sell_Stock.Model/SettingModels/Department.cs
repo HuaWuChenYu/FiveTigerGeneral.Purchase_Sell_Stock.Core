@@ -25,5 +25,9 @@ namespace Purchase_Sell_Stock.Model.SettingModels
         /// 部门父id
         /// </summary>
         public int DepartmentParentId { get; set; }
+        /// <summary>
+        /// 等级
+        /// </summary>
+        public int Level { get; set; } = 1;
     }
 }

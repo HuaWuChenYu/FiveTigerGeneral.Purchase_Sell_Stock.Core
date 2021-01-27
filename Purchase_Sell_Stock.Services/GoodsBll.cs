@@ -61,6 +61,24 @@ namespace Purchase_Sell_Stock.Services
             return goods1.GetGoodsUnitList<GoodsUnit>(unitId, unitName, storeId);
         }
         /// <summary>
+        /// 删除品牌
+        /// </summary>
+        /// <param name="brandId"></param>
+        /// <returns></returns>
+        public int DelBrand(int brandId)
+        {
+            return goods1.DelBrand(brandId);
+        }
+        /// <summary>
+        /// 删除单位
+        /// </summary>
+        /// <param name="unitId"></param>
+        /// <returns></returns>
+        public int DelUnit(int unitId)
+        {
+            return goods1.DelUnit(unitId);
+        }
+        /// <summary>
         /// 添加商品
         /// </summary>
         /// <param name="goods"></param>
@@ -102,9 +120,9 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="goodId"></param>
         /// <param name="storeId"></param>
         /// <returns></returns>
-        public int ModifyState(int goodId, int storeId)
+        public int ModifyState(int goodId)
         {
-            return goods1.ModifyState(goodId,storeId);
+            return goods1.ModifyState(goodId);
         }
         /// <summary>
         /// 删除商品
@@ -112,9 +130,9 @@ namespace Purchase_Sell_Stock.Services
         /// <param name="storeId"></param>
         /// <param name="goodsIds"></param>
         /// <returns></returns>
-        public int DeleteGoods(string goodIds, int storeId)
+        public int DeleteGoods(string goodIds)
         {
-            return goods1.DeleteGoods(goodIds,storeId);
+            return goods1.DeleteGoods(goodIds);
         }
         /// <summary>
         /// 根据Id查询信息

@@ -60,10 +60,11 @@ namespace Purchase_Sell_Stock.Model.SettingModels
         /// <summary>
         /// 主体类型
         /// </summary>
-        public string CompanyType { get; set; }
+        public bool CompanyType { get; set; }
         /// <summary>
         /// 认证状态
         /// </summary>
         public bool CompanyStates { get; set; }
+        public int StoreId { get; set; }
     }
 }
