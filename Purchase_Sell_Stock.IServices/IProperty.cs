@@ -31,13 +31,13 @@ namespace Purchase_Sell_Stock.IServices
         /// </summary>
         /// <returns></returns>
         /// 
-        int AddBilling_detailsInfos();
+        int AddBilling_detailsInfos(int UserId, string Account_Type, decimal Account_Money, int InorOut, string Order_type, string Order_NUm);
 
         /// <summary>
         /// 显示待结算信息
         /// </summary>
         /// <returns></returns>
-        List<Amount_settledMoney> Amount_settledMoneyShowInfos();
+        Coods_Page<Amount_settledMoney> Amount_settledMoneyShowInfos(string OrderUnm, int pageIndex, int pageSize);
 
         /// <summary>
         /// 显示余额信息
@@ -55,6 +55,6 @@ namespace Purchase_Sell_Stock.IServices
         /// 显示详细账单信息
         /// </summary>
         /// <returns></returns>
-        Coods_Page<Billing_details> Billing_detailsShowInfos(string page, int pageIndex, int pageSize, string Account_Type, string Order_NUm, int InorOut, string Order_type, string statrtime, string endtime);
+        Coods_Page<Billing_details> Billing_detailsShowInfos(string UserId,string page, int pageIndex, int pageSize, string Account_Type, string Order_NUm, int InorOut, string Order_type, string statrtime, string endtime);
     }
 }
