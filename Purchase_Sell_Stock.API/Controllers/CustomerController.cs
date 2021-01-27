@@ -8,6 +8,7 @@ using Purchase_Sell_Stock.IServices;
 using Purchase_Sell_Stock.Services;
 using Purchase_Sell_Stock.Model.Buyer;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
@@ -16,8 +17,10 @@ namespace Purchase_Sell_Stock.API.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    
     public class CustomerController : ControllerBase
     {
+        
         private ICustomer _customer;
         public CustomerController(ICustomer customer)
         {
@@ -29,9 +32,9 @@ namespace Purchase_Sell_Stock.API.Controllers
         
         [HttpGet]
         [Route("/api/GetCustomerShow")]
-        public string GetCustomerShow(int pageIndex, int pageSize, string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable,int cusId)
+        public string GetCustomerShow(int pageIndex, int pageSize, string customerName, string customerPhone, string customeridentity, int lableId, int whetherEnable)
         {
-            List<Customer> list = _customer.GetCustomerShow(customerName, customerPhone, customeridentity, lableId, whetherEnable, cusId);
+            List<Customer> list = _customer.GetCustomerShow(customerName, customerPhone, customeridentity, lableId, whetherEnable);
             var dataJson = new
             {
                 code = 0,
@@ -54,9 +57,9 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("/api/GetRechargeRecord")]
-        public string GetRechargeRecord(int pageIndex,int pageSize, string customerName, string customerPhone, int denominationId ,int cusId)
+        public string GetRechargeRecord(int pageIndex,int pageSize, string customerName, string customerPhone, int denominationId )
         {
-            List<RechargeRecord> list = _customer.GetRechargeRecord(customerName, customerPhone, denominationId, cusId);
+            List<RechargCustomer> list = _customer.GetRechargeRecord(customerName, customerPhone, denominationId);
             var dataJson = new
             {
                 code = 0,
@@ -164,6 +167,59 @@ namespace Purchase_Sell_Stock.API.Controllers
             int i = _customer.AddDenomination(obj);
             return i;
         }
-        
+        /// <summary>
+        /// 钱包查询
+        /// </summary>
+        /// <returns></returns>
+        /// 
+        [HttpGet]
+        [Route("/api/GetWallet")]
+        public string GetWallet(int pageIndex, int pageSize, string customerName, string customerPhone)
+        {
+            List<wallet> list = _customer.GetWallet(customerName, customerPhone);
+            var dataJson = new
+            {
+                code = 0,
+                msg = "",
+                count = list.Count,
+                data = list.Skip((pageIndex - 1) * pageSize).Take(pageSize)
+            };
+            string str = JsonConvert.SerializeObject(dataJson);
+            return str;
+        }
+        /// <summary>
+        /// 流水表
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        /// 
+        [HttpGet]
+        [Route("/api/GetWater")]
+        public string GetWater(int pageIndex, int pageSize)
+        {
+            List<Water> list = _customer.GetWater();
+            var dataJson = new
+            {
+                code = 0,
+                msg = "",
+                count = list.Count,
+                data = list.Skip((pageIndex - 1) * pageSize).Take(pageSize)
+            };
+            string str = JsonConvert.SerializeObject(dataJson);
+            return str;
+        }
+        /// <summary>
+        /// 流水反填
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("/api/LSFt/{ids}")]
+        public Water LSFt(int ids)
+        {
+            List<Water> lable = _customer.LSFt(ids);
+            return lable[0];
+        }
     }
 }

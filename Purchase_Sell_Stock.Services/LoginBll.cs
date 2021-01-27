@@ -11,6 +11,15 @@ namespace Purchase_Sell_Stock.Services
     {
         LoginDal dal = new LoginDal();
         /// <summary>
+        /// 判断是不是员工还是老板
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int IsEmployeeOrBoss(int id)
+        {
+            return dal.IsEmployeeOrBoss(id);
+        }
+        /// <summary>
         /// 忘记密码
         /// </summary>
         /// <param name="g"></param>

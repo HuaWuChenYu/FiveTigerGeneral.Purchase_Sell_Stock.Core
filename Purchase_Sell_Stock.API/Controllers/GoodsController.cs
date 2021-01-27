@@ -9,11 +9,13 @@ using Purchase_Sell_Stock.Services;
 using Purchase_Sell_Stock.IServices;
 using Newtonsoft.Json;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class GoodsController : ControllerBase
     {
         private IGoods _goods1;

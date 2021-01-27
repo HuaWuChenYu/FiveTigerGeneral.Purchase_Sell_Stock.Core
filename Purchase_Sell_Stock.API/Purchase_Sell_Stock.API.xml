@@ -9,16 +9,92 @@
             客户控制器
             </summary>
         </member>
-        <member name="F:Purchase_Sell_Stock.API.Controllers.CustomerController.bll">
+        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.GetCustomerShow(System.Int32,System.Int32,System.String,System.String,System.String,System.Int32,System.Int32)">
             <summary>
-            实例化
+            全部客户
             </summary>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.GetRechargeRecord(System.Int32,System.Int32,System.String,System.String,System.Int32)">
+            <summary>
+            充值记录查询
+            </summary>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <param name="customerName"></param>
+            <param name="customerPhone"></param>
+            <param name="denominationId"></param>
+            <param name="cusId"></param>
+            <returns></returns>
         </member>
         <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.GetLable(Purchase_Sell_Stock.Model.Buyer.Lable)">
             <summary>
             添加标签
             </summary>
-            <param name="a"></param>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.GetLableShow(System.Int32,System.Int32)">
+            <summary>
+            显示标签
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.LableDelete(System.String)">
+            <summary>
+            删除标签
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.Modify(Purchase_Sell_Stock.Model.Buyer.Lable)">
+            <summary>
+            修改标签
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.Ft(System.Int32)">
+            <summary>
+            标签反填
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.GetListDen(System.Int32,System.Int32)">
+            <summary>
+            充值面额
+            </summary>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.AddDenomination(Purchase_Sell_Stock.Model.Buyer.Denomination)">
+            <summary>
+            新建面额
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.GetWallet(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            钱包查询
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.GetWater(System.Int32,System.Int32)">
+            <summary>
+            流水表
+            </summary>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+            
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.CustomerController.LSFt(System.Int32)">
+            <summary>
+            流水反填
+            </summary>
+            <param name="ids"></param>
             <returns></returns>
         </member>
         <member name="T:Purchase_Sell_Stock.API.Controllers.LoginController">
@@ -26,12 +102,32 @@
             登录控制器
             </summary>
         </member>
-        <member name="M:Purchase_Sell_Stock.API.Controllers.LoginController.Login(System.String,System.String)">
+        <member name="M:Purchase_Sell_Stock.API.Controllers.LoginController.Login(Purchase_Sell_Stock.Model.Login.Users)">
             <summary>
             登录
             </summary>
-            <param name="name"></param>
-            <param name="pwd"></param>
+            <param name="users"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.LoginController.Logins(Purchase_Sell_Stock.Model.Login.Users)">
+            <summary>
+            短信登陆
+            </summary>
+            <param name="users"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.LoginController.Forgers(Purchase_Sell_Stock.Model.Login.Users)">
+            <summary>
+            忘记密码
+            </summary>
+            <param name="g"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.LoginController.Register(Purchase_Sell_Stock.Model.Login.Users)">
+            <summary>
+            注册
+            </summary>
+            <param name="a"></param>
             <returns></returns>
         </member>
         <member name="M:Purchase_Sell_Stock.API.Controllers.PropertyController.PropertyShow(System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
@@ -58,6 +154,234 @@
             </summary>
             <param name="pageIndex"></param>
             <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Purchase_Sell_Stock.API.Controllers.SettingController">
+            <summary>
+            设置
+            </summary>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.#ctor(Purchase_Sell_Stock.IServices.ISet)">
+            <summary>
+            依赖注入
+            </summary>
+            <param name="set"></param>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetRoleId(System.String)">
+            <summary>
+            角色名称获取角色id
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetPhoneByEId(System.Int32)">
+            <summary>
+            获取手机号
+            </summary>
+            <param name="eid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.AddStore(Purchase_Sell_Stock.Model.SettingModels.Store)">
+            <summary>
+            添加店铺
+            </summary>
+            <param name="store"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetIndustriesForShow">
+            <summary>
+            获取行业
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetClassifiesForShow">
+            <summary>
+            获取分类
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetPowerIdForBig(System.Int32)">
+            <summary>
+            根据小菜单id 查询出中大菜单的主键
+            </summary>
+            <param name="pid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetPowersBySel(System.String,System.Int32)">
+            <summary>
+            通过权限名称获取权限路径
+            </summary>
+            <param name="name"></param>
+            <param name="empId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.AddStoreSet(Purchase_Sell_Stock.Model.SettingModels.StoreSet)">
+            <summary>
+            添加店铺设置
+            </summary>
+            <param name="storeSet"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.IsHaveCompany(System.Int32)">
+            <summary>
+            查询店铺是否认证主体 认证过返回值
+            </summary>
+            <param name="storeid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.AddCompany(Purchase_Sell_Stock.Model.SettingModels.Company)">
+            <summary>
+            添加主体
+            </summary>
+            <param name="company"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetDepartmentById(System.Int32)">
+            <summary>
+            通过id获取部门
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.UpdateDepartment(Purchase_Sell_Stock.Model.SettingModels.Department)">
+            <summary>
+            修改部门
+            </summary>
+            <param name="department"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.AddDepartment(Purchase_Sell_Stock.Model.SettingModels.Department)">
+            <summary>
+            添加部门
+            </summary>
+            <param name="department"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetDepartmentByShow(System.String,System.String)">
+            <summary>
+            查询员工
+            </summary>
+            <param name="number"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.UpdateEmployee(Purchase_Sell_Stock.Model.SettingModels.Employee)">
+            <summary>
+            修改员工
+            </summary>
+            <param name="emp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetEmployeeById(System.Int32)">
+            <summary>
+            通过id查询员工信息
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.AddEmployee(Purchase_Sell_Stock.Model.SettingModels.Employee)">
+            <summary>
+            添加员工信息
+            </summary>
+            <param name="emp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetRolesForSelect">
+            <summary>
+            获取角色信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetDepartments">
+            <summary>
+            获取部门信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetEmployeesForShow(System.Int32,System.Int32,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            获取员工信息
+            </summary>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <param name="eNumber"></param>
+            <param name="eName"></param>
+            <param name="ePhone"></param>
+            <param name="eDepartId"></param>
+            <param name="eRoleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetPowers(System.Int32,System.Int32)">
+            <summary>
+            角色的权限的显示
+            </summary>
+            <param name="employeeId"></param>
+            <param name="powersParentId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetStoresFromLogin(System.String)">
+            <summary>
+            通过用户手机号返回店铺信息
+            </summary>
+            <param name="userPhone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetStoresForUpdate(System.Int32)">
+            <summary>
+            通过店铺id  店铺信息
+            </summary>
+            <param name="storeId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.UpdateStore(Purchase_Sell_Stock.Model.SettingModels.Store)">
+            <summary>
+            用于修改店铺信息
+            </summary>
+            <param name="store"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetRoleTypes">
+            <summary>
+            用于显示角色类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetRoles(System.Int32)">
+            <summary>
+            通过角色类型获取角色
+            </summary>
+            <param name="roleTypesId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetPowersBySet(System.Int32,System.Int32)">
+            <summary>
+            用于修改角色的权限
+            </summary>
+            <param name="powerParentId"></param>
+            <param name="rolesId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.GetPowersByShowId(System.Int32)">
+            <summary>
+            根据角色查询权限id
+            </summary>
+            <param name="roleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.DeletePowersAndRoles(System.String,System.Int32)">
+            <summary>
+            删除角色的一项权限
+            </summary>
+            <param name="powerId"></param>
+            <param name="roleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.AddPowersAndRoles(System.String,System.Int32)">
+            <summary>
+            添加角色的一项权限
+            </summary>
+            <param name="powerId"></param>
+            <param name="roleId"></param>
             <returns></returns>
         </member>
         <member name="F:Purchase_Sell_Stock.API.Controllers.StorageController._storage">

@@ -22,6 +22,26 @@ namespace Purchase_Sell_Stock.DAL
              List<Users> list= dBAdo.GetList<Users>(sql);
             return list;
         }
+        public int IsEmployeeOrBoss(int id)
+        {
+            string sql = $"select * from Employee where EmployeeUserId = '{id}'";
+            List<Purchase_Sell_Stock.Model.SettingModels.Employee> elist = dBAdo.GetList<Purchase_Sell_Stock.Model.SettingModels.Employee>(sql);
+            if (elist.Count>0)
+            {
+                if (elist[0].EmployeeRolesId==1)
+                {
+                    return 20000;
+                }
+                else
+                { 
+                    return elist[0].EmployeeId;
+                }
+            }
+            else
+            {
+                return -2;
+            }
+        }
         /// <summary>
         /// 短信登录
         /// </summary>

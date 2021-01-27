@@ -8,6 +8,7 @@ using Purchase_Sell_Stock.Model.Login;
 using Purchase_Sell_Stock.Services;
 using Newtonsoft.Json;
 using Purchase_Sell_Stock.IServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
@@ -20,9 +21,19 @@ namespace Purchase_Sell_Stock.API.Controllers
     {
         LoginBll bll = new LoginBll();
         private ILogin _login;
-        public LoginController(ILogin login)
+        JwtBuilder _jwt;
+        public LoginController(ILogin login, JwtBuilder _builder)
         {
             _login = login;
+            _jwt = _builder;
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("/api/Login/GetToken")]
+        public string GetToken(Users users)
+        {
+            string token = _jwt.GetJwt(users);
+            return token;
         }
         /// <summary>
         /// 登录
@@ -36,22 +47,27 @@ namespace Purchase_Sell_Stock.API.Controllers
             List<Users> list = _login.Login(users.UserPhone, users.UserPassword);
             if (list.Count>0)
             {
-                return 1;
+                int s = _login.IsEmployeeOrBoss(list[0].UserId);
+                return s;
             }
             return 0;
         }
         /// <summary>
         /// 短信登陆
         /// </summary>
-        /// <param name="phone"></param>
+        /// <param name="users"></param>
         /// <returns></returns>
         [HttpPost]
         [Route("/api/Logins")]
-        
-        public List<Users> Logins(string phone)
+        public int Logins(Users users)
         {
-            List<Users> list = _login.Logins(phone);
-            return list;
+            List<Users> list = _login.Logins(users.UserPhone);
+            if (list.Count > 0)
+            {
+                int s = _login.IsEmployeeOrBoss(list[0].UserId);
+                return s;
+            }
+            return 0;
         }
         /// <summary>
         /// 忘记密码
