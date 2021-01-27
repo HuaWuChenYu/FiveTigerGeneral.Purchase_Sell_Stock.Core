@@ -9,6 +9,7 @@ using Purchase_Sell_Stock.Services;
 using Purchase_Sell_Stock.IServices;
 using Newtonsoft.Json;
 using System.IO;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Purchase_Sell_Stock.API.Controllers
@@ -18,12 +19,13 @@ namespace Purchase_Sell_Stock.API.Controllers
     
     public class GoodsController : ControllerBase
     {
+        private readonly ILogger<CustomerController> _logger;
         private IGoods _goods1;
-        public GoodsController(IGoods goods)
+        public GoodsController(IGoods goods,ILogger<CustomerController> logger)
         {
+            _logger = logger;
             _goods1 = goods;
         }
-
         [HttpGet]
         [Route("/api/GetGoodsList/{storeId}")]
         /// <summary>
@@ -39,6 +41,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public string GetGoodsList(int storeId, int pageIndex, int pageSize, string goodsName = "", string goodsType = "", string goodsClassify = "")
         {
+            _logger.LogInformation("商品档案显示");
             if (goodsType == "全部")
             {
                 goodsType = "";
@@ -52,27 +55,53 @@ namespace Purchase_Sell_Stock.API.Controllers
                 count = goodsPaging.Count,
                 data = goodsPaging.list
             };
-            string str= JsonConvert.SerializeObject(jsonData);
+            string str = JsonConvert.SerializeObject(jsonData);
             return str;
         }
         [HttpGet]
-        [Route("/api/GetGoodsBrandList/{brandId}/{brandName}/{storeId}")]
+        [Route("/api/GetGoodsBrandList/{storeId}")]
         ///<summary>
-        /// 商品品牌查询
+        /// 商品品牌下拉
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="brandId"></param>
         /// <param name="brandName"></param>
         /// <returns></returns>
-        public List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName, int storeId)
+        public List<GoodsBrand> GetGoodsBrandList( int storeId,int brandId, string brandName)
         {
+            _logger.LogInformation("商品品牌显示");
             List<GoodsBrand> list = _goods1.GetGoodsBrandList(brandId, brandName, storeId);
             return list;
         }
         [HttpGet]
+        [Route("/api/GetGoodsBrandListShow/{storeId}")]
+        ///<summary>
+        /// 商品品牌显示
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="brandId"></param>
+        /// <param name="brandName"></param>
+        /// <returns></returns>
+        public string GetGoodsBrandListShow(int storeId, int brandId, string brandName)
+        {
+            List<GoodsBrand> list = _goods1.GetGoodsBrandList(brandId, brandName, storeId);
+            return JsonConvert.SerializeObject(new { code=0,msg="",count=list.Count,data=list});
+        }
+        [HttpGet]
+        [Route("/api/DelBrand")]
+        /// <summary>
+        /// 删除品牌
+        /// </summary>
+        /// <param name="brandId"></param>
+        /// <returns></returns>
+        public int DelBrand(int brandId)
+        {
+            return _goods1.DelBrand(brandId);
+        }
+        [HttpGet]
         [Route("/api/GetGoodsTypeList/{typeId}/{typeName}/{storeId}")]
         /// <summary>
-        /// 商品分类查询
+        /// 商品分类下拉
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="typeId"></param>
@@ -80,13 +109,14 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public List<GoodsType> GetGoodsTypeList(int typeId, string typeName, int storeId)
         {
+            _logger.LogInformation("商品分类显示");
             List<GoodsType> list = _goods1.GetGoodsTypeList(typeId, typeName, storeId);
             return list;
         }
         [HttpGet]
-        [Route("/api/GetGoodsUnitList/{unitId}/{unitName}/{storeId}")]
+        [Route("/api/GetGoodsUnitList/{storeId}")]
         /// <summary>
-        /// 商品单位查询
+        /// 商品单位下拉
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="unitId"></param>
@@ -94,8 +124,34 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName, int storeId)
         {
+            _logger.LogInformation("商品单位显示");
             List<GoodsUnit> list = _goods1.GetGoodsUnitList(unitId, unitName, storeId);
             return list;
+        }
+        [HttpGet]
+        [Route("/api/GetGoodsUnitListShow/{storeId}")]
+        /// <summary>
+        /// 商品单位显示
+        /// </summary>
+        /// <param name="storeId"></param>
+        /// <param name="brandId"></param>
+        /// <param name="brandName"></param>
+        /// <returns></returns>
+        public string GetGoodsUnitListShow(int storeId, int unitId, string unitName)
+        {
+            List<GoodsUnit> list = _goods1.GetGoodsUnitList(unitId, unitName, storeId);
+            return JsonConvert.SerializeObject(new { code = 0, msg = "", count = list.Count, data = list });
+        }
+        /// <summary>
+        /// 删除单位
+        /// </summary>
+        /// <param name="brandId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("/api/DelUnit")]
+        public int DelUnit(int unitId)
+        {
+            return _goods1.DelUnit(unitId);
         }
         [HttpPost]
         [Route("/api/AddGoodsType")]
@@ -106,6 +162,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns> v  
         public int AddGoodsType(GoodsType goods)
         {
+            _logger.LogInformation("添加商品分类");
             return _goods1.AddGoodsType(goods);
         }
         [HttpPost]
@@ -117,6 +174,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns> v  
         public int AddGoodsBrand(GoodsBrand goods)
         {
+            _logger.LogInformation("添加商品品牌");
             return _goods1.AddGoodsBrand(goods);
         }
         [HttpPost]
@@ -128,6 +186,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns> v  
         public int AddGoodsUnit(GoodsUnit goods)
         {
+            _logger.LogInformation("添加商品单位");
             return _goods1.AddGoodsUnit(goods);
         }
         [HttpPost]
@@ -139,6 +198,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns> v
         public int AddGoods([FromBody] Goods goods)
         {
+            _logger.LogInformation("添加商品");
             int i = _goods1.AddGoods(goods);
             return i;
         }
@@ -152,6 +212,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public int ModifyState(int goodId)
         {
+            _logger.LogInformation("修改商品上下架");
             int i = _goods1.ModifyState(goodId);
             return i;
         }
@@ -166,6 +227,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// [HttpPost]
         public int DeleteGoods(string goodIds)
         {
+            _logger.LogInformation("删除商品");
             return _goods1.DeleteGoods(goodIds );
         }
         [HttpGet]
@@ -177,6 +239,8 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public Goods GetGoodsById(int goodsId)
         {
+            _logger.LogInformation("根据id查询信息");
+
             List<Goods> list = _goods1.GetGoodsById(goodsId);
             return list[0];
         }
@@ -189,6 +253,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public int ModifyGoods(Goods goods)
         {
+            _logger.LogInformation("修改商品单位");
             int i = _goods1.ModifyGoods(goods);
             return i;
         }

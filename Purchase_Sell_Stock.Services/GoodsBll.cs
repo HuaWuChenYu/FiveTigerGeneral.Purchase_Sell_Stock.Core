@@ -61,6 +61,24 @@ namespace Purchase_Sell_Stock.Services
             return goods1.GetGoodsUnitList<GoodsUnit>(unitId, unitName, storeId);
         }
         /// <summary>
+        /// 删除品牌
+        /// </summary>
+        /// <param name="brandId"></param>
+        /// <returns></returns>
+        public int DelBrand(int brandId)
+        {
+            return goods1.DelBrand(brandId);
+        }
+        /// <summary>
+        /// 删除单位
+        /// </summary>
+        /// <param name="unitId"></param>
+        /// <returns></returns>
+        public int DelUnit(int unitId)
+        {
+            return goods1.DelUnit(unitId);
+        }
+        /// <summary>
         /// 添加商品
         /// </summary>
         /// <param name="goods"></param>

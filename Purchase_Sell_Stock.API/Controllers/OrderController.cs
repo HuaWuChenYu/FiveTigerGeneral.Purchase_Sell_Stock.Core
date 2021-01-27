@@ -10,6 +10,7 @@ using Purchase_Sell_Stock.IServices;
 using Newtonsoft.Json;
 using Purchase_Sell_Stock.Model.GoodsFunction;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
@@ -18,9 +19,11 @@ namespace Purchase_Sell_Stock.API.Controllers
     
     public class OrderController : ControllerBase
     {
+        private readonly ILogger<CustomerController> _logger;
         private IOrder _order;
-        public OrderController(IOrder order)
+        public OrderController(IOrder order, ILogger<CustomerController> logger)
         {
+            _logger = logger;
             _order = order;
         }
 
@@ -45,6 +48,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public string GetOrderList(int orderState, string orderNum, string sellType, string time, string person, string phone, string payType, int pageIndex, int pageSize, int storeId)
         {
+            _logger.LogInformation("订单查询显示");
             OrderPaging<Orders> orderPaging = _order.GetOrderList<Orders>(orderState, orderNum, sellType, time, person, phone, payType, pageIndex, pageSize, storeId);
             var jsonData = new
             {
@@ -64,6 +68,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public Orders GetOrderById_1(int orderId)
         {
+            _logger.LogInformation("订单明细上");
             return _order.GetOrderById_1(orderId);
         }
         [HttpGet]
@@ -75,6 +80,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public string GetOrderById_2(int orderId)
         {
+            _logger.LogInformation("订单明细下");
             List<Goods> list = _order.GetOrderById_2(orderId);
             var dataJson = new
             {
@@ -94,6 +100,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public int ModifyOrderState(int orderId)
         {
+            _logger.LogInformation("订单出货");
             return _order.ModifyOrderState(orderId);
         }
 
@@ -116,6 +123,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public string CancelOrderList(string CancelOrderNumber, string OrdersNum, int goState, int cancelState, string time, int storeId, int pageIndex, int pageSize)
         {
+            _logger.LogInformation("订单退货");
             OrderPaging<CancelOrder> cancelOrderPaging= _order.CancelOrderList<CancelOrder>(CancelOrderNumber, OrdersNum, goState, cancelState, time, storeId, pageIndex, pageSize);
             var jsonData = new
             {
@@ -135,6 +143,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public CancelOrderOneViewModel GetCancelOneById(int orderId)
         {
+            _logger.LogInformation("退单明细");
             CancelOrderOneViewModel obj= _order.GetCancelOneById(orderId);
             return obj;
         }
@@ -147,6 +156,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public int ModifyCancelState(int orderId)
         {
+            _logger.LogInformation("修改状态");
             return _order.ModifyCancelState(orderId);
         }
         [HttpGet]
@@ -165,6 +175,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public string CancelCommentList(string content, string person, string time, string type, int storeId, int pageIndex, int pageSize)
         {
+            _logger.LogInformation("查询评价");
             OrderPaging<Comment> comment = _order.CommentList<Comment>(content, person, time, type, storeId, pageIndex, pageSize);
             var jsonData = new
             {
@@ -184,6 +195,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public int ReplyComment(Comment comment)
         {
+            _logger.LogInformation("回复评价");
             return _order.ReplyComment(comment.CommentId, comment.CommentContent);
         }
     }

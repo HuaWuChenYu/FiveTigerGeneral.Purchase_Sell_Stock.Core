@@ -9,6 +9,7 @@ using Purchase_Sell_Stock.Services;
 using Newtonsoft.Json;
 using Purchase_Sell_Stock.IServices;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
@@ -21,11 +22,13 @@ namespace Purchase_Sell_Stock.API.Controllers
     {
         LoginBll bll = new LoginBll();
         private ILogin _login;
+        private readonly ILogger<CustomerController> _logined;
         JwtBuilder _jwt;
-        public LoginController(ILogin login, JwtBuilder _builder)
+        public LoginController(ILogin login, JwtBuilder _builder, ILogger<CustomerController> loggered)
         {
             _login = login;
             _jwt = _builder;
+            _logined = loggered;
         }
         [AllowAnonymous]
         [HttpPost]
@@ -48,6 +51,7 @@ namespace Purchase_Sell_Stock.API.Controllers
             if (list.Count>0)
             {
                 int s = _login.IsEmployeeOrBoss(list[0].UserId);
+                _logined.LogInformation($"{users.UserPhone}登录成功");
                 return s;
             }
             return 0;
@@ -61,9 +65,11 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/Logins")]
         public int Logins(Users users)
         {
+           
             List<Users> list = _login.Logins(users.UserPhone);
             if (list.Count > 0)
             {
+                _logined.LogInformation($"{users.UserPhone}");
                 int s = _login.IsEmployeeOrBoss(list[0].UserId);
                 return s;
             }
@@ -79,6 +85,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         
         public int Forgers(Users g)
         {
+            _logined.LogInformation($"{g}忘记密码");
             return _login.Forget(g);
         }
 
@@ -92,6 +99,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         [Route("/api/Register")]
         public int Register(Users a)
         {
+            _logined.LogInformation($"注册{a}成功");
             return _login.Register(a);
         }
     }

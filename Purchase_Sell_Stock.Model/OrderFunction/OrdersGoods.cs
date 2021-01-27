@@ -25,5 +25,9 @@ namespace Purchase_Sell_Stock.Model.OrderFunction
         /// 订单外键
         /// </summary>
         public int OrdersId { get; set; }
+        /// <summary>
+        /// 已出库数量
+        /// </summary>
+        public int Ooutbound { get; set; }
     }
 }

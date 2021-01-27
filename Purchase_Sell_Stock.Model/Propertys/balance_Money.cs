@@ -45,5 +45,10 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// 说明
         /// </summary>
         public string Explain { get; set; }
+
+        /// <summary>
+        /// 待结算总金额
+        /// </summary>
+        public decimal sttledmoney { get; set; }
     }
 }

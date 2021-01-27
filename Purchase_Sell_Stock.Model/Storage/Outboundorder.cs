@@ -37,11 +37,6 @@ namespace Purchase_Sell_Stock.Model.Storage
         [SugarColumn(ColumnName = "OutboundorderState")]
         public int OutboundorderState { get; set; }
         /// <summary>
-        /// 出库数量（默认值0）
-        /// </summary>
-        [SugarColumn(ColumnName = "OutboundorderNumber")]
-        public int OutboundorderNumber { get; set; }
-        /// <summary>
         /// 发货方（仓库）（仓库外键）
         /// </summary>
         [SugarColumn(ColumnName = "WarehouseId")]

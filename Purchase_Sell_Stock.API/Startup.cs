@@ -43,7 +43,9 @@ namespace Purchase_Sell_Stock.API
             services.AddTransient<ISet,SetBll>();//设置
             services.AddTransient<ILogin,LoginBll>();
             services.AddTransient<PropertyBll>();
+            services.AddSingleton<IProcurement, ProcurementBll>();//采购
             services.AddControllers();
+           
             
             //配置跨域处理，允许所有来源：
             services.AddCors(options =>

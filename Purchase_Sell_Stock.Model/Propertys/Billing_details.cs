@@ -48,5 +48,20 @@ namespace Purchase_Sell_Stock.Model.Storage
         /// 单据编码
         /// </summary>
         public string Order_NUm { get; set; }
+
+        /// <summary>
+        /// 支/收总数
+        /// </summary>
+        public int Num { get; set; }
+
+        /// <summary>
+        /// 支/收钱数总数
+        /// </summary>
+        public decimal MoneySum { get; set; }
+
+        /// <summary>
+        /// 待结算总金额
+        /// </summary>
+        public decimal sttledmoney { get; set; }
     }
 }

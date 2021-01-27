@@ -34,6 +34,12 @@ namespace Purchase_Sell_Stock.IServices
         /// <returns></returns>
         List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName, int storeId);
         /// <summary>
+        /// 删除品牌
+        /// </summary>
+        /// <param name="brandId"></param>
+        /// <returns></returns>
+        int DelBrand(int brandId);
+        /// <summary>
         /// 商品单位查询
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -41,6 +47,12 @@ namespace Purchase_Sell_Stock.IServices
         /// <param name="unitName"></param>
         /// <returns></returns>
         List<GoodsUnit> GetGoodsUnitList(int unitId, string unitName, int storeId);
+        /// <summary>
+        /// 删除单位
+        /// </summary>
+        /// <param name="unitId"></param>
+        /// <returns></returns>
+        int DelUnit(int unitId);
         /// <summary>
         /// 添加商品
         /// </summary>
