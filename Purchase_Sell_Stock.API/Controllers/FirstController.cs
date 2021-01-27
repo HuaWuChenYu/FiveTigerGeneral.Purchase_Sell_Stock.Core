@@ -23,7 +23,7 @@ namespace Purchase_Sell_Stock.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    
     public class FirstController : ControllerBase
     {
         private IFirst _first;
@@ -113,6 +113,8 @@ namespace Purchase_Sell_Stock.API.Controllers
         {
             _logger.LogInformation("支付金额显示");
             return _first.orderUser(storeId, date);
+            decimal a= _first.orderMoney(storeId, date);
+            return a;
         }
         [HttpGet]
         [Route("/api/orderUser/{storeId}/{date}")]

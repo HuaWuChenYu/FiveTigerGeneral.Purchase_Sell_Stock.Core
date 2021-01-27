@@ -31,6 +31,7 @@ namespace Purchase_Sell_Stock.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Configuration.GetConnectionString("Customer");
             services.AddSingleton<IStorage, StorageBll>();
             //xiaoMi11locastr
             DBHelper._locastr = Configuration["ConnectionString:locastr"];
@@ -45,6 +46,7 @@ namespace Purchase_Sell_Stock.API
             services.AddSingleton<IProcurement, ProcurementBll>();//采购
             services.AddControllers();
            
+            
             //配置跨域处理，允许所有来源：
             services.AddCors(options =>
             {

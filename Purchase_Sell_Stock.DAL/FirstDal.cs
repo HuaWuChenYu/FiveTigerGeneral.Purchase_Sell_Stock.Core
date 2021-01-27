@@ -75,7 +75,7 @@ namespace Purchase_Sell_Stock.DAL
             {
                 return 0;
             }
-            decimal i = Convert.ToInt32(dapper.ExecuteScalar(str, new { storeId, date }));
+            decimal i = Convert.ToDecimal(dapper.ExecuteScalar(str, new { storeId, date }));
             return i;
         }
         /// <summary>
@@ -157,7 +157,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public List<Goods> SellSum(int storeId)
         {
-            string sql = "select top 10 ROW_NUMBER() over(order by GoodsName) Num,GoodsName,sum(OrdersGoodsNum) GoodsSum from OrdersGoods og join Orders od on og.OrdersId = od.OrdersId join Goods gd on gd.GoodsId = og.GoodsId" +
+            string sql = "select top 10 ROW_NUMBER() over(order by sum(OrdersGoodsNum) desc) Num,GoodsName,sum(OrdersGoodsNum) GoodsSum from OrdersGoods og join Orders od on og.OrdersId = od.OrdersId join Goods gd on gd.GoodsId = og.GoodsId" +
                 " group by GoodsName,od.StoreId having od.StoreId = @storeId order by sum(OrdersGoodsNum) desc";
             List<Goods> list = dapper.GetList<Goods>(sql, new { storeId });
             return list;
@@ -180,7 +180,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public List<Incomingorder> ChangeIncomingorder(int storeId)
         {
-            string str = "select * from Incomingorder ig join Procurement pm on pm.ProcurementId = ig.ProcurementId where StoreId = @storeId";
+            string str = "select * from Incomingorder im join Procurement po on po.ProcurementId = im.ProcurementId where StoreId = @storeId and IncomingorderState = 1";
             List<Incomingorder> list = dapper.GetList<Incomingorder>(str, new { storeId });
             return list;
         }
@@ -191,7 +191,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public List<Procurement> ChangeProcurement(int storeId)
         {
-            string str = "select * from Procurement where StoreId = @storeId";
+            string str = "select * from Procurement where StoreId = @storeId and ProcurementState = 0";
             List<Procurement> list = dapper.GetList<Procurement>(str, new { storeId });
             return list;
         }

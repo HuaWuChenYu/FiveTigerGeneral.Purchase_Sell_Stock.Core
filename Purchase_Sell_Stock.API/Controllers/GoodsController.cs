@@ -16,7 +16,7 @@ namespace Purchase_Sell_Stock.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    
     public class GoodsController : ControllerBase
     {
         private readonly ILogger<CustomerController> _logger;
@@ -55,28 +55,53 @@ namespace Purchase_Sell_Stock.API.Controllers
                 count = goodsPaging.Count,
                 data = goodsPaging.list
             };
-            string str= JsonConvert.SerializeObject(jsonData);
+            string str = JsonConvert.SerializeObject(jsonData);
             return str;
         }
         [HttpGet]
-        [Route("/api/GetGoodsBrandList/{brandId}/{brandName}/{storeId}")]
+        [Route("/api/GetGoodsBrandList/{storeId}")]
         ///<summary>
-        /// 商品品牌查询
+        /// 商品品牌下拉
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="brandId"></param>
         /// <param name="brandName"></param>
         /// <returns></returns>
-        public List<GoodsBrand> GetGoodsBrandList(int brandId, string brandName, int storeId)
+        public List<GoodsBrand> GetGoodsBrandList( int storeId,int brandId, string brandName)
         {
             _logger.LogInformation("商品品牌显示");
             List<GoodsBrand> list = _goods1.GetGoodsBrandList(brandId, brandName, storeId);
             return list;
         }
         [HttpGet]
+        [Route("/api/GetGoodsBrandListShow/{storeId}")]
+        ///<summary>
+        /// 商品品牌显示
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="brandId"></param>
+        /// <param name="brandName"></param>
+        /// <returns></returns>
+        public string GetGoodsBrandListShow(int storeId, int brandId, string brandName)
+        {
+            List<GoodsBrand> list = _goods1.GetGoodsBrandList(brandId, brandName, storeId);
+            return JsonConvert.SerializeObject(new { code=0,msg="",count=list.Count,data=list});
+        }
+        [HttpGet]
+        [Route("/api/DelBrand")]
+        /// <summary>
+        /// 删除品牌
+        /// </summary>
+        /// <param name="brandId"></param>
+        /// <returns></returns>
+        public int DelBrand(int brandId)
+        {
+            return _goods1.DelBrand(brandId);
+        }
+        [HttpGet]
         [Route("/api/GetGoodsTypeList/{typeId}/{typeName}/{storeId}")]
         /// <summary>
-        /// 商品分类查询
+        /// 商品分类下拉
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="typeId"></param>
@@ -89,9 +114,9 @@ namespace Purchase_Sell_Stock.API.Controllers
             return list;
         }
         [HttpGet]
-        [Route("/api/GetGoodsUnitList/{unitId}/{unitName}/{storeId}")]
+        [Route("/api/GetGoodsUnitList/{storeId}")]
         /// <summary>
-        /// 商品单位查询
+        /// 商品单位下拉
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="unitId"></param>
@@ -102,6 +127,31 @@ namespace Purchase_Sell_Stock.API.Controllers
             _logger.LogInformation("商品单位显示");
             List<GoodsUnit> list = _goods1.GetGoodsUnitList(unitId, unitName, storeId);
             return list;
+        }
+        [HttpGet]
+        [Route("/api/GetGoodsUnitListShow/{storeId}")]
+        /// <summary>
+        /// 商品单位显示
+        /// </summary>
+        /// <param name="storeId"></param>
+        /// <param name="brandId"></param>
+        /// <param name="brandName"></param>
+        /// <returns></returns>
+        public string GetGoodsUnitListShow(int storeId, int unitId, string unitName)
+        {
+            List<GoodsUnit> list = _goods1.GetGoodsUnitList(unitId, unitName, storeId);
+            return JsonConvert.SerializeObject(new { code = 0, msg = "", count = list.Count, data = list });
+        }
+        /// <summary>
+        /// 删除单位
+        /// </summary>
+        /// <param name="brandId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("/api/DelUnit")]
+        public int DelUnit(int unitId)
+        {
+            return _goods1.DelUnit(unitId);
         }
         [HttpPost]
         [Route("/api/AddGoodsType")]

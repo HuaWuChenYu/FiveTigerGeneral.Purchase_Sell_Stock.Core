@@ -11,9 +11,11 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Purchase_Sell_Stock.API.Controllers
 {
+    /// <summary>
+    /// 设置
+    /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize]
     public class SettingController : ControllerBase
     {
         private readonly ILogger<CustomerController> _logger;
@@ -316,6 +318,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// </summary>
         /// <param name="userPhone"></param>
         /// <returns></returns>
+        [Authorize]
         [HttpGet]
         public List<ViewStoreInfo> GetStoresFromLogin(string userPhone)
         {
