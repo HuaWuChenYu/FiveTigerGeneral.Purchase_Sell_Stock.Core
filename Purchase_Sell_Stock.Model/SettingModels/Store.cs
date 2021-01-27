@@ -53,12 +53,12 @@ namespace Purchase_Sell_Stock.Model.SettingModels
         /// 有效时间(用于显示有效期剩余天数) 
         /// </summary>
         public DateTime StoreEffectiveDate { get; set; }
-        public string StrStart { get {return DateTime.Now.ToString("yyyy-MM-dd"); } }
-        public string StrEnd { get { return StoreEffectiveDate.ToString("yyyy-MM-dd"); } }
         /// <summary>
         /// 创建时间
         /// </summary>
         public DateTime StoreCreateDate { get; set; }
+        public string StrStart { get { return StoreCreateDate.ToString("yyyy-MM-dd"); } }
+        public string StrEnd { get { return StoreEffectiveDate.ToString("yyyy-MM-dd"); } }
         /// <summary>
         /// 店铺logo
         /// </summary>
