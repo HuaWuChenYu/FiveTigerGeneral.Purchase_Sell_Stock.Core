@@ -102,6 +102,7 @@ namespace Purchase_Sell_Stock.API
                 //·�����ã�����Ϊ�գ���ʾֱ���ڸ�������localhost:8001�����ʸ��ļ�,ע��localhost:8001/swagger�Ƿ��ʲ����ģ�ȥlaunchSettings.json��launchUrlȥ���������뻻һ��·����ֱ��д���ּ��ɣ�����ֱ��дc.RoutePrefix = "doc";
                 c.RoutePrefix = "";
             });
+            
             app.UseRouting();
             app.UseAuthentication();//身份验证
             app.UseAuthorization();
