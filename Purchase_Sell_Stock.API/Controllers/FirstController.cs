@@ -99,7 +99,8 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         public decimal orderMoney(int storeId, int date)
         {
-            return _first.orderUser(storeId, date);
+            decimal a= _first.orderMoney(storeId, date);
+            return a;
         }
         [HttpGet]
         [Route("/api/orderUser/{storeId}/{date}")]

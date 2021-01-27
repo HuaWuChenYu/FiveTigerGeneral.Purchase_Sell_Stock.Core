@@ -26,7 +26,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <param name="goodsType"></param>
         /// <param name="goodsClassify"></param>
         /// <returns></returns>
-        public GoodsPaging<Goods> GetGoodsList<Goods>(int pageIndex, int pageSize, string goodsName, string goodsType, string goodsClassify,int storeId)
+        public GoodsPaging<Goods> GetGoodsList<Goods>(int pageIndex, int pageSize, string goodsName, string goodsType, string goodsClassify, int storeId)
         {
             string sql = $"1 = 1 and StoreId = {storeId}";
             if (!string.IsNullOrEmpty(goodsName))
@@ -66,7 +66,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <param name="typeId"></param>
         /// <param name="typeName"></param>
         /// <returns></returns>
-        public List<GoodsType> GetGoodsTypeList<GoodsType>(int typeId, string typeName,int storeId)
+        public List<GoodsType> GetGoodsTypeList<GoodsType>(int typeId, string typeName, int storeId)
         {
             string sql = "select * from GoodsType where 1 = 1 and StoreId = @StoreId and GoodsTypePId != 0";
             if (typeId != 0)
@@ -78,7 +78,7 @@ namespace Purchase_Sell_Stock.DAL
                 sql += " and GoodsTypeName = @typeName";
             }
 
-            List<GoodsType> list = dBDapper.GetList<GoodsType>(sql,new { typeId, typeName, storeId });
+            List<GoodsType> list = dBDapper.GetList<GoodsType>(sql, new { typeId, typeName, storeId });
             return list;
         }
         /// <summary>
@@ -97,10 +97,20 @@ namespace Purchase_Sell_Stock.DAL
             }
             if (!string.IsNullOrEmpty(brandName))
             {
-                sql += " and GoodsBrandName = @brandName";
+                sql += " and GoodsBrandName like @brandName";
             }
-            List<GoodsBrand> list = dBDapper.GetList<GoodsBrand>(sql,new { brandId, brandName, storeId });
+            List<GoodsBrand> list = dBDapper.GetList<GoodsBrand>(sql, new { brandId, brandName = '%' + brandName + '%', storeId });
             return list;
+        }
+        /// <summary>
+        /// 删除品牌
+        /// </summary>
+        /// <param name="brandId"></param>
+        /// <returns></returns>
+        public int DelBrand(int brandId) 
+        {
+            string sql = "delete GoodsBrand where GoodsBrandId = @brandId";
+            return dBDapper.ExecuteNonQuery(sql,new { brandId });
         }
         /// <summary>
         /// 商品单位查询
@@ -118,10 +128,20 @@ namespace Purchase_Sell_Stock.DAL
             }
             if (!string.IsNullOrEmpty(unitName))
             {
-                sql += " and GoodsUnitName = @unitName";
+                sql += " and GoodsUnitName like @unitName";
             }
-            List<GoodsUnit> list = dBDapper.GetList<GoodsUnit>(sql,new { unitId , storeId, unitName });
+            List<GoodsUnit> list = dBDapper.GetList<GoodsUnit>(sql,new { unitId , storeId, unitName = '%' + unitName + '%' });
             return list;
+        }
+        /// <summary>
+        /// 删除单位
+        /// </summary>
+        /// <param name="unitId"></param>
+        /// <returns></returns>
+        public int DelUnit(int unitId)
+        {
+            string sql = "delete GoodsUnit where GoodsUnitId = @unitId";
+            return dBDapper.ExecuteNonQuery(sql, new { unitId });
         }
         /// <summary>
         /// 添加商品
