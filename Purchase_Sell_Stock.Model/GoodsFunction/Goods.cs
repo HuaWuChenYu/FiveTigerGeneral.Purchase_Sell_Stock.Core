@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using SqlSugar;
@@ -14,7 +15,7 @@ namespace Purchase_Sell_Stock.Model.GoodsFunction
         /// <summary>
         /// 商品主键
         /// </summary>
-        [SugarColumn(ColumnName = "GoodsId",IsPrimaryKey =true,IsIdentity =true)]
+        [SugarColumn(ColumnName = "GoodsId", IsPrimaryKey = true, IsIdentity = true)]
         public int GoodsId { get; set; }
         /// <summary>
         /// 商品名称
@@ -35,13 +36,13 @@ namespace Purchase_Sell_Stock.Model.GoodsFunction
         /// <summary>
         /// 商品价格
         /// </summary>
-      
+
         [SugarColumn(ColumnName = "Price")]
         public float Price { get; set; }
         /// <summary>
         /// 进货价格
         /// </summary>
-       
+
         [SugarColumn(ColumnName = "ProcurementPrice")]
         public float ProcurementPrice { get; set; }
         /// <summary>
@@ -79,18 +80,22 @@ namespace Purchase_Sell_Stock.Model.GoodsFunction
         /// <summary>
         /// 商品数量
         /// </summary>
+        [SugarColumn(IsIgnore=true)]
         public int OrdersGoodsNum { get; set; }
         /// <summary>
         /// 小计
         /// </summary>
+        [SugarColumn(IsIgnore = true)]
         public double AllPrice { get { return Math.Round(Price * OrdersGoodsNum * 100) / 100; } }
         /// <summary>
         /// 商品排行销量
         /// </summary>
+        [SugarColumn(IsIgnore = true)]
         public int GoodsSum { get; set; }
         /// <summary>
         /// 排行
         /// </summary>
+        [SugarColumn(IsIgnore = true)]
         public int Num { get; set; }
     }
 }
