@@ -42,7 +42,7 @@ namespace Purchase_Sell_Stock.DAL
             {
                 sql += " and WhetherEnable= whetherEnable";
             }
-            List<Customer> list = dBAdo.GetList<Customer>(sql);
+            List<Customer> list = dBDapper.GetList<Customer>(sql);
             return list;
         }
         /// <summary>
@@ -67,7 +67,7 @@ namespace Purchase_Sell_Stock.DAL
             {
                 sql +=$" and DenominationId= {denominationId}";
             }
-            List<RechargCustomer> list = dBAdo.GetList<RechargCustomer>(sql);
+            List<RechargCustomer> list = dBDapper.GetList<RechargCustomer>(sql);
             return list;
         }
        
@@ -143,7 +143,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public int AddDenomination(Denomination a)
         {
-            string sql = $"insert into Denomination values('{a.DenominationLable}','{a.DenominationMoney}','{a.ActuallyMoney}','{a.GivenMoney}',0,'{a.PeriodValidity}',0)";
+            string sql = $"insert into Denomination values('{a.DenominationLable}','{a.DenominationMoney}','{a.ActuallyMoney}','{a.GivenMoney}','{a.Recgargenumber}','{a.PeriodValidity}',0,0)";
             int i= dBAdo.ExecuteNonQuery(sql);
             return i;
         }

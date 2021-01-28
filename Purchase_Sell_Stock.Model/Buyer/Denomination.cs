@@ -41,5 +41,9 @@ namespace Purchase_Sell_Stock.Model.Buyer
         /// 是否启动
         /// </summary>
         public bool WhetherEnable { get; set; }
+        /// <summary>
+        /// 店铺外键
+        /// </summary>
+        public int StoreId { get; set; }
     }
 }
