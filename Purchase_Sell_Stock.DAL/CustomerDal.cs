@@ -143,7 +143,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public int AddDenomination(Denomination a)
         {
-            string sql = $"insert into Denomination values('{a.DenominationLable}','{a.DenominationMoney}','{a.ActuallyMoney}','{a.GivenMoney}',0,'{a.PeriodValidity}',0)";
+            string sql = $"insert into Denomination values('{a.DenominationLable}','{a.DenominationMoney}','{a.ActuallyMoney}','{a.GivenMoney}','{a.Recgargenumber}','{a.PeriodValidity}',0,1)";
             int i= dBAdo.ExecuteNonQuery(sql);
             return i;
         }
