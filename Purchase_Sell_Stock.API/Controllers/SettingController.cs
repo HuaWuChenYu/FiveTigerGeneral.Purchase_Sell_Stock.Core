@@ -318,7 +318,6 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// </summary>
         /// <param name="userPhone"></param>
         /// <returns></returns>
-        [Authorize]
         [HttpGet]
         public List<ViewStoreInfo> GetStoresFromLogin(string userPhone)
         {
