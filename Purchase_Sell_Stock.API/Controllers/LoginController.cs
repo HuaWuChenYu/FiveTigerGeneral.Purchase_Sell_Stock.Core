@@ -23,20 +23,10 @@ namespace Purchase_Sell_Stock.API.Controllers
         LoginBll bll = new LoginBll();
         private ILogin _login;
         private readonly ILogger<CustomerController> _logined;
-        JwtBuilder _jwt;
-        public LoginController(ILogin login, JwtBuilder _builder, ILogger<CustomerController> loggered)
+        public LoginController(ILogin login, ILogger<CustomerController> loggered)
         {
             _login = login;
-            _jwt = _builder;
             _logined = loggered;
-        }
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("/api/Login/GetToken")]
-        public string GetToken(Users users)
-        {
-            string token = _jwt.GetJwt(users);
-            return token;
         }
         /// <summary>
         /// 登录
