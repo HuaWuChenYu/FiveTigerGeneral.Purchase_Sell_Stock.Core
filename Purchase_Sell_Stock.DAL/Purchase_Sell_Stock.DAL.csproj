@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Purchase_Sell_Stock.Model\Purchase_Sell_Stock.Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="Dapper">
       <HintPath>..\..\配置文件\Dapper.dll</HintPath>
     </Reference>
