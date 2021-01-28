@@ -28,7 +28,7 @@ namespace Purchase_Sell_Stock.Model.Buyer
         /// <summary>
         /// 买家标签外键
         /// </summary>
-        public int LableId { get; set; }
+        public string LableName { get; set; }
         /// <summary>
         /// 消费次数
         /// </summary>
