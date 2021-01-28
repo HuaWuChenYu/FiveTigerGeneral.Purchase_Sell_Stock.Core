@@ -35,7 +35,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpGet]
-        public int GetRoleId(string name)
+        public int GetRoleId(string name=null)
         {
             _logger.LogInformation($"获取角色名称{name}");
             return _iset.GetRoleId(name);
@@ -46,7 +46,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="eid"></param>
         /// <returns></returns>
         [HttpGet]
-        public string GetPhoneByEId(int eid)
+        public string GetPhoneByEId(int eid=-1)
         {
             _logger.LogInformation($"获取的手机号:{eid}");
             return _iset.GetPhoneByEId(eid);
@@ -88,7 +88,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="pid"></param>
         /// <returns></returns>
         [HttpGet]
-        public int GetPowerIdForBig(int pid)
+        public int GetPowerIdForBig(int pid=-1)
         {
             _logger.LogInformation("查询大菜单");
             return _iset.GetPowerIdForBig(pid);
@@ -100,7 +100,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="empId"></param>
         /// <returns></returns>
         [HttpGet]
-        public Powers GetPowersBySel(string name, int empId)
+        public Powers GetPowersBySel(string name=null, int empId=-1)
         {
             _logger.LogInformation($"权限名以及路径{name}{empId}");
             return _iset.GetPowersBySel(name,empId);
@@ -126,7 +126,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="storeid"></param>
         /// <returns></returns>
         [HttpGet]
-        public List<Company> IsHaveCompany(int storeid)
+        public List<Company> IsHaveCompany(int storeid=-1)
         {
             _logger.LogInformation($"查询店铺是否认证主题,认真返回值{storeid}");
             return _iset.IsHaveCompany(storeid);
@@ -148,7 +148,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public Department GetDepartmentById(int id)
+        public Department GetDepartmentById(int id=-1)
         {
             _logger.LogInformation($"通过id获取部门:{id}");
             return _iset.GetDepartmentById(id);
@@ -182,7 +182,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpGet]
-        public object GetDepartmentByShow(string number, string name)
+        public object GetDepartmentByShow(string number=null, string name=null)
         {
             _logger.LogInformation($"通过{number},{name}查询员工");
             List<Department> dlist = _iset.GetDepartmentByShow();
@@ -220,7 +220,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public Employee GetEmployeeById(int id)
+        public Employee GetEmployeeById(int id=-1)
         {
             _logger.LogInformation("通过id获取员工信息");
             return _iset.GetEmployeeById(id);
@@ -308,7 +308,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="powersParentId"></param>
         /// <returns></returns>
         [HttpGet]
-        public List<Powers> GetPowers(int employeeId, int powersParentId)
+        public List<Powers> GetPowers(int employeeId=-1, int powersParentId=-1)
         {
             _logger.LogInformation("根据员工id生成不同的导航栏");
             return _iset.GetPowersForUp(employeeId,powersParentId);
@@ -320,7 +320,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <returns></returns>
         [Authorize]
         [HttpGet]
-        public List<ViewStoreInfo> GetStoresFromLogin(string userPhone)
+        public List<ViewStoreInfo> GetStoresFromLogin(string userPhone=null)
         {
             _logger.LogInformation("通过手机号返回店铺信息");
             return _iset.GetStoresFromLogin(userPhone);
@@ -331,7 +331,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="storeId"></param>
         /// <returns></returns>
         [HttpGet]
-        public Store GetStoresForUpdate(int storeId)
+        public Store GetStoresForUpdate(int storeId=-1)
         {
             _logger.LogInformation($"获取店铺id:{storeId}");
             return _iset.GetStoresForUpdate(storeId);
@@ -373,7 +373,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="roleTypesId"></param>
         /// <returns></returns>
         [HttpGet]
-        public List<Roles> GetRoles(int roleTypesId)
+        public List<Roles> GetRoles(int roleTypesId=-1)
         {
             _logger.LogInformation($"角色类型获取角色{roleTypesId}");
             return _iset.GetRoles(roleTypesId);
@@ -385,7 +385,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="rolesId"></param>
         /// <returns></returns>
         [HttpGet]
-        public List<Powers> GetPowersBySet(int powerParentId, int rolesId)
+        public List<Powers> GetPowersBySet(int powerParentId=-1, int rolesId=-1)
         {
             _logger.LogInformation("修改角色权限");
             return _iset.GetPowersBySet(powerParentId,rolesId);
@@ -396,7 +396,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="roleId"></param>
         /// <returns></returns>
         [HttpGet]
-        public List<Powers> GetPowersByShowId(int roleId)
+        public List<Powers> GetPowersByShowId(int roleId=-1)
         {
             _logger.LogInformation("根据角色id查询权限");
             return _iset.GetPowersByShowId(roleId);
@@ -408,7 +408,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="roleId"></param>
         /// <returns></returns>
         [HttpGet]
-        public int DeletePowersAndRoles(string powerId, int roleId)
+        public int DeletePowersAndRoles(string powerId=null, int roleId=-1)
         {
             _logger.LogInformation("删除角色");
             return _iset.DeletePowersAndRoles(powerId, roleId);
@@ -420,7 +420,7 @@ namespace Purchase_Sell_Stock.API.Controllers
         /// <param name="roleId"></param>
         /// <returns></returns>
         [HttpGet]
-        public int AddPowersAndRoles(string powerId, int roleId)
+        public int AddPowersAndRoles(string powerId=null, int roleId=-1)
         {
             _logger.LogInformation("获取角色的一项权限");
             return _iset.AddPowersAndRoles(powerId,roleId);
