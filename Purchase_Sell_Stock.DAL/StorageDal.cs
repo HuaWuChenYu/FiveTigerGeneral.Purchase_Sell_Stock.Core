@@ -263,11 +263,15 @@ namespace Purchase_Sell_Stock.DAL
                     if (order_list.Count==0)
                     {
                         var tui_list = Purchase(outboundorderId);
-                        sqlsugar.GetInstance().Updateable<CancleProcurementGoods>(new { Coutbound = Convert.ToInt32(m[i]), CancleProcurementGoodsNum = tui_list[i].OrdersGoodsNum - Convert.ToInt32(m[i]) }).Where(x => x.CancleProcurementId == tui_list[i].OrdersId && x.GoodsId == tui_list[i].GoodsId).ExecuteCommand();
+                        var coutbound = sqlsugar.GetInstance().Queryable<CancleProcurementGoods>().Where(x => x.CancleProcurementId == tui_list[i].OrdersId && x.GoodsId == tui_list[i].GoodsId).First().Coutbound;
+                        sqlsugar.GetInstance().Updateable<CancleProcurementGoods>(new { Coutbound =(coutbound+ Convert.ToInt32(m[i])), CancleProcurementGoodsNum = tui_list[i].OrdersGoodsNum - Convert.ToInt32(m[i]) })
+                            .Where(x => x.CancleProcurementId == tui_list[i].OrdersId && x.GoodsId == tui_list[i].GoodsId).ExecuteCommand();
                     }
                     else
                     {
-                        sqlsugar.GetInstance().Updateable<OrdersGoods>(new { Ooutbound = Convert.ToInt32(m[i]), OrdersGoodsNum = order_list[i].OrdersGoodsNum - Convert.ToInt32(m[i]) }).Where(x => x.OrdersId == order_list[i].OrdersId && x.GoodsId == order_list[i].GoodsId).ExecuteCommand();
+                        var ooutbound = sqlsugar.GetInstance().Queryable<OrdersGoods>().Where(x => x.OrdersId == order_list[i].OrdersId && x.GoodsId == order_list[i].GoodsId).First().Ooutbound;
+                        sqlsugar.GetInstance().Updateable<OrdersGoods>(new { Ooutbound = (ooutbound+Convert.ToInt32(m[i])), OrdersGoodsNum = order_list[i].OrdersGoodsNum - Convert.ToInt32(m[i]) })
+                            .Where(x => x.OrdersId == order_list[i].OrdersId && x.GoodsId == order_list[i].GoodsId).ExecuteCommand();
                     }
                     //用一个变量来接受剩余库存量
                     int[] Inventoryed = new int[100];
@@ -627,12 +631,16 @@ namespace Purchase_Sell_Stock.DAL
                     {
                         //退单 修改订单商品表
                         var tui_list = Orderreturn(incomingorderid);
-                        sqlsugar.GetInstance().Updateable<OrdersGoods>(new { Ooutbound = Convert.ToInt32(m[i]), OrdersGoodsNum = tui_list[i].ProcurementGoodsNum - Convert.ToInt32(m[i]) }).Where(x => x.GoodsId == tui_list[i].GoodsId && x.OrdersId == tui_list[i].Orders).ExecuteCommand();
+                        var ooutbound = sqlsugar.GetInstance().Queryable<OrdersGoods>().Where(x => x.GoodsId == tui_list[i].GoodsId && x.OrdersId == tui_list[i].Orders).First().Ooutbound;
+                        sqlsugar.GetInstance().Updateable<OrdersGoods>(new { Ooutbound = (ooutbound + Convert.ToInt32(m[i])), OrdersGoodsNum = tui_list[i].ProcurementGoodsNum - Convert.ToInt32(m[i]) })
+                            .Where(x => x.GoodsId == tui_list[i].GoodsId && x.OrdersId == tui_list[i].Orders).ExecuteCommand();
                     }
                     else
                     {
                         //采购  修改采购商品表
-                        sqlsugar.GetInstance().Updateable<ProcurementGoods>(new { Poutbound = Convert.ToInt32(m[i]), ProcurementGoodsNum = cai_list[i].ProcurementGoodsNum - Convert.ToInt32(m[i]) }).Where(x => x.GoodsId == cai_list[i].GoodsId && x.ProcurementId == cai_list[i].ProcurementId).ExecuteCommand();
+                        var poutbound = sqlsugar.GetInstance().Queryable<ProcurementGoods>().Where(x => x.GoodsId == cai_list[i].GoodsId && x.ProcurementId == cai_list[i].ProcurementId).First().Poutbound;
+                        sqlsugar.GetInstance().Updateable<ProcurementGoods>(new { Poutbound = (poutbound+Convert.ToInt32(m[i])), ProcurementGoodsNum = cai_list[i].ProcurementGoodsNum - Convert.ToInt32(m[i]) })
+                            .Where(x => x.GoodsId == cai_list[i].GoodsId && x.ProcurementId == cai_list[i].ProcurementId).ExecuteCommand();
                     }
                     //定义变量用于存储剩余库存
                     int[] Inventoryed = new int[100];

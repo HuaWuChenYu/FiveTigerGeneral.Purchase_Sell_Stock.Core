@@ -112,7 +112,6 @@ namespace Purchase_Sell_Stock.API.Controllers
         public decimal orderMoney(int storeId, int date)
         {
             _logger.LogInformation("支付金额显示");
-            return _first.orderUser(storeId, date);
             decimal a= _first.orderMoney(storeId, date);
             return a;
         }

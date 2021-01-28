@@ -180,7 +180,7 @@ namespace Purchase_Sell_Stock.DAL
         /// <returns></returns>
         public List<Incomingorder> ChangeIncomingorder(int storeId)
         {
-            string str = "select * from Incomingorder im join Procurement po on po.ProcurementId = im.ProcurementId where StoreId = @storeId and IncomingorderState = 1";
+            string str = "select * from Incomingorder im join Procurement po on po.ProcurementId = im.ProcurementId where StoreId = @storeId and IncomingorderState = 0";
             List<Incomingorder> list = dapper.GetList<Incomingorder>(str, new { storeId });
             return list;
         }
