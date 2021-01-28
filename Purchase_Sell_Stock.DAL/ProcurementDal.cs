@@ -140,7 +140,7 @@ namespace Purchase_Sell_Stock.DAL
                     ProcurementId= procurementId,  //采购表外键
                     ProcurementGoodsNum= Convert.ToInt32(procurementGoodsNumeds[i]),//采购商品数量
                     GoodsId= _list.GoodsId, //商品id
-                    Total= Convert.ToInt32(procurementGoodsNumeds[i])*_list.ProcurementPrice,
+                    Total= Convert.ToInt32(Convert.ToInt32(procurementGoodsNumeds[i])*_list.ProcurementPrice),
                     Poutbound =0, //已入库
                 }).ExecuteCommand();
             }
