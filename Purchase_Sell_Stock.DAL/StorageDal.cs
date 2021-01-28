@@ -312,7 +312,8 @@ namespace Purchase_Sell_Stock.DAL
             //状态改变
             if (dit == d.Count())
             {
-                OutboundorderCombinebackfill(outboundorderId).OutboundorderState = 1;
+                sqlsugar.GetInstance().Updateable<OutboundorderCombine>(new { OutboundorderId=1 }).Where(x=>x.OutboundorderId== outboundorderId).ExecuteCommand();
+                //OutboundorderCombinebackfill(outboundorderId).OutboundorderState = 1;
 
             }
             //判断出库失败
@@ -677,7 +678,8 @@ namespace Purchase_Sell_Stock.DAL
             }
             if (dit == d.Count())
             {
-                IncomingordermodityDetail(incomingorderid).IncomingorderState = 1;
+                sqlsugar.GetInstance().Updateable<IncomingorderCombine>(new { IncomingorderState=1 }).Where(x=>x.IncomingorderId==incomingorderid).ExecuteCommand();
+                //IncomingordermodityDetail(incomingorderid).IncomingorderState = 1;
             }
             if (dif<=d.Count()&&dif!=0)
             {
