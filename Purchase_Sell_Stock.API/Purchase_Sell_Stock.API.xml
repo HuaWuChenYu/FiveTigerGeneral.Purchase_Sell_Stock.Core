@@ -97,6 +97,13 @@
             <param name="ids"></param>
             <returns></returns>
         </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.GoodsController.DelUnit(System.Int32)">
+            <summary>
+            删除单位
+            </summary>
+            <param name="brandId"></param>
+            <returns></returns>
+        </member>
         <member name="T:Purchase_Sell_Stock.API.Controllers.LoginController">
             <summary>
             登录控制器
@@ -130,19 +137,67 @@
             <param name="a"></param>
             <returns></returns>
         </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.ProcurementController.GetProcurementsShow">
+            <summary>
+            采购单显示
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.ProcurementController.GetGoodsShow">
+            <summary>
+            商品表显示
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.ProcurementController.AddProcurements(Purchase_Sell_Stock.Model.ProcurementFunction.Procuert)">
+            <summary>
+             添加
+            </summary>
+            <param name="pt"></param>
+            <param name="procuert"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.ProcurementController.GetGoodsbuyersShow(System.String)">
+            <summary>
+            用于显示商品列表
+            </summary>
+            <param name="goodid"></param>
+            <param name="procurementGoodsNum"></param>
+            <param name="total"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.ProcurementController.UptProviders(System.Int32)">
+            <summary>
+            审核通过
+            </summary>
+            <param name="procurementId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.PropertyController.AddBilling_detailsInfos(System.Int32,System.String,System.Decimal,System.Int32,System.String,System.String)">
+            <summary>
+            插入对账详细数据
+            </summary>
+            <param name="UserId"></param>
+            <param name="Account_Type"></param>
+            <param name="Account_Money"></param>
+            <param name="InorOut"></param>
+            <param name="Order_type"></param>
+            <param name="Order_NUm"></param>
+            <returns></returns>
+        </member>
         <member name="M:Purchase_Sell_Stock.API.Controllers.PropertyController.PropertyShow(System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
             <summary>
             余额
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Purchase_Sell_Stock.API.Controllers.PropertyController.Amount_settledMoney">
+        <member name="M:Purchase_Sell_Stock.API.Controllers.PropertyController.Amount_settledMoney(System.String,System.Int32,System.Int32)">
             <summary>
             待结算金额
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Purchase_Sell_Stock.API.Controllers.PropertyController.ShowBilling_details(System.String,System.Int32,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String)">
+        <member name="M:Purchase_Sell_Stock.API.Controllers.PropertyController.ShowBilling_details(System.String,System.String,System.Int32,System.Int32,System.String,System.String,System.Int32,System.String,System.String,System.String)">
             <summary>
             对账详细
             </summary>
@@ -156,12 +211,15 @@
             <param name="pageSize"></param>
             <returns></returns>
         </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.PropertyController.Tim(System.String,System.String)">
+            <returns></returns>
+        </member>
         <member name="T:Purchase_Sell_Stock.API.Controllers.SettingController">
             <summary>
             设置
             </summary>
         </member>
-        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.#ctor(Purchase_Sell_Stock.IServices.ISet)">
+        <member name="M:Purchase_Sell_Stock.API.Controllers.SettingController.#ctor(Purchase_Sell_Stock.IServices.ISet,Microsoft.Extensions.Logging.ILogger{Purchase_Sell_Stock.API.Controllers.CustomerController})">
             <summary>
             依赖注入
             </summary>
@@ -389,13 +447,13 @@
             定义一个接口
             </summary>
         </member>
-        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.#ctor(Purchase_Sell_Stock.IServices.IStorage)">
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.#ctor(Purchase_Sell_Stock.IServices.IStorage,Microsoft.Extensions.Logging.ILogger{Purchase_Sell_Stock.API.Controllers.StorageController})">
             <summary>
             依赖注入
             </summary>
             <param name="storage"></param>
         </member>
-        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.IncomingorderShow">
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.IncomingorderShow(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>
             入库订单的显示
             </summary>
@@ -415,7 +473,7 @@
             <param name="incomingorderid"></param>
             <returns></returns>
         </member>
-        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.Storage(System.String,System.String,System.String,System.Int32)">
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.Storage(System.String,System.String,System.String,System.Int32,System.String,System.String)">
             <summary>
             确定入库
             </summary>
@@ -431,6 +489,14 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.GoodsAmend(System.String,System.String,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            出库功能
+            </summary>
+            <param name="arr2"></param>
+            <param name="arr4"></param>
+            <returns></returns>
+        </member>
         <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.Outboundordercommoditybackfill(System.Int32)">
             <summary>
             出库商品的反填
@@ -438,16 +504,43 @@
             <param name="outboundorderid"></param>
             <returns></returns>
         </member>
-        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.OutboundorderShow(System.Nullable{System.Int32},System.String,System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.OutboundorderShow(System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>
             出库订单显示
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.GetWarehousesShow">
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.GetWarehousesShow(System.String,System.String,System.Nullable{System.Int32})">
             <summary>
             显示所有的仓库
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.GetWarehousesShowed">
+            <summary>
+            显示所有的仓库
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.AddWarehouses(Purchase_Sell_Stock.Model.Storage.Warehouse)">
+            <summary>
+            添加仓库
+            </summary>
+            <param name="ws"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.BackfillWarehouse(System.Int32)">
+            <summary>
+            反填仓库
+            </summary>
+            <param name="WarehouseId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.ModifyWarehouse(Purchase_Sell_Stock.Model.Storage.Warehouse)">
+            <summary>
+            修改仓库
+            </summary>
+            <param name="ws"></param>
             <returns></returns>
         </member>
         <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.GetWarehouseTypesShow">
@@ -462,23 +555,34 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.GoodsAmend(System.String,System.String,System.String,System.Int32)">
-            <summary>
-            出库功能
-            </summary>
-            <param name="arr2"></param>
-            <param name="arr4"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.commodityStocksandGoodsShow">
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.commodityStocksandGoodsShow(System.String,System.String,System.Nullable{System.Int32})">
             <summary>
             商品以及库存量的显示
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.Goodsflowingwater(System.Int32,System.String,System.String,System.String,System.String)">
+            <summary>
+            单个商品的流水记录
+            </summary>
+            <param name="goodsid"></param>
+            <returns></returns>
+        </member>
         <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.goodRunningWaterShow">
             <summary>
             商品流水
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.DifferencesInventoryedShow(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            差异库存表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Purchase_Sell_Stock.API.Controllers.StorageController.DifferentTypesShow">
+            <summary>
+            差异类型
             </summary>
             <returns></returns>
         </member>

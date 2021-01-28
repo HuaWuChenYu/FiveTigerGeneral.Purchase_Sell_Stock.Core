@@ -99,6 +99,7 @@ namespace Purchase_Sell_Stock.DAL
              JoinType.Inner,a.GoodsId==c.GoodsId,
             }).Where((a, b, c) => b.CancleProcurementNum.Contains(list_ordersnum)).Select((a, b, c) => new OutboundorderCombine
             {
+                CancleProcurementId = b.CancleProcurementId,
                 GoodsId = c.GoodsId,   //商品编码
                 GoodsSize = c.GoodsSize,//商品规格
                 GoodsName = c.GoodsName,//商品名称
@@ -122,6 +123,7 @@ namespace Purchase_Sell_Stock.DAL
              JoinType.Inner,b.GoodsId==c.GoodsId,
             }).Where((a, b, c) => a.OrdersNum.Contains(list_ordersnum)).Select((a, b, c) => new OutboundorderCombine()
             {
+                OrdersGoodsId=b.OrdersGoodsId,
                 OrdersId = a.OrdersId,
                 GoodsId = c.GoodsId, //商品编码
                 GoodsName = c.GoodsName,//商品名称
@@ -139,6 +141,7 @@ namespace Purchase_Sell_Stock.DAL
         public List<OutboundorderCombine> Outboundordercommoditybackfill(int outboundorderid)//出单编号
         {
             //获取订单表中的订单编号（主键）
+            var list_ordersnumed = OutboundorderShow().FirstOrDefault(x => x.OutboundorderId == outboundorderid).OrdersId;
             var list_ordersnum = OutboundorderShow().FirstOrDefault(x => x.OutboundorderId == outboundorderid).OrdersNum;
             var _list = sqlsugar.GetInstance().Queryable<Orders, OrdersGoods, Goods>((a, b, c) => new object[] {
              JoinType.Inner,b.OrdersId==a.OrdersId,
@@ -259,15 +262,20 @@ namespace Purchase_Sell_Stock.DAL
  
                     //修改订单商品表中的已出库数量以及修改商品数量
                      var order_list = Outboundordered(outboundorderId);
-                     
+
                     if (order_list.Count==0)
                     {
                         var tui_list = Purchase(outboundorderId);
-                        sqlsugar.GetInstance().Updateable<CancleProcurementGoods>(new { Coutbound = Convert.ToInt32(m[i]), CancleProcurementGoodsNum = tui_list[i].OrdersGoodsNum - Convert.ToInt32(m[i]) }).Where(x => x.CancleProcurementId == tui_list[i].OrdersId && x.GoodsId == tui_list[i].GoodsId).ExecuteCommand();
+                        var coutbound = sqlsugar.GetInstance().Queryable<CancleProcurementGoods>().Where(x => x.CancleProcurementId == tui_list[i].CancleProcurementId && x.GoodsId == tui_list[i].GoodsId).First().Coutbound;
+                       var a= sqlsugar.GetInstance().Updateable<CancleProcurementGoods>(new { Coutbound = (coutbound+Convert.ToInt32(m[i])), CancleProcurementGoodsNum = tui_list[i].OrdersGoodsNum - Convert.ToInt32(m[i]) })
+                            .Where(x => x.CancleProcurementId == tui_list[i].CancleProcurementId && x.GoodsId == tui_list[i].GoodsId).ExecuteCommand();
+                       
                     }
                     else
                     {
-                        sqlsugar.GetInstance().Updateable<OrdersGoods>(new { Ooutbound = Convert.ToInt32(m[i]), OrdersGoodsNum = order_list[i].OrdersGoodsNum - Convert.ToInt32(m[i]) }).Where(x => x.OrdersId == order_list[i].OrdersId && x.GoodsId == order_list[i].GoodsId).ExecuteCommand();
+                        var ooutbound = sqlsugar.GetInstance().Queryable<OrdersGoods>().Where(x => x.OrdersId == order_list[i].OrdersId && x.GoodsId == order_list[i].GoodsId).First().Ooutbound;
+                        var b= sqlsugar.GetInstance().Updateable<OrdersGoods>(new { Ooutbound = (ooutbound + Convert.ToInt32(m[i])), OrdersGoodsNum = order_list[i].OrdersGoodsNum - Convert.ToInt32(m[i]) })
+                            .Where(x => x.OrdersGoodsId == order_list[i].OrdersGoodsId && x.GoodsId == order_list[i].GoodsId).ExecuteCommand();
                     }
                     //用一个变量来接受剩余库存量
                     int[] Inventoryed = new int[100];
@@ -277,11 +285,7 @@ namespace Purchase_Sell_Stock.DAL
                     Inventoryed[i] = _dd.Inventory;
                     //修改商品库存
                     sqlsugar.GetInstance().Updateable<CommodityStocks>(new { Inventory = Inventoryed[i], vendibilityInventory = Inventoryed[i] }).Where(x => x.GoodsId == list[i].GoodsId).ExecuteCommand();
-                    //sqlsugar.GetInstance().Updateable<OrdersGoods>(new { Ooutbound = OutNumber[i], OrdersGoodsNum = order_list[i].OrdersGoodsNum - OutNumber[i] }).Where(x => x.OrdersId == order_list[i].OrdersId && x.GoodsId == order_list[i].GoodsId).ExecuteCommand();
-                    ////采购退货
-                    //var tui_lists= Purchase(outboundorderId);
-                    //sqlsugar.GetInstance().Updateable<CancleProcurementGoods>(new { Coutbound = OutNumber[i], CancleProcurementGoodsNum = tui_list[i].CancleProcurementGoodsNum - OutNumber[i] }).Where(x => x.CancleProcurementId == tui_list[i].OrdersId && x.GoodsId == tui_list[i].GoodsId).ExecuteCommand();
-                    //用于添加流水表
+                    
                     runningWater.GoodsId = _dd.GoodsId;                             //商品编号
                     runningWater.Inventory = _dd.Inventory;                         //库存
                     runningWater.vendibilityInventory = _dd.vendibilityInventory;   //可售库存
@@ -582,8 +586,6 @@ namespace Purchase_Sell_Stock.DAL
             int dit = 0;
             //定义计数器  用于计算差异表
             int dif = 0;
-
-            
             GoodRunningWater runningWater = new GoodRunningWater();
             for (int i = 0; i < d.Length; i++)
             {
@@ -627,12 +629,15 @@ namespace Purchase_Sell_Stock.DAL
                     {
                         //退单 修改订单商品表
                         var tui_list = Orderreturn(incomingorderid);
-                        sqlsugar.GetInstance().Updateable<OrdersGoods>(new { Ooutbound = Convert.ToInt32(m[i]), OrdersGoodsNum = tui_list[i].ProcurementGoodsNum - Convert.ToInt32(m[i]) }).Where(x => x.GoodsId == tui_list[i].GoodsId && x.OrdersId == tui_list[i].Orders).ExecuteCommand();
+                        //查询出数据库已入库的字段
+                        var ooutbound = sqlsugar.GetInstance().Queryable<OrdersGoods>().Where(x => x.GoodsId == tui_list[i].GoodsId && x.OrdersId == tui_list[i].Orders).First().Ooutbound;
+                        sqlsugar.GetInstance().Updateable<OrdersGoods>(new { Ooutbound = ooutbound+ Convert.ToInt32(m[i]), OrdersGoodsNum = tui_list[i].ProcurementGoodsNum - Convert.ToInt32(m[i]) }).Where(x => x.GoodsId == tui_list[i].GoodsId && x.OrdersId == tui_list[i].Orders).ExecuteCommand();
                     }
                     else
                     {
+                        var poutbound = sqlsugar.GetInstance().Queryable<ProcurementGoods>().Where(x => x.GoodsId == cai_list[i].GoodsId && x.ProcurementId == cai_list[i].ProcurementId).First().Poutbound;
                         //采购  修改采购商品表
-                        sqlsugar.GetInstance().Updateable<ProcurementGoods>(new { Poutbound = Convert.ToInt32(m[i]), ProcurementGoodsNum = cai_list[i].ProcurementGoodsNum - Convert.ToInt32(m[i]) }).Where(x => x.GoodsId == cai_list[i].GoodsId && x.ProcurementId == cai_list[i].ProcurementId).ExecuteCommand();
+                        sqlsugar.GetInstance().Updateable<ProcurementGoods>(new { Poutbound = poutbound + Convert.ToInt32(m[i]), ProcurementGoodsNum = cai_list[i].ProcurementGoodsNum - Convert.ToInt32(m[i]) }).Where(x => x.GoodsId == cai_list[i].GoodsId && x.ProcurementId == cai_list[i].ProcurementId).ExecuteCommand();
                     }
                     //定义变量用于存储剩余库存
                     int[] Inventoryed = new int[100];
