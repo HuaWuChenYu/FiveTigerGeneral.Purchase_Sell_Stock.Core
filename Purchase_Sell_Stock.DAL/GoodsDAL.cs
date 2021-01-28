@@ -31,7 +31,7 @@ namespace Purchase_Sell_Stock.DAL
             string sql = $"1 = 1 and StoreId = {storeId}";
             if (!string.IsNullOrEmpty(goodsName))
             {
-                goodsName = goodsName.Substring(1);
+                //goodsName = goodsName.Substring(1);
                 sql += $" and GoodsName like '%{goodsName}%'";
             }
             if (!string.IsNullOrEmpty(goodsType))
